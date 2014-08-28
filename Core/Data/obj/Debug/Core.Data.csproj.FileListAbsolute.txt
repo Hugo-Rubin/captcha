@@ -1,5 +1,0 @@
-C:\GIT MLResearch\Versao-Vetorizada\DAL\bin\Debug\DAL.dll.config
-C:\GIT MLResearch\Versao-Vetorizada\DAL\bin\Debug\DAL.dll
-C:\GIT MLResearch\Versao-Vetorizada\DAL\bin\Debug\DAL.pdb
-C:\GIT MLResearch\Versao-Vetorizada\DAL\obj\Debug\DAL.dll
-C:\GIT MLResearch\Versao-Vetorizada\DAL\obj\Debug\DAL.pdb
