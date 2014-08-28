@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ocrdbModelStoreContainer" CdmEntityContainer="ocrdbEntities">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="ocrdbModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requisicoes">
+      <EntityTypeMapping TypeName="ocrdbModel.Requisicoes">
+        <MappingFragment StoreEntitySet="Requisicoes">
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="Mensagem" ColumnName="Mensagem" />
+          <ScalarProperty Name="Resposta" ColumnName="Resposta" />
+          <ScalarProperty Name="Captcha" ColumnName="Captcha" />
+          <ScalarProperty Name="idOCR" ColumnName="idOCR" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servicos">
+      <EntityTypeMapping TypeName="ocrdbModel.Servicos">
+        <MappingFragment StoreEntitySet="Servicos">
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServicosCliente">
+      <EntityTypeMapping TypeName="ocrdbModel.ServicosCliente">
+        <MappingFragment StoreEntitySet="ServicosCliente">
+          <ScalarProperty Name="LimiteConsultasDiarias" ColumnName="LimiteConsultasDiarias" />
+          <ScalarProperty Name="IdServico" ColumnName="IdServico" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoOCR">
+      <EntityTypeMapping TypeName="ocrdbModel.TipoOCR">
+        <MappingFragment StoreEntitySet="TipoOCR">
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

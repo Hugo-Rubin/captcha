@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="global.asax.cs" Inherits="WebGateway.Global" Language="C#" %>

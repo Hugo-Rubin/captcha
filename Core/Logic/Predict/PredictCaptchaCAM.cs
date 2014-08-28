@@ -1,0 +1,63 @@
+﻿using System;
+using Core.Logic.Predict.Abstract;
+
+namespace Core.Logic.Predict
+{
+    public class PredictCaptchaCAM : PredictNeuralNetwork
+    {
+        protected override int HiddenUnits
+        {
+            get { return 86; }
+        }
+
+        protected override int TamanhoCaracter
+        {
+            get { return 2025; }
+        }
+
+        protected override char[] Dicionario
+        {
+            get
+            {
+                return new[]
+                           {
+                               '2', '3', '4', '5', '6', '7', '8', 'b', 'c', 'd', 'e', 'f', 'g', 'm', 'n', 'p', 'w', 'x', 'y'
+                           };
+            }
+        }
+
+        #region Implementação de Singleton
+
+        protected static volatile PredictCaptchaCAM instance;
+        protected static object SyncRoot = new Object();
+
+        private PredictCaptchaCAM()
+        {
+        }
+
+        public static PredictCaptchaCAM Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (SyncRoot)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new PredictCaptchaCAM();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
+
+        #endregion
+
+        public override string SiglaServico
+        {
+            get { return "CAM"; }
+        }
+    }
+}

@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ocrdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ocrdbModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="ocrdbModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Requisicoes" EntityType="ocrdbModel.Store.Requisicoes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Servicos" EntityType="ocrdbModel.Store.Servicos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ServicosCliente" EntityType="ocrdbModel.Store.ServicosCliente" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="TipoOCR" EntityType="ocrdbModel.Store.TipoOCR" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Requisicoes_Clientes" Association="ocrdbModel.Store.FK_Requisicoes_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Requisicoes" EntitySet="Requisicoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requisicoes_TipoOCR" Association="ocrdbModel.Store.FK_Requisicoes_TipoOCR">
+            <End Role="TipoOCR" EntitySet="TipoOCR" />
+            <End Role="Requisicoes" EntitySet="Requisicoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicosCliente_Clientes" Association="ocrdbModel.Store.FK_ServicosCliente_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ServicosCliente" EntitySet="ServicosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicosCliente_Servicos" Association="ocrdbModel.Store.FK_ServicosCliente_Servicos">
+            <End Role="Servicos" EntitySet="Servicos" />
+            <End Role="ServicosCliente" EntitySet="ServicosCliente" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nchar" Nullable="false" MaxLength="200" />
+          <Property Name="Telefone" Type="nchar" MaxLength="10" />
+          <Property Name="Observacoes" Type="nchar" MaxLength="500" />
+          <Property Name="Token" Type="nchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Requisicoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="idOCR" Type="int" Nullable="false" />
+          <Property Name="Captcha" Type="nchar" Nullable="false" MaxLength="200" />
+          <Property Name="Resposta" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="Mensagem" Type="nchar" MaxLength="500" />
+          <Property Name="IP" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Servicos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Sigla" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="ServicosCliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdServico" />
+          </Key>
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="IdServico" Type="int" Nullable="false" />
+          <Property Name="LimiteConsultasDiarias" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoOCR">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Requisicoes_Clientes">
+          <End Role="Clientes" Type="ocrdbModel.Store.Clientes" Multiplicity="1" />
+          <End Role="Requisicoes" Type="ocrdbModel.Store.Requisicoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Requisicoes">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requisicoes_TipoOCR">
+          <End Role="TipoOCR" Type="ocrdbModel.Store.TipoOCR" Multiplicity="1" />
+          <End Role="Requisicoes" Type="ocrdbModel.Store.Requisicoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoOCR">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Requisicoes">
+              <PropertyRef Name="idOCR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicosCliente_Clientes">
+          <End Role="Clientes" Type="ocrdbModel.Store.Clientes" Multiplicity="1" />
+          <End Role="ServicosCliente" Type="ocrdbModel.Store.ServicosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServicosCliente">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicosCliente_Servicos">
+          <End Role="Servicos" Type="ocrdbModel.Store.Servicos" Multiplicity="1" />
+          <End Role="ServicosCliente" Type="ocrdbModel.Store.ServicosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicosCliente">
+              <PropertyRef Name="IdServico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ocrdbModel" Alias="Self"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ocrdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="ocrdbModel.Clientes" />
+          <EntitySet Name="Requisicoes" EntityType="ocrdbModel.Requisicoes" />
+          <EntitySet Name="Servicos" EntityType="ocrdbModel.Servicos" />
+          <EntitySet Name="ServicosCliente" EntityType="ocrdbModel.ServicosCliente" />
+          <EntitySet Name="TipoOCR" EntityType="ocrdbModel.TipoOCR" />
+          <AssociationSet Name="FK_Requisicoes_Clientes" Association="ocrdbModel.FK_Requisicoes_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Requisicoes" EntitySet="Requisicoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicosCliente_Clientes" Association="ocrdbModel.FK_ServicosCliente_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ServicosCliente" EntitySet="ServicosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requisicoes_TipoOCR" Association="ocrdbModel.FK_Requisicoes_TipoOCR">
+            <End Role="TipoOCR" EntitySet="TipoOCR" />
+            <End Role="Requisicoes" EntitySet="Requisicoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicosCliente_Servicos" Association="ocrdbModel.FK_ServicosCliente_Servicos">
+            <End Role="Servicos" EntitySet="Servicos" />
+            <End Role="ServicosCliente" EntitySet="ServicosCliente" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Telefone" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Observacoes" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Token" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Requisicoes" Relationship="ocrdbModel.FK_Requisicoes_Clientes" FromRole="Clientes"
+                              ToRole="Requisicoes" />
+          <NavigationProperty Name="ServicosCliente" Relationship="ocrdbModel.FK_ServicosCliente_Clientes"
+                              FromRole="Clientes" ToRole="ServicosCliente" />
+        </EntityType>
+        <EntityType Name="Requisicoes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="DateTime" Name="Data" Nullable="false" />
+          <Property Type="Int32" Name="idOCR" Nullable="false" />
+          <Property Type="String" Name="Captcha" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Resposta" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Mensagem" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="IP" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="ocrdbModel.FK_Requisicoes_Clientes" FromRole="Requisicoes"
+                              ToRole="Clientes" />
+          <NavigationProperty Name="TipoOCR" Relationship="ocrdbModel.FK_Requisicoes_TipoOCR" FromRole="Requisicoes"
+                              ToRole="TipoOCR" />
+        </EntityType>
+        <EntityType Name="Servicos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Sigla" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServicosCliente" Relationship="ocrdbModel.FK_ServicosCliente_Servicos"
+                              FromRole="Servicos" ToRole="ServicosCliente" />
+        </EntityType>
+        <EntityType Name="ServicosCliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdServico" />
+          </Key>
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="Int32" Name="IdServico" Nullable="false" />
+          <Property Type="Int32" Name="LimiteConsultasDiarias" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="ocrdbModel.FK_ServicosCliente_Clientes"
+                              FromRole="ServicosCliente" ToRole="Clientes" />
+          <NavigationProperty Name="Servicos" Relationship="ocrdbModel.FK_ServicosCliente_Servicos"
+                              FromRole="ServicosCliente" ToRole="Servicos" />
+        </EntityType>
+        <EntityType Name="TipoOCR">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Requisicoes" Relationship="ocrdbModel.FK_Requisicoes_TipoOCR" FromRole="TipoOCR"
+                              ToRole="Requisicoes" />
+        </EntityType>
+        <Association Name="FK_Requisicoes_Clientes">
+          <End Type="ocrdbModel.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="ocrdbModel.Requisicoes" Role="Requisicoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Requisicoes">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicosCliente_Clientes">
+          <End Type="ocrdbModel.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="ocrdbModel.ServicosCliente" Role="ServicosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServicosCliente">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requisicoes_TipoOCR">
+          <End Type="ocrdbModel.TipoOCR" Role="TipoOCR" Multiplicity="1" />
+          <End Type="ocrdbModel.Requisicoes" Role="Requisicoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoOCR">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Requisicoes">
+              <PropertyRef Name="idOCR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicosCliente_Servicos">
+          <End Type="ocrdbModel.Servicos" Role="Servicos" Multiplicity="1" />
+          <End Type="ocrdbModel.ServicosCliente" Role="ServicosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicosCliente">
+              <PropertyRef Name="IdServico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ocrdbModelStoreContainer" CdmEntityContainer="ocrdbEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="ocrdbModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requisicoes">
+            <EntityTypeMapping TypeName="ocrdbModel.Requisicoes">
+              <MappingFragment StoreEntitySet="Requisicoes">
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Mensagem" ColumnName="Mensagem" />
+                <ScalarProperty Name="Resposta" ColumnName="Resposta" />
+                <ScalarProperty Name="Captcha" ColumnName="Captcha" />
+                <ScalarProperty Name="idOCR" ColumnName="idOCR" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicos">
+            <EntityTypeMapping TypeName="ocrdbModel.Servicos">
+              <MappingFragment StoreEntitySet="Servicos">
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicosCliente">
+            <EntityTypeMapping TypeName="ocrdbModel.ServicosCliente">
+              <MappingFragment StoreEntitySet="ServicosCliente">
+                <ScalarProperty Name="LimiteConsultasDiarias" ColumnName="LimiteConsultasDiarias" />
+                <ScalarProperty Name="IdServico" ColumnName="IdServico" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoOCR">
+            <EntityTypeMapping TypeName="ocrdbModel.TipoOCR">
+              <MappingFragment StoreEntitySet="TipoOCR">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="OcrDB">
+        <EntityTypeShape EntityType="ocrdbModel.Clientes" Width="1.5" PointX="0.75" PointY="3.375"
+                         Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="ocrdbModel.Requisicoes" Width="1.5" PointX="3" PointY="3.125"
+                         Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="ocrdbModel.Servicos" Width="1.5" PointX="3.75" PointY="8.625"
+                         Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="ocrdbModel.ServicosCliente" Width="1.5" PointX="6" PointY="3.5"
+                         Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="ocrdbModel.TipoOCR" Width="1.5" PointX="0.75" PointY="0.75"
+                         Height="1.5956835937499996" />
+        <AssociationConnector Association="ocrdbModel.FK_Requisicoes_Clientes">
+          <ConnectorPoint PointX="2.25" PointY="4.5574446614583337" />
+          <ConnectorPoint PointX="3" PointY="4.5574446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="ocrdbModel.FK_ServicosCliente_Clientes">
+          <ConnectorPoint PointX="1.5" PointY="3.375" />
+          <ConnectorPoint PointX="1.5" PointY="2.875" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="2.8749999999999996" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="2.875" />
+          <ConnectorPoint PointX="5.625" PointY="2.875" />
+          <ConnectorPoint PointX="5.625" PointY="4.4901432291666659" />
+          <ConnectorPoint PointX="6" PointY="4.4901432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="ocrdbModel.FK_Requisicoes_TipoOCR">
+          <ConnectorPoint PointX="2.25" PointY="1.5478417968749998" />
+          <ConnectorPoint PointX="3.75" PointY="1.5478417968749998" />
+          <ConnectorPoint PointX="3.75" PointY="3.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="ocrdbModel.FK_ServicosCliente_Servicos">
+          <ConnectorPoint PointX="5.25" PointY="9.5189925130208337" />
+          <ConnectorPoint PointX="6.75" PointY="9.5189925130208337" />
+          <ConnectorPoint PointX="6.75" PointY="5.4802864583333317" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

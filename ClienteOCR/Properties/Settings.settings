@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="ClienteSintegra.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ClienteOCR_RemoteGateway_Gateway" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">
+        http://www.ml-research.com/OCRGateway/gateway.asmx
+      </Value>
+    </Setting>
+    <Setting Name="ClienteOCR_Gateway_Gateway" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">
+        http://localhost:53568/Gateway.asmx
+      </Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

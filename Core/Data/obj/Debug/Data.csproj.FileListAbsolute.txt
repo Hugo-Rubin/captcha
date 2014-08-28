@@ -1,0 +1,5 @@
+C:\GIT MLResearch\Versao-Vetorizada\DAL\bin\Debug\Core.Data.dll.config
+C:\GIT MLResearch\Versao-Vetorizada\DAL\bin\Debug\Core.Data.dll
+C:\GIT MLResearch\Versao-Vetorizada\DAL\bin\Debug\Core.Data.pdb
+C:\GIT MLResearch\Versao-Vetorizada\DAL\obj\Debug\Core.Data.dll
+C:\GIT MLResearch\Versao-Vetorizada\DAL\obj\Debug\Core.Data.pdb

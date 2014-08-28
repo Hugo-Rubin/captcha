@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClientePost.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ClientePost_GatewayLocal_Gateway" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53568/Gateway.asmx</Value>
+    </Setting>
+    <Setting Name="ClientePost_GatewayRemoto_Gateway" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.ml-research.com/ocrgateway/gateway.asmx</Value>
+    </Setting>
+    <Setting Name="ClientePost_WS_OCR" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.ml-research.com/ocrnfe/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="ClientePost_WSLocal_OCR" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53543/OCR.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

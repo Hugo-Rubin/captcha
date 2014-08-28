@@ -1,0 +1,38 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="WebGateway.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WebGateway_WS_CA_OCRCA" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:51282/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_CM_OCRCM" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:51244/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_CRJ_OCRCRJ" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:51277/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_MG_OCRMG" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:51272/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_NFE_OCRNFE" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53543/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_SI_OCRSI" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53558/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_SP_OCRSP" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:49857/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_RJ_OCRRJ" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:51267/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_AM_OCRAM" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:49595/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_RF_OCRRF" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1770/ocr.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

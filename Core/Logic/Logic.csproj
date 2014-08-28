@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ADF52F5A-5091-4121-9AD7-DCBB5BD23498}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core.Logic</RootNamespace>
+    <AssemblyName>Core.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accord, Version=2.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Accord.2.12.0.0\lib\Accord.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math, Version=2.12.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Accord.Math.2.12.0.0\lib\Accord.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QuickGraph">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Captchas\CaptchaCA.cs" />
+    <Compile Include="Captchas\CaptchaCM.cs" />
+    <Compile Include="Captchas\CaptchaCRJ.cs" />
+    <Compile Include="Captchas\CctCaptchaA.cs" />
+    <Compile Include="Obsolete\Graph.cs" />
+    <Compile Include="GraphProcesserDijkstra.cs" />
+    <Compile Include="Obsolete\SeamCarving.cs" />
+    <Compile Include="Obsolete\ColorFillingSegmentation.cs" />
+    <Compile Include="Predict\PredictCaptchaCAM.cs" />
+    <Compile Include="Predict\PredictCaptchaCRJVerde.cs" />
+    <Compile Include="Predict\PredictCaptchaCRJCinza.cs" />
+    <Compile Include="Predict\PredictCaptchaCRJ.cs" />
+    <Compile Include="Predict\PredictCaptchaCRJAzul.cs" />
+    <Compile Include="GraphSearch.cs" />
+    <Compile Include="Separacao\ColorFillingSegmentation2.cs" />
+    <Compile Include="RemocaoFundo\Erosion.cs" />
+    <Compile Include="Predict\Abstract\Predict.cs" />
+    <Compile Include="Predict\Abstract\PredictTemplateMatching.cs" />
+    <Compile Include="Predict\PredictCaptchaNFE.cs" />
+    <Compile Include="Predict\PredictCaptchaAM.cs" />
+    <Compile Include="Predict\PredictCaptchaMG.cs" />
+    <Compile Include="Predict\PredictCaptchaRJ.cs" />
+    <Compile Include="ImageQuantizer\BaseColorCache.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\BaseColorCache.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\Common\ColorModel.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\EuclideanDistance\EuclideanDistanceColorCache.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\IColorCache.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\LocalitySensitiveHash\LshBucketInfo.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\LocalitySensitiveHash\LshColorCache.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\Octree\OctreeCacheNode.cs" />
+    <Compile Include="ImageQuantizer\ColorCaches\Octree\OctreeColorCache.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\BaseColorDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\AtkinsonDithering.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\BaseErrorDiffusionDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\BurkesDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\FanDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\FilterLiteSierra.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\FloydSteinbergDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\JarvisJudiceNinkeDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\ShiauDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\SierraDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\StuckiDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\TwoRowSierraDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\IColorDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\Ordered\BaseOrderedDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\Ordered\BayerDitherer4.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\Ordered\BayerDitherer8.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\Ordered\ClusteredDotDitherer.cs" />
+    <Compile Include="ImageQuantizer\Ditherers\Ordered\DotHalfToneDitherer.cs" />
+    <Compile Include="ImageQuantizer\Extensions\Extend.IEnumerable.cs" />
+    <Compile Include="ImageQuantizer\Extensions\Extend.Image.cs" />
+    <Compile Include="ImageQuantizer\Extensions\Extend.PixelFormat.cs" />
+    <Compile Include="ImageQuantizer\Helpers\ColorModelHelper.cs" />
+    <Compile Include="ImageQuantizer\Helpers\FastRandom.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Guard.cs" />
+    <Compile Include="ImageQuantizer\Helpers\ImageBuffer.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixel.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\IIndexedPixel.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\Indexed\PixelData1Indexed.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\Indexed\PixelData4Indexed.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\Indexed\PixelData8Indexed.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\INonIndexedPixel.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataArgb1555.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataArgb64.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataArgb8888.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataGray16.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb48.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb555.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb565.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb888.cs" />
+    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb8888.cs" />
+    <Compile Include="ImageQuantizer\Helpers\PixelTransform.cs" />
+    <Compile Include="ImageQuantizer\Helpers\QuantizationHelper.cs" />
+    <Compile Include="ImageQuantizer\IColorCache.cs" />
+    <Compile Include="ImageQuantizer\PathProviders\IPathProvider.cs" />
+    <Compile Include="ImageQuantizer\PathProviders\ReversedPathProvider.cs" />
+    <Compile Include="ImageQuantizer\PathProviders\SerpentinePathProvider.cs" />
+    <Compile Include="ImageQuantizer\PathProviders\StandardPathProvider.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\BaseColorCacheQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\BaseColorQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\DistinctSelection\DistinctBucket.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\DistinctSelection\DistinctColorInfo.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\DistinctSelection\DistinctSelectionQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\IColorQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\MedianCut\MedianCutCube.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\MedianCut\MedianCutQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\NeuQuant\NeuralColorQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\Octree\OctreeNode.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\Octree\OctreeQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\OptimalPalette\OptimalPaletteQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\Popularity\PopularityColorSlot.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\Popularity\PopularityQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\Uniform\UniformColorSlot.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\Uniform\UniformQuantizer.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\XiaolinWu\WuColorCube.cs" />
+    <Compile Include="ImageQuantizer\Quantizers\XiaolinWu\WuColorQuantizer.cs" />
+    <Compile Include="PalleteQuantizer.cs" />
+    <Compile Include="Predict\PredictCaptchaSI.cs" />
+    <Compile Include="Predict\PredictCaptchaSP.cs" />
+    <Compile Include="Separacao\SeamCarving2.cs" />
+    <Compile Include="Filtros\GaussianBlur.cs" />
+    <Compile Include="ImageLevels\AdjustLevels.cs" />
+    <Compile Include="ImageLevels\CustomLevels.cs" />
+    <Compile Include="ImageLevels\GammaRemap.cs" />
+    <Compile Include="ImageLevels\HistoRemap.cs" />
+    <Compile Include="ImageLevels\ImageWindow.cs" />
+    <Compile Include="RemocaoFundo\K_Means.cs" />
+    <Compile Include="SeparacaoADAP_CRJ_Cinza\SeamCarving2ADAP.cs" />
+    <Compile Include="SeparacaoADAP_CRJ_Cinza\SeparacaoPadraoADAP.cs" />
+    <Compile Include="Services\BasicService.cs" />
+    <Compile Include="Services\OcrService.cs" />
+    <Compile Include="StringLogicalComparer.cs" />
+    <Compile Include="TemplateMatching.cs" />
+    <Compile Include="Tratamento\IConditional.cs" />
+    <Compile Include="Tratamento\IDilation.cs" />
+    <Compile Include="Tratamento\ForwardDerivative.cs" />
+    <Compile Include="Tratamento\ICM.cs" />
+    <Compile Include="Tratamento\ICM_MRF.cs" />
+    <Compile Include="Tratamento\ICM_Basic.cs" />
+    <Compile Include="Tratamento\ManhattanDilation.cs" />
+    <Compile Include="Tratamento\Thinning.cs" />
+    <Compile Include="Tratamento\Neighbors.cs" />
+    <Compile Include="Tratamento\ThinningStentiford.cs" />
+    <Compile Include="Tratamento\ThinningZhangSuen.cs" />
+    <Compile Include="Captchas\CaptchaMG.cs" />
+    <Compile Include="Captchas\CaptchaNFE.cs" />
+    <Compile Include="Captchas\CaptchaSI.cs" />
+    <Compile Include="Captchas\CaptchaSP.cs" />
+    <Compile Include="Captchas\CaptchaRJ.cs" />
+    <Compile Include="Types\ChaveValor.cs" />
+    <Compile Include="Captchas\CaptchaAM.cs" />
+    <Compile Include="Predict\Abstract\PredictNeuralNetwork.cs" />
+    <Compile Include="Predict\PredictPadraoCaptchaNFE.cs" />
+    <Compile Include="RawBitmap.cs" />
+    <Compile Include="Tratamento\ReconhecimentoDePadraoNFE.cs" />
+    <Compile Include="Types\BlurType.cs" />
+    <Compile Include="Captchas\Abstract\Captcha.cs" />
+    <Compile Include="Captchas\CaptchaRF.cs" />
+    <Compile Include="Types\ImgArray.cs" />
+    <Compile Include="Types\ImgArrayGrayscale.cs" />
+    <Compile Include="Types\MinMaxReturn.cs" />
+    <Compile Include="Types\NanoArray.cs" />
+    <Compile Include="ServerLog.cs" />
+    <Compile Include="Predict\PredictCaptchaRF.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tratamento\Endireitamento.cs" />
+    <Compile Include="Filtros\Gauss.cs" />
+    <Compile Include="IdentificaPadrao.cs" />
+    <Compile Include="Tratamento\LensDistortionReturn.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tratamento\Tratamento.cs" />
+    <Compile Include="ServerUtil.cs" />
+    <Compile Include="Types\TipoPadrao.cs" />
+    <Compile Include="Utils\BitmapUtils.cs" />
+    <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\ImgArrayUtils.cs" />
+    <Compile Include="Utils\RemocaoFundoPadrao.cs" />
+    <Compile Include="Utils\SeparacaoPadrao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{a7b2066a-3a1b-48c7-b264-2b9322f6acb1}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{E511F63F-F352-400D-9DEB-7931E3E3A2E0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

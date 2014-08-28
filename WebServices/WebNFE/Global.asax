@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="global.asax.cs" Inherits="WebNFE.Global" Language="C#" %>

@@ -1,0 +1,4 @@
+C:\GIT MLResearch\Versao-Vetorizada\Library\bin\Debug\Core.Common.dll
+C:\GIT MLResearch\Versao-Vetorizada\Library\bin\Debug\Core.Common.pdb
+C:\GIT MLResearch\Versao-Vetorizada\Library\obj\Debug\Core.Common.dll
+C:\GIT MLResearch\Versao-Vetorizada\Library\obj\Debug\Core.Common.pdb
