@@ -1,9 +1,8 @@
-﻿using System;
-using Core.Logic.Predict.Abstract;
+﻿using Core.Logic.Predict.Abstract;
 
 namespace Core.Logic.Predict
 {
-    public class PredictCaptchaCRJVerde : PredictNeuralNetwork
+    public class PredictCaptchaCRJVerde : PredictNeuralNetwork<PredictCaptchaCRJVerde>
     {
         protected override int HiddenUnits
         {
@@ -39,35 +38,6 @@ namespace Core.Logic.Predict
         {
             get { return "verde_theta2"; }
         }
-
-        #region Implementação de Singleton
-
-        protected static volatile PredictCaptchaCRJVerde instance;
-        protected static object SyncRoot = new Object();
-
-        private PredictCaptchaCRJVerde()
-        {
-        }
-
-        public static PredictCaptchaCRJVerde Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new PredictCaptchaCRJVerde();
-                        }
-                    }
-                }
-                return instance;
-            }
-        }
-
-        #endregion
 
         public override string SiglaServico
         {

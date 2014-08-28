@@ -17,8 +17,8 @@ namespace TestesManuais
         private readonly string arquivo;
         private readonly List<FileInfo> captchaFiles;
         private readonly List<string> filesOk;
-        private readonly Predict p1;
-        private readonly Predict p2;
+        private readonly IPredict p1;
+        private readonly IPredict p2;
         private readonly string pastaCaptchas;
         private readonly string pastaRede;
         private readonly string pastaSemFundo;

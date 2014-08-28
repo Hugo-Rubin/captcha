@@ -13,14 +13,14 @@ using WebCommon.Logging;
 
 namespace WebCommon
 {
-    public abstract class BaseWebService<T> where T: Captcha
+    public abstract class BaseWebService<T> where T : Captcha
     {
         private readonly ocrdbEntities db = new ocrdbEntities();
         protected readonly IWebLog Log = new WebLog();
 
-        protected PredictNeuralNetwork Rede
+        protected IPredict Rede
         {
-            get { return (PredictNeuralNetwork)HttpContext.Current.Cache[CachePredictItemName]; }
+            get { return (IPredict)HttpContext.Current.Cache[CachePredictItemName]; }
         }
 
         protected abstract string CachePredictItemName { get; }

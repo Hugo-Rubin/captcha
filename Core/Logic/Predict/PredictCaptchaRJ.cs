@@ -1,9 +1,8 @@
-﻿using System;
-using Core.Logic.Predict.Abstract;
+﻿using Core.Logic.Predict.Abstract;
 
 namespace Core.Logic.Predict
 {
-    public class PredictCaptchaRJ : PredictNeuralNetwork
+    public class PredictCaptchaRJ : PredictNeuralNetwork<PredictCaptchaRJ>
     {
         protected override int HiddenUnits
         {
@@ -27,35 +26,6 @@ namespace Core.Logic.Predict
                            };
             }
         }
-
-        #region Implementação de Singleton
-
-        protected static volatile PredictCaptchaRJ instance;
-        protected static object SyncRoot = new Object();
-
-        private PredictCaptchaRJ()
-        {
-        }
-
-        public static PredictCaptchaRJ Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new PredictCaptchaRJ();
-                        }
-                    }
-                }
-                return instance;
-            }
-        }
-
-        #endregion
 
         public override string SiglaServico
         {

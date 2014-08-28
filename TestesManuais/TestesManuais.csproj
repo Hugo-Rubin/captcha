@@ -286,11 +286,11 @@
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\Logic.csproj">
+    <ProjectReference Include="..\Core\Logic\Logic.csproj">
       <Project>{ADF52F5A-5091-4121-9AD7-DCBB5BD23498}</Project>
       <Name>Logic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\Common.csproj">
+    <ProjectReference Include="..\Core\Common\Common.csproj">
       <Project>{e511f63f-f352-400d-9deb-7931e3e3a2e0}</Project>
       <Name>Common</Name>
     </ProjectReference>

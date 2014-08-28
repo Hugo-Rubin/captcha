@@ -54,7 +54,6 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="ocr.asmx" />
-    <Content Include="WebSI.csproj" />
     <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -67,6 +66,8 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Resources\theta1.csv" />
+    <Content Include="Resources\theta2.csv" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -74,7 +75,6 @@
     </Compile>
     <Compile Include="ocr.asmx.cs">
       <DependentUpon>ocr.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

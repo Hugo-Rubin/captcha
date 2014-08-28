@@ -1013,7 +1013,7 @@ namespace Core.Logic
             {
                 case 'p':
                     {
-                        var prdct = PredictCaptchaSp.Instance;
+                        var prdct = PredictCaptchaSP.Instance;
                         foreach (var i in imagens)
                         {
                             var m = new byte[3600];
@@ -1771,7 +1771,7 @@ namespace Core.Logic
                     result = new ChaveValor<Type, Type>
                                  {
                                      Chave = typeof(CaptchaRF),
-                                     Valor = typeof(PredictCaptchaRf)
+                                     Valor = typeof(PredictCaptchaRF)
                                  };
                     break;
                 case "NFE":
@@ -1793,7 +1793,7 @@ namespace Core.Logic
                     result = new ChaveValor<Type, Type>
                                  {
                                      Chave = typeof(CaptchaSP),
-                                     Valor = typeof(PredictCaptchaSp)
+                                     Valor = typeof(PredictCaptchaSP)
                                  };
                     break;
                 case "RJ":

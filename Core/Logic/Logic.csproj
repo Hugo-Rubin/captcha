@@ -91,6 +91,7 @@
     <Compile Include="GraphProcesserDijkstra.cs" />
     <Compile Include="Obsolete\SeamCarving.cs" />
     <Compile Include="Obsolete\ColorFillingSegmentation.cs" />
+    <Compile Include="Predict\Abstract\IPredict.cs" />
     <Compile Include="Predict\PredictCaptchaCAM.cs" />
     <Compile Include="Predict\PredictCaptchaCRJVerde.cs" />
     <Compile Include="Predict\PredictCaptchaCRJCinza.cs" />
@@ -192,8 +193,6 @@
     <Compile Include="RemocaoFundo\K_Means.cs" />
     <Compile Include="SeparacaoADAP_CRJ_Cinza\SeamCarving2ADAP.cs" />
     <Compile Include="SeparacaoADAP_CRJ_Cinza\SeparacaoPadraoADAP.cs" />
-    <Compile Include="Services\BasicService.cs" />
-    <Compile Include="Services\OcrService.cs" />
     <Compile Include="StringLogicalComparer.cs" />
     <Compile Include="TemplateMatching.cs" />
     <Compile Include="Tratamento\IConditional.cs" />

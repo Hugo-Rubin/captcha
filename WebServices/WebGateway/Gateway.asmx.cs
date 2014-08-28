@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -14,7 +12,6 @@ using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas;
 using Core.Logic.Types;
-using WebCommon.Logging;
 using WebGateway.WS_AM;
 using WebGateway.WS_CA;
 using WebGateway.WS_CM;
@@ -26,24 +23,15 @@ using WebGateway.WS_RJ;
 using WebGateway.WS_SI;
 using WebGateway.WS_SP;
 
-#endregion
-
 namespace WebGateway
 {
-    /// <summary>
-    ///     Summary description for Gateway
-    /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
     public class Gateway : WebService
     {
         private static Dictionary<string, Func<Bitmap, string, string>> servicosSuportados;
         private readonly ocrdbEntities db = new ocrdbEntities();
-
-        private readonly IWebLog log = new WebLog();
 
         public Gateway()
         {
@@ -70,7 +58,7 @@ namespace WebGateway
         [WebMethod]
         // ReSharper disable InconsistentNaming
         public string GetText(string Servico, byte[] Imagem, int w, int h, string Token)
-            // ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             var cliente = ListarClientePeloToken(Token);
             if (cliente == null)
@@ -119,9 +107,7 @@ namespace WebGateway
         [WebMethod]
         public string WakeUp()
         {
-            var imgCaptcha = new Bitmap(@"D:\Hosting\9799333\html\wakeup\temp.png");
-            return GetText("NFE", imgCaptcha.ToByteArray(ImageFormat.Png), imgCaptcha.Width, imgCaptcha.Height,
-                "yWAmlOxGfMEiIz0FY58B");
+            return "Hello";
         }
 
         private void GravarLogExecucao(string cliente, string ip, string servico, string resposta,
@@ -135,8 +121,8 @@ namespace WebGateway
             try
             {
                 var cliente = (from c in db.Clientes
-                    where c.Token == token
-                    select c).First();
+                               where c.Token == token
+                               select c).First();
                 cliente.Nome = cliente.Nome.Trim();
                 cliente.Token = cliente.Token.Trim();
                 return cliente;
@@ -150,10 +136,10 @@ namespace WebGateway
         private IQueryable<Servicos> ListarServicosPorCliente(Clientes cliente)
         {
             return from sc in db.ServicosCliente
-                join s in db.Servicos
-                    on sc.IdServico equals s.Id
-                where sc.IdCliente == cliente.id
-                select s;
+                   join s in db.Servicos
+                       on sc.IdServico equals s.Id
+                   where sc.IdCliente == cliente.id
+                   select s;
         }
 
         private bool AcessoConcedido(Clientes cliente, String servico)

@@ -1,10 +1,6 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -12,12 +8,11 @@ using Core.Common;
 using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas;
-using Core.Logic.Captchas.Abstract;
 using Core.Logic.Predict;
 using Core.Logic.Types;
 using WebCommon.Logging;
 
-#endregion
+//TODO Avaliar se eh mesmo necessario usar varios predicts para este caso...
 
 namespace WebCRJ
 {

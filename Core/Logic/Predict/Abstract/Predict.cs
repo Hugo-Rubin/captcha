@@ -1,10 +1,12 @@
 ﻿using System;
+using Core.Common;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;
 
 namespace Core.Logic.Predict.Abstract
 {
-    public abstract class Predict
+    public abstract class Predict<T> : Singleton<T>, IPredict 
+        where T : new()
     {
         public abstract String CacheDependencyFile { get; }
         public abstract String SiglaServico { get; }

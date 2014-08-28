@@ -245,7 +245,7 @@ namespace TestesManuais
 
         private void btnTesteLocal_Click(object sender, EventArgs e)
         {
-            var rede = PredictCaptchaRf.Instance;
+            var rede = PredictCaptchaRF.Instance;
 
 
             if (listBox1.Items.Count > 0)
@@ -1269,7 +1269,7 @@ namespace TestesManuais
 
         private void btnBatchReconhecer_Click(object sender, EventArgs e)
         {
-            var result = LoteSintegraSP.Reconhecer(typeof (PredictCaptchaSp));
+            var result = LoteSintegraSP.Reconhecer(typeof (PredictCaptchaSP));
             MessageBox.Show("Tempo médio do CaptchaTipo3: " + result.Chave.ToString());
             Util.GravarLinhasEmArquivo(@"C:\CaptchaTipo3.txt", result.Valor, true);
         }

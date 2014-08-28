@@ -95,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
+    <Content Include="Resources\theta1.csv" />
+    <Content Include="Resources\theta2.csv" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

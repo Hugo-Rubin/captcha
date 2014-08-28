@@ -383,7 +383,7 @@ namespace TestesManuais
                 //this.captcha = CreateCaptchaInstance(file.FullName);
                 //Bitmap[] caracteres = captcha.GetCaracteres();
 
-                var p = (PredictNeuralNetwork) Activator.CreateInstance(predictType);
+                var p = (IPredict) Activator.CreateInstance(predictType);
                 var dt = DateTime.Now;
 
                 var bmp = (Bitmap) BitmapUtils.LoadImageWithoutLockFile(file.FullName);
@@ -551,7 +551,7 @@ namespace TestesManuais
                        };
         }
 
-        private Predict GetPredictInstance(Type predictType)
+        private IPredict GetPredictInstance(Type predictType)
         {
             // Infelizmente nao encontrei uma maneira melhor de fazer isso porque nao eh possivel implementar 
             // Singleton na classe abstrata e nao eh possivel criar um metodo statico em Interface 
@@ -572,43 +572,43 @@ namespace TestesManuais
             {
                 return PredictCaptchaNFE.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaMG))
+            if (predictType == typeof (PredictCaptchaMG))
             {
                 return PredictCaptchaMG.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaAM))
+            if (predictType == typeof (PredictCaptchaAM))
             {
                 return PredictCaptchaAM.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaRf))
+            if (predictType == typeof (PredictCaptchaRF))
             {
-                return PredictCaptchaRf.Instance;
+                return PredictCaptchaRF.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaRJ))
+            if (predictType == typeof (PredictCaptchaRJ))
             {
                 return PredictCaptchaRJ.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaSp))
+            if (predictType == typeof (PredictCaptchaSP))
             {
-                return PredictCaptchaSp.Instance;
+                return PredictCaptchaSP.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaSi))
+            if (predictType == typeof (PredictCaptchaSi))
             {
                 return PredictCaptchaSi.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaCRJ))
+            if (predictType == typeof (PredictCaptchaCRJ))
             {
                 return PredictCaptchaCRJ.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaCRJAzul))
+            if (predictType == typeof (PredictCaptchaCRJAzul))
             {
                 return PredictCaptchaCRJAzul.Instance;
             }
-            else if (predictType == typeof (PredictCaptchaCAM))
+            if (predictType == typeof (PredictCaptchaCAM))
             {
                 return PredictCaptchaCAM.Instance;
             }
-            return (PredictNeuralNetwork) Activator.CreateInstance(predictType);
+            throw new ArgumentOutOfRangeException("predictType");
         }
 
         public ChaveValor<TimeSpan, List<String>> Reconhecer(Type predictType, int sleep = 0)

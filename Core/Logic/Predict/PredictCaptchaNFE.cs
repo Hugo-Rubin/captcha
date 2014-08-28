@@ -1,9 +1,8 @@
-﻿using System;
-using Core.Logic.Predict.Abstract;
+﻿using Core.Logic.Predict.Abstract;
 
 namespace Core.Logic.Predict
 {
-    public class PredictCaptchaNFE : PredictNeuralNetwork
+    public class PredictCaptchaNFE : PredictNeuralNetwork<PredictCaptchaNFE>
     {
         protected override char[] Dicionario
         {
@@ -29,37 +28,7 @@ namespace Core.Logic.Predict
         {
             get { return 3600; }
         }
-
-        #region Implementação de Singleton
-
-        protected static volatile PredictCaptchaNFE instance;
-        protected static object SyncRoot = new Object();
-
-        private PredictCaptchaNFE()
-        {
-        }
-
-        public static PredictCaptchaNFE Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new PredictCaptchaNFE();
-                            ServerLog.Append("PredictNFE foi instanciado");
-                        }
-                    }
-                }
-                return instance;
-            }
-        }
-
-        #endregion
-
+        
         public override string SiglaServico
         {
             get { return "NFE"; }

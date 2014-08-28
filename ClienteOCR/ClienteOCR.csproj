@@ -182,7 +182,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Library\Common.csproj">
+    <ProjectReference Include="..\Core\Common\Common.csproj">
       <Project>{E511F63F-F352-400D-9DEB-7931E3E3A2E0}</Project>
       <Name>Common</Name>
     </ProjectReference>

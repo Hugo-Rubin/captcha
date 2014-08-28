@@ -12,39 +12,18 @@ namespace WebCA
 {
     public class Global : HttpApplication
     {
+        public const string PredictObjectCacheName = "RedeCAM";
+
         protected void Application_Start(object sender, EventArgs e)
         {
             ServerLog.Append("Aplicação Consignações Aeronáutica/Marinha foi iniciada.");
-            if (HttpContext.Current.Cache["RedeCAM"] == null)
+            if (HttpContext.Current.Cache[PredictObjectCacheName] != null)
             {
-                HttpContext.Current.Cache.Insert("RedeCAM", PredictCaptchaCAM.Instance,
-                    new CacheDependency(PredictCaptchaCAM.Instance.CacheDependencyFile));
-                ServerLog.Append("O PredictConsigAM foi carregado em cache.");
+                return;
             }
-        }
-
-        protected void Session_Start(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_Error(object sender, EventArgs e)
-        {
-        }
-
-        protected void Session_End(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_End(object sender, EventArgs e)
-        {
+            HttpContext.Current.Cache.Insert(PredictObjectCacheName, PredictCaptchaCAM.Instance,
+                new CacheDependency(PredictCaptchaCAM.Instance.CacheDependencyFile));
+            ServerLog.Append(PredictObjectCacheName + " foi carregado em cache.");
         }
     }
 }

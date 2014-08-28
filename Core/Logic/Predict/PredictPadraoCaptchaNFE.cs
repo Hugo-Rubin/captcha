@@ -5,7 +5,7 @@ using Core.Logic.Utils;
 
 namespace Core.Logic.Predict
 {
-    public class PredictPadraoCaptchaNFE : PredictNeuralNetwork
+    public class PredictPadraoCaptchaNFE : PredictNeuralNetwork<PredictPadraoCaptchaNFE>
     {
         //TODO: Esse método precisou ser sobrescrito porque a rede NFE foi treinada invertida
         // Remover esse método assim que retreinar a a rede NFE
@@ -34,35 +34,6 @@ namespace Core.Logic.Predict
         {
             get { return "ArquivoTheta2Padroes_NFE"; }
         }
-
-        #region Implementação de Singleton
-
-        protected static volatile PredictPadraoCaptchaNFE instance;
-        protected static object SyncRoot = new Object();
-
-        private PredictPadraoCaptchaNFE()
-        {
-        }
-
-        public static PredictPadraoCaptchaNFE Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new PredictPadraoCaptchaNFE();
-                        }
-                    }
-                }
-                return instance;
-            }
-        }
-
-        #endregion
 
         public override string SiglaServico
         {

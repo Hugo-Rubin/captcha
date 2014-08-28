@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSI", "WebServices\WebSI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSP", "WebServices\WebSP\WebSP.csproj", "{1F0C37DD-31AF-4E16-B232-352A68C47C1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRF", "WebServices\WebRF\WebRF.csproj", "{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +209,16 @@ Global
 		{1F0C37DD-31AF-4E16-B232-352A68C47C1A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1F0C37DD-31AF-4E16-B232-352A68C47C1A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1F0C37DD-31AF-4E16-B232-352A68C47C1A}.Release|x86.ActiveCfg = Release|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,5 +238,6 @@ Global
 		{46281C29-CE39-4EAC-A55B-35B1DFDB1058} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
 		{748D8A85-EDE7-4932-8B53-39B3AD4A99CC} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
 		{1F0C37DD-31AF-4E16-B232-352A68C47C1A} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
+		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
 	EndGlobalSection
 EndGlobal

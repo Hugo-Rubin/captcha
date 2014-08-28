@@ -54,6 +54,7 @@
     <Compile Include="IImgArray.cs" />
     <Compile Include="ImgArrayLite.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Singleton.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

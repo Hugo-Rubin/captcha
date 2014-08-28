@@ -3,7 +3,7 @@ using Core.Logic.Types;
 
 namespace Core.Logic.Predict.Abstract
 {
-    public abstract class PredictTemplateMatching : Predict
+    public abstract class PredictTemplateMatching<T> : Predict<T> where T : new()
     {
         public override string CacheDependencyFile
         {

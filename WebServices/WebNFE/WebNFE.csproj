@@ -105,6 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
+    <Content Include="Resources\theta1.csv" />
+    <Content Include="Resources\Theta1Padroes.csv" />
+    <Content Include="Resources\theta2.csv" />
+    <Content Include="Resources\Theta2Padroes.csv" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

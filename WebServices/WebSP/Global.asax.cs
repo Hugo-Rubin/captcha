@@ -14,7 +14,7 @@ namespace WebSP
         protected void Application_Start(object sender, EventArgs e)
         {
             ServerLog.Append("WebAppOCRTipo3 instanciou o PredictCaptchaSp.");
-            Application.Add("Rede", PredictCaptchaSp.Instance);
+            Application.Add("Rede", PredictCaptchaSP.Instance);
         }
 
         protected void Session_Start(object sender, EventArgs e)

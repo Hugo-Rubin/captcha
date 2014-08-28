@@ -10,7 +10,7 @@ using Core.Logic.Utils;
 
 namespace Core.Logic.Predict.Abstract
 {
-    public abstract class PredictNeuralNetwork : Predict
+    public abstract class PredictNeuralNetwork<T> : Predict<T> where T: new()
     {
         private double[,] th1;
         private double[,] th2;
