@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Separacao;
@@ -55,7 +56,7 @@ namespace Core.Logic.Captchas
             get { return 5; }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var idxInicial = new List<int>();
             var clusters = new List<ImgArray>();
@@ -172,7 +173,7 @@ namespace Core.Logic.Captchas
         private ChaveValor<bool, int> IsLetterColor(Color color)
         {
             var result = false;
-            var brilho = ColorUtils.BrilhoDoPixel(color);
+            var brilho = color.BrilhoDoPixel();
 
             var i = brilho - ToleranciaBrilhoLetras;
             var max = brilho + ToleranciaBrilhoLetras;
@@ -201,7 +202,7 @@ namespace Core.Logic.Captchas
             {
                 for (var i = -ToleranciaBrilhoLetras; i < ToleranciaBrilhoLetras; i++)
                 {
-                    var brilho = ColorUtils.BrilhoDoPixel(cor) + i;
+                    var brilho = cor.BrilhoDoPixel() + i;
                     if (brilho > byte.MinValue && brilho < byte.MaxValue)
                     {
                         brilhosValidosParaLetras.Add((byte)(brilho));

@@ -35,7 +35,7 @@ namespace WebSI
             {
                 var ip = HttpContext.Current.Request.UserHostAddress;
 
-                var nano = new NanoArray(NanoImg.BitmapFromNanoArray(w, h));
+                var nano = new NanoArray(NanoImg.CreateBitmapFromNanoArray(w, h));
                 var captcha = new CaptchaSI(nano);
 
                 try

@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic;
 using Core.Logic.Captchas;
 using Core.Logic.ImageLevels;
@@ -25,8 +26,8 @@ namespace TestesManuais
     {
         private readonly string DirTeste = ConfigurationManager.AppSettings["ImagesDir"];
 
-        private readonly Batch LoteSintegraSP = new Batch(typeof (CaptchaSP), @"C:\SintegraSP", "SP");
-        
+        private readonly Batch LoteSintegraSP = new Batch(typeof(CaptchaSP), @"C:\SintegraSP", "SP");
+
         private String PostURLLocal = "http://localhost:50231/GetText.aspx";
         private String PostURLServidor = "http://www.ml-research.com/testes2Redes/GetText.aspx";
         private object WebService;
@@ -62,7 +63,7 @@ namespace TestesManuais
                 if (array[i] is IList<T>)
                 {
                     //Recursively convert nested arrays to string
-                    outputString += ArrayToStringGeneric((IList<T>) array[i], delimeter);
+                    outputString += ArrayToStringGeneric((IList<T>)array[i], delimeter);
                 }
                 else
                 {
@@ -219,9 +220,8 @@ namespace TestesManuais
 
 
                     var palavra = HttpPost(postURL,
-                                              new[] {"i", "w", "h", "n"},
-                                              new[]
-                                                  {strImg, captcha.Width.ToString(), captcha.Height.ToString(), "true"}
+                                              new[] { "i", "w", "h", "n" },
+                                              new[] { strImg, captcha.Width.ToString(), captcha.Height.ToString(), "true" }
                         );
                     var dt2 = DateTime.Now;
                     var tempo = dt2 - dt1;
@@ -274,7 +274,7 @@ namespace TestesManuais
                     var dt1 = DateTime.Now;
 
 
-                    var caracteres = captcha.GetCaracteresImgArray();
+                    var caracteres = captcha.GetCaracteres();
                     var palavra = rede.Recognize(caracteres);
 
                     var dt2 = DateTime.Now;
@@ -360,7 +360,7 @@ namespace TestesManuais
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var AL = new AdjustLevels(@"C:\Users\Hugo\Pictures\foto-raio.jpg", new[] {86, 129, 200}, new[] {0, 255});
+            var AL = new AdjustLevels(@"C:\Users\Hugo\Pictures\foto-raio.jpg", new[] { 86, 129, 200 }, new[] { 0, 255 });
             MessageBox.Show("Terminei");
         }
 
@@ -480,10 +480,10 @@ namespace TestesManuais
 
 
                 // Bitmap img = (Bitmap)Bitmap.FromFile(@"D:\Arquivos e Pastas\Captcha\Siscarga\1000\Captcha_Ssicarga71.tif");
-                var img = (Bitmap) Image.FromFile(f.FullName);
+                var img = (Bitmap)Image.FromFile(f.FullName);
                 //Bitmap img = (Bitmap)Bitmap.FromFile(@"D:\Arquivos e Pastas\Captcha\Siscarga\100\1 (87).tif");
                 //Grayscale filter = new Grayscale(0.015, 0.25, 0.83); // 0, 0.098, 0.8 (inicial) - 0, 0.25, 0.8 (+claro) - 0, 0.25, 0.83 (+claro) - 0.015, 0.25, 0.83 (+claro)
-                var grayImage = img.MakeGrayscale(); // filter.Apply(img);
+                var grayImage = img.TransformToGrayscale(); // filter.Apply(img);
 
                 var c = new CaptchaSI(grayImage);
 
@@ -772,7 +772,7 @@ namespace TestesManuais
 
                     default:
                         {
-                            resposta = new[] {'X', 'X', 'X', 'X', 'X'};
+                            resposta = new[] { 'X', 'X', 'X', 'X', 'X' };
                             break;
                         }
                 }
@@ -933,7 +933,7 @@ namespace TestesManuais
 
             foreach (var file in files)
             {
-                var img = (Bitmap) Image.FromFile(file.FullName);
+                var img = (Bitmap)Image.FromFile(file.FullName);
                 var c = new CaptchaSI(img);
 
                 //Grayscale filter = new Grayscale(0.13333, 0.13333, 0.06666); // 0, 0.098, 0.8 (inicial) - 0, 0.25, 0.8 (+claro) - 0, 0.25, 0.83 (+claro) - 0.015, 0.25, 0.83 (+claro) - 0.015, 0.25, 0.73 (adjusted) - (0.4, 0.4, 0.2)
@@ -1007,7 +1007,7 @@ namespace TestesManuais
 
         private void button11_Click(object sender, EventArgs e)
         {
-            var b = (Bitmap) Image.FromFile(@"C:\Users\Hugo\Templates\W\Repetidas\Captcha_Ssicarga902 - 1.png");
+            var b = (Bitmap)Image.FromFile(@"C:\Users\Hugo\Templates\W\Repetidas\Captcha_Ssicarga902 - 1.png");
             b.RemoveWhiteBorders(); // TODO: Validar esse cara. Antes chamava o RWB com o parâmetro crop.
 
             var di = new DirectoryInfo(@"C:\Users\Hugo\Templates").GetDirectories();
@@ -1060,13 +1060,11 @@ namespace TestesManuais
         private void button12_Click(object sender, EventArgs e)
         {
             var c = new CaptchaSP(@"C:\sintegraSP.png");
-            var caracteres = c.GetCaracteresImgArray();
-            for (var i = 0; i < caracteres.Count(); i++)
+            var caracteres = c.GetCaracteres();
+            int i = 0;
+            foreach (var item in caracteres.Where(obj => obj != null))
             {
-                if (caracteres[i] != null)
-                {
-                    caracteres[i].Save(String.Format(@"D:\{0}.jpg", i));
-                }
+                item.Save(String.Format(@"D:\{0}.jpg", i++));
             }
         }
 
@@ -1122,7 +1120,7 @@ namespace TestesManuais
                 }
             }
 
-            MessageBox.Show("Efficiency: " + String.Format("{0:F2}", ((double) matchingResults/imagesCount)*100)
+            MessageBox.Show("Efficiency: " + String.Format("{0:F2}", ((double)matchingResults / imagesCount) * 100)
                             + " %\n" + matchingResults + " out of " + imagesCount + " images were identified rightly."
                             + "\n" + "Background removal errors: " + bgRemovalErrors
                             + "\n" + "Total number of characters: " + (wrongCharacters + matchingCharacters)
@@ -1152,17 +1150,17 @@ namespace TestesManuais
 
                 foreach (var i in imagens)
                 {
-                    var m = new double[1,3600]; //[1, 3600] para imagens 60 x 60, [1, 18000] para imagens 200 x 90
+                    var m = new double[1, 3600]; //[1, 3600] para imagens 60 x 60, [1, 18000] para imagens 200 x 90
                     var img = Image.FromFile(i.FullName);
-                    var bmp = (Bitmap) img;
+                    var bmp = (Bitmap)img;
                     var k = 0;
                     for (var y = 0; y < bmp.Height; y++)
                     {
                         for (var x = 0; x < bmp.Width; x++)
                         {
                             c = bmp.GetPixel(x, y);
-                            luminance = (int) (c.R*0.3 + c.G*0.59 + c.B*0.11);
-                            m[0, k] = luminance/255;
+                            luminance = (int)(c.R * 0.3 + c.G * 0.59 + c.B * 0.11);
+                            m[0, k] = luminance / 255;
                             s.Append(string.Format("{0};", m[0, k]));
                             k++;
                         }
@@ -1269,14 +1267,14 @@ namespace TestesManuais
 
         private void btnBatchReconhecer_Click(object sender, EventArgs e)
         {
-            var result = LoteSintegraSP.Reconhecer(typeof (PredictCaptchaSP));
+            var result = LoteSintegraSP.Reconhecer(typeof(PredictCaptchaSP));
             MessageBox.Show("Tempo médio do CaptchaTipo3: " + result.Chave.ToString());
             Util.GravarLinhasEmArquivo(@"C:\CaptchaTipo3.txt", result.Valor, true);
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            var img = (Bitmap) Image.FromFile(@"C:\Users\Hugo\DropBox\OCR\Testes\RJ\00078.png");
+            var img = (Bitmap)Image.FromFile(@"C:\Users\Hugo\DropBox\OCR\Testes\RJ\00078.png");
 
             var wu = new WuColorQuantizer();
             var pq = new PalleteQuantizer(img, wu, 16);
@@ -1287,9 +1285,9 @@ namespace TestesManuais
         private void button19_Click(object sender, EventArgs e)
         {
             var img = new Bitmap(@"D:\Arquivos e Pastas\Captcha\Sintegra\AM2.jpg");
-            img.MakeGrayscale().Otsu().InvertImageColors().Save(@"C:\Users\Hugo\am1.jpg");
-            img.MakeGrayscale().InvertImageColors().Otsu().Save(@"C:\Users\Hugo\am3.jpg");
-            img.MakeGrayscale().Otsu().Save(@"C:\Users\Hugo\am2.jpg");
+            img.TransformToGrayscale().Otsu().InvertImageColors().Save(@"C:\Users\Hugo\am1.jpg");
+            img.TransformToGrayscale().InvertImageColors().Otsu().Save(@"C:\Users\Hugo\am3.jpg");
+            img.TransformToGrayscale().Otsu().Save(@"C:\Users\Hugo\am2.jpg");
         }
 
         private void OrdenarCarac_Click(object sender, EventArgs e)
@@ -1319,7 +1317,7 @@ namespace TestesManuais
 
             foreach (var im in imagens)
             {
-                var bmp = (Bitmap) Image.FromFile(im.FullName);
+                var bmp = (Bitmap)Image.FromFile(im.FullName);
                 var km = new KMeans(2, bmp);
                 bmp = km.Apply();
 

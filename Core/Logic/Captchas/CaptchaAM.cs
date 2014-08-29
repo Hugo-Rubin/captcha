@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Separacao;
@@ -41,7 +42,7 @@ namespace Core.Logic.Captchas
             get { return new Point(30, 30); }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var cfs = new ColorFillingSegmentation2(ImgArray, 8, 1);
             var chars = cfs.GetCaracteres();
@@ -97,49 +98,7 @@ namespace Core.Logic.Captchas
                 chars.InsertRange(maxIdx, clusters);
             }
 
-            /*List<Bitmap> semBorda = new List<Bitmap>();
-
-            foreach (ImgArray img in chars)
-            {
-                semBorda.Add(img.RemoveWhiteBorders().ToBitmap());
-            }
-
-            while (semBorda.Count < NumeroMinimoDeLetras)
-            {
-                int maxWidth = semBorda[0].Width;
-                int maxIdx = 0;
-                for (int i = 1; i < semBorda.Count; i++)
-                {
-                    if (semBorda[i].Width > maxWidth)
-                    {
-                        maxWidth = semBorda[i].Width;
-                        maxIdx = i;
-                    }
-                }
-
-                Seam_Carving SC = new Seam_Carving();
-                int interval = (int)Math.Floor((double)semBorda[maxIdx].Width / 2);
-                Bitmap[] clusters = SC.CheckClusters(semBorda[maxIdx], interval, 0);
-                semBorda.RemoveAt(maxIdx);
-
-                foreach (Bitmap cluster in clusters)
-                {
-                    semBorda.Insert(maxIdx++, cluster);
-                }
-            }
-
-            ImgArray[] result = new ImgArray[semBorda.Count()];
-            for (int i = 0; i < semBorda.Count(); i++)
-            {
-                if (semBorda[i] != null)
-                {
-                    result[i] = new ImgArray(semBorda[i]).CortarECentralizar(60, 60);
-                }
-            }
-
-            return result;*/
-
-            return chars.ToArray().CortarECentralizarTodos(TamanhoImagemLetra.X, TamanhoImagemLetra.Y);
+            return chars.CortarECentralizarTodos(TamanhoImagemLetra.X, TamanhoImagemLetra.Y);
         }
 
         public override Bitmap RemoverFundo(Bitmap source)
@@ -157,7 +116,7 @@ namespace Core.Logic.Captchas
             {
                 for (var x = 0; x < bmp8.Width; x++)
                 {
-                    if (ColorUtils.BrilhoDoPixel(source.GetPixel(x, y)) < 160)
+                    if (source.GetPixel(x, y).BrilhoDoPixel() < 160)
                     {
                         img.SetPixel(x, y, Color.Black);
                     }

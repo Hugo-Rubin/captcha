@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.RemocaoFundo;
 
 namespace Core.Logic.Utils
@@ -22,7 +23,7 @@ namespace Core.Logic.Utils
                 for (var x = 0; x < bmp.Width; x++)
                 {
                     var novoPixel = Color.White;
-                    if (ColorUtils.BrilhoDoPixel(bmp.GetPixel(x, y)) < 90)
+                    if (bmp.GetPixel(x, y).BrilhoDoPixel() < 90)
                     {
                         novoPixel = Color.Black;
                     }

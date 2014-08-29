@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Core.Logic.Types;
 
 namespace Core.Logic.Captchas.Abstract
@@ -87,20 +87,8 @@ namespace Core.Logic.Captchas.Abstract
         {
             return ImgArray.ToNanoArray();
         }
-
-        [Obsolete("Usar ImArray")]
-        public virtual Bitmap[] GetCaracteres()
-        {
-            var chars = GetCaracteresImgArray();
-            var result = new Bitmap[chars.Count()];
-            for (var i = 0; i < chars.Count(); i++)
-            {
-                result[i] = chars[i].ToBitmap();
-            }
-            return result;
-        }
-
-        public abstract ImgArray[] GetCaracteresImgArray();
+     
+        public abstract IEnumerable<ImgArray> GetCaracteres();
 
         public abstract Bitmap RemoverFundo(Bitmap source);
 

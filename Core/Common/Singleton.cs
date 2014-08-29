@@ -2,9 +2,7 @@
 {
     public abstract class Singleton<T> where T : new()
     {
-        static Singleton()
-        {
-        }
+        static Singleton() { }
 
         private static readonly T PrivateInstance = new T();
 

@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Utils;
 using TestesManuais.GatewayRemoto;
 

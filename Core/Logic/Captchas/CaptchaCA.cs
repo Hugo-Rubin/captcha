@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.RemocaoFundo;
@@ -39,28 +40,12 @@ namespace Core.Logic.Captchas
             get { return new Point(45, 45); }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var cfs = new ColorFillingSegmentation2(ImgArray, 8, 2, true, true, 120);
             var sp = new SeparacaoPadrao(this, cfs);
-
-            //SeamCarving2 sc = new SeamCarving2(5);
-            //return sc.GetClusters(this.ImgArray.RemoveWhiteBorders().InserirBordaX().InserirBordaY()).CortarECentralizarTodos(45,45);
-
-            /*ImgArray[] imgs = sp.ColorFillingSegmentation2AndCorteCego(18);
             
-            Thinning thin = new ThinningZhangSuen();
-            Dilation di = new ManhattanDilation();
-
-            for (int i = 0; i < imgs.Length; i++)
-            {
-                imgs[i] = di.Apply(thin.Apply(imgs[i]).RemoverRuidos(5), 2).PreencherPixels();
-            }*/
-
             return sp.ColorFillingSegmentation2AndCorteCego(18);
-
-            //return sp.ColorFillingSegmentation2AndSeamCarving2();
-            //return new ImgArray[5].CortarECentralizarTodos(45, 45);
         }
 
         public override Bitmap RemoverFundo(Bitmap source)

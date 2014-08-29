@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;
@@ -31,7 +32,7 @@ namespace Core.Logic.Captchas
             get { return 5; }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var separacao = new SeparacaoPadrao(this);
             return separacao.ColorFillingSegmentation2AndSeamCarving2().PreencherPixelEmTodos();

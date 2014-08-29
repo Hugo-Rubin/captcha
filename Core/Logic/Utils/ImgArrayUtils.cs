@@ -13,16 +13,12 @@ namespace Core.Logic.Utils
     /// </summary>
     public static class ImgArrayUtils
     {
-        public static ImgArray[] CortarECentralizarTodos(this ImgArray[] src, int width, int height)
+        public static IEnumerable<ImgArray> CortarECentralizarTodos(this IEnumerable<ImgArray> src, int width, int height)
         {
-            return new List<ImgArray>(src).CortarECentralizarTodos(width, height).ToArray();
-        }
-
-        public static List<ImgArray> CortarECentralizarTodos(this List<ImgArray> src, int width, int height)
-        {
-            var result = new List<ImgArray>();
-            src.ForEach(img => result.Add(img.CortarECentralizar(width, height)));
-            return result;
+            foreach (var item in src)
+            {
+                yield return item.CortarECentralizar(width, height);
+            }
         }
 
         /// <summary>
@@ -308,7 +304,7 @@ namespace Core.Logic.Utils
             var x = 0;
             var y = 0;
             var idx = 0;
-            
+
             var pixelsProcessados = new List<Point>();
             while (idx < imgArray.Width * imgArray.Height - 1)
             {

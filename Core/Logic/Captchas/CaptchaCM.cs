@@ -149,7 +149,7 @@ namespace Core.Logic.Captchas
             return source.GetSegment(r).CortarECentralizar(source.Width, source.Height);
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var cfs = new ColorFillingSegmentation2(
                 imgBlackAndWhite: ImgArray,

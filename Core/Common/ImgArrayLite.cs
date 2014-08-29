@@ -1,11 +1,8 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
-
-#endregion
+using Core.Common.Extensions;
 
 namespace Core.Common
 {

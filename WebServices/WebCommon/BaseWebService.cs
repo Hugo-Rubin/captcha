@@ -41,13 +41,13 @@ namespace WebCommon
             {
                 var ip = HttpContext.Current.Request.UserHostAddress;
 
-                var bmp = (Bitmap)ImagemColorida.ToImage();
+                var bmp = ImagemColorida.CreateBitmap();
 
                 var captcha = (Captcha)Activator.CreateInstance(typeof(T), new object[] { bmp });
 
                 try
                 {
-                    palavra = Rede.Recognize(captcha.GetCaracteresImgArray());
+                    palavra = Rede.Recognize(captcha.GetCaracteres());
                     Log.GravarLogExecucao(Token, ip, palavra);
                 }
                 catch (Exception exception)

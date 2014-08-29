@@ -103,6 +103,7 @@
       <DependentUpon>ClassificacaoManual.cs</DependentUpon>
     </Compile>
     <Compile Include="ConsultaCaptcha.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

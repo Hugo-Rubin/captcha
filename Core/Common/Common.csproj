@@ -49,9 +49,8 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorUtils.cs" />
-    <Compile Include="Compressor.cs" />
-    <Compile Include="IImgArray.cs" />
+    <Compile Include="Extensions\BitmapExtension.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="ImgArrayLite.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Singleton.cs" />

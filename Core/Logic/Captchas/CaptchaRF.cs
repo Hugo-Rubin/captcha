@@ -30,45 +30,8 @@ namespace Core.Logic.Captchas
             get { return 6; }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
-            /*ColorFillingSegmentation2 cfs = new ColorFillingSegmentation2(this.ImgArray, 8, 70, false);
-            List<ImgArray> chars = cfs.GetCaracteres();
-
-            while (chars.Count < NumeroMinimoDeLetras && chars.Count != 0)
-            {
-                int maxWidth = chars[0].Width;
-                int maxIdx = 0;
-                for (int i = 1; i < chars.Count; i++)
-                {
-                    if (chars[i].Width > maxWidth)
-                    {
-                        maxWidth = chars[i].Width;
-                        maxIdx = i;
-                    }
-                }
-
-                SeamCarving2 seamCarving = new SeamCarving2(2, maxWidth / 2);
-                ImgArray[] clusters = seamCarving.GetClusters(new ImgArray(chars[maxIdx]));
-                chars.RemoveAt(maxIdx);
-
-                foreach (ImgArray cluster in clusters)
-                {
-                    chars.Insert(maxIdx++, cluster);
-                }
-            }
-
-            ImgArray[] result = new ImgArray[chars.Count()];
-            for (int i = 0; i < chars.Count(); i++)
-            {
-                if (chars[i] != null)
-                {
-                    result[i] = chars[i].CortarECentralizar(60, 60);
-                }
-            }
-            
-            return result;*/
-
             var separar = new SeparacaoPadrao(this);
             return
                 separar.ColorFillingSegmentation2AndSeamCarving2(ImgArray, false).CortarECentralizarTodos(

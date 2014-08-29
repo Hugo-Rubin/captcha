@@ -276,7 +276,7 @@ namespace Core.Logic.Captchas
             }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var bmpTratado = TratarImagem();
             var separar = new SeparacaoPadrao(this);

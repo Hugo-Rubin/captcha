@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;
 using Core.Logic.Utils;
@@ -32,7 +34,7 @@ namespace Core.Logic.Captchas
             get { return 4; }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             var separacao = new SeparacaoPadrao(this);
             return separacao.ColorFillingSegmentation2AndSeamCarving2();
@@ -42,7 +44,7 @@ namespace Core.Logic.Captchas
         {
             var removerFundo = new RemocaoFundoPadrao(source);
             source = removerFundo.LetrasTemBrilhoMenorQue(90);
-            return ColorUtils.PreencherPixels(source);
+            return source.PreencherPixels();
         }
     }
 }

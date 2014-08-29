@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Core.Common
@@ -33,6 +35,42 @@ namespace Core.Common
                 fileWriter = File.Exists(logFile) ? File.AppendText(logFile) : File.CreateText(logFile);
 
                 fileWriter.Write(lines.ToString());
+            }
+            finally
+            {
+                if (fileWriter != null)
+                {
+                    fileWriter.Close();
+                }
+            }
+        }
+
+        public static void GravarLinhasEmArquivo(string filePath, IEnumerable<string> lines, bool overrite)
+        {
+            if (string.IsNullOrEmpty(filePath)
+                || lines == null
+                || !lines.Any())
+            {
+                return;
+            }
+
+            StreamWriter fileWriter = null;
+
+            try
+            {
+                if (!overrite && File.Exists(filePath))
+                {
+                    fileWriter = File.AppendText(filePath);
+                }
+                else
+                {
+                    fileWriter = File.CreateText(filePath);
+                }
+
+                foreach (var line in lines)
+                {
+                    fileWriter.WriteLine(line);
+                }
             }
             finally
             {

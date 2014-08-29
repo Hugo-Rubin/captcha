@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using Core.Common;
+using Core.Common.Extensions;
 using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas;
