@@ -87,6 +87,7 @@
     <Compile Include="GraphProcesserDijkstra.cs" />
     <Compile Include="Obsolete\SeamCarving.cs" />
     <Compile Include="Obsolete\ColorFillingSegmentation.cs" />
+    <Compile Include="Predict\Abstract\ICacheable.cs" />
     <Compile Include="Predict\Abstract\IPredict.cs" />
     <Compile Include="Predict\PredictCaptchaCAM.cs" />
     <Compile Include="Predict\PredictCaptchaCRJVerde.cs" />

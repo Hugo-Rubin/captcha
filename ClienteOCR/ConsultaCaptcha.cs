@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows.Forms;
 using ClienteSintegra.Properties;
 using Core.Common;
+using Core.Common.Extensions;
 
 namespace ClienteSintegra
 {

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;
 
@@ -37,14 +39,14 @@ namespace Core.Logic.Captchas
             {
                 for (var x = 0; x < source.Width; x++)
                 {
-                    source.SetPixel(x, y, ColorUtils.BrilhoDoPixel(source.GetPixel(x, y)) > 160 ? Color.White : Color.Black);
+                    source.SetPixel(x, y, source.GetPixel(x, y).BrilhoDoPixel() > 160 ? Color.White : Color.Black);
                 }
             }
 
             return source;
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             throw new NotImplementedException();
         }

@@ -11,7 +11,7 @@ namespace WebRF
     {        
         protected override string CachePredictItemName
         {
-            get { return Global.PredictObjectCacheName; }
+            get { return Global.PredictObjectCacheName(); }
         }
     }
 }

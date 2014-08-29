@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Utils;
 
 namespace Core.Logic.Types

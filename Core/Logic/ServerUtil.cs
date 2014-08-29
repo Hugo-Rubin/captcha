@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using AForge.Imaging.Filters;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas;
 using Core.Logic.Predict;
 using Core.Logic.Types;

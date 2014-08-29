@@ -1,29 +1,19 @@
-﻿#region
-
-using System;
-using System.Web;
-using System.Web.Caching;
-using Core.Logic;
-using Core.Logic.Predict;
-
-#endregion
+﻿using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
+using WebCommon;
 
 namespace WebCA
 {
-    public class Global : HttpApplication
+    public class Global : BaseHttpApplication
     {
-        public const string PredictObjectCacheName = "RedeCAM";
-
-        protected void Application_Start(object sender, EventArgs e)
+        public override string PredictObjectCacheName
         {
-            ServerLog.Append("Aplicação Consignações Aeronáutica/Marinha foi iniciada.");
-            if (HttpContext.Current.Cache[PredictObjectCacheName] != null)
-            {
-                return;
-            }
-            HttpContext.Current.Cache.Insert(PredictObjectCacheName, PredictCaptchaCAM.Instance,
-                new CacheDependency(PredictCaptchaCAM.Instance.CacheDependencyFile));
-            ServerLog.Append(PredictObjectCacheName + " foi carregado em cache.");
+            get { return "RedeCAM"; }
+        }
+
+        protected override ICacheable PredictInstance
+        {
+            get { return PredictCaptchaCAM.Instance; }
         }
     }
 }

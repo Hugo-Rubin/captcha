@@ -260,11 +260,11 @@ namespace TestesManuais
                                           batch.MenorTempo.ToString(),
                                           resultado.Chave.ToString(),
                                           batch.MaiorTempo.ToString()));
-            Util.GravarLinhasEmArquivo(txtPasta.Text + "\\reconhecimento.txt", resultado.Valor, true);
+            Log.GravarLinhasEmArquivo(txtPasta.Text + "\\reconhecimento.txt", resultado.Valor, true);
             if (!File.Exists(txtPasta.Text + "\\working.txt"))
             {
                 var workingTxtPath = txtPasta.Text + "\\working.txt";
-                Util.GravarLinhasEmArquivo(workingTxtPath, resultado.Valor, true);
+                Log.GravarLinhasEmArquivo(workingTxtPath, resultado.Valor, true);
                 workingLog.DataSource = CarregarLogItems(workingTxtPath);
             }
         }

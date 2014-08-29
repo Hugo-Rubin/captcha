@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Core.Common;
+using Core.Common.Extensions;
 
 namespace Core.Logic.Types
 {
@@ -80,7 +81,7 @@ namespace Core.Logic.Types
 
             var result = lista.ToArray();
 
-            return result.BitmapFromArray(width, height);
+            return result.CreateBitmap(width, height);
         }
 
         public int[] GetInternalArray()

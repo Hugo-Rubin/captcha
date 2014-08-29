@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Separacao;
 using Core.Logic.SeparacaoADAP_CRJ_Cinza;
@@ -42,7 +44,7 @@ namespace Core.Logic.Captchas
             get { return new Point(60, 60); }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             switch (Padrao)
             {
@@ -97,7 +99,7 @@ namespace Core.Logic.Captchas
             {
                 case TipoPadraoConsigRJ.Cinza:
                     {
-                        source = source.MakeGrayscale();
+                        source = source.TransformToGrayscale();
 
                         const int threshold = 150;
 
@@ -154,7 +156,7 @@ namespace Core.Logic.Captchas
 
                 case TipoPadraoConsigRJ.Azul:
                     {
-                        source = source.MakeGrayscale();
+                        source = source.TransformToGrayscale();
 
                         var img = new ImgArray(source.Width, source.Height);
 

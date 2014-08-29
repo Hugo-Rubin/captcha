@@ -48,7 +48,7 @@ namespace WebCRJ
             {
                 var ip = HttpContext.Current.Request.UserHostAddress;
 
-                var bmp = (Bitmap) ImagemColorida.ToImage();
+                var bmp = ImagemColorida.CreateBitmap();
                 var captcha = new CaptchaCRJ(bmp);
 
                 try
@@ -57,17 +57,17 @@ namespace WebCRJ
                     {
                         case TipoPadraoConsigRJ.Cinza:
                         {
-                            palavra = rede.Recognize(captcha.GetCaracteresImgArray());
+                            palavra = rede.Recognize(captcha.GetCaracteres());
                             break;
                         }
                         case TipoPadraoConsigRJ.Azul:
                         {
-                            palavra = redeAzul.Recognize(captcha.GetCaracteresImgArray());
+                            palavra = redeAzul.Recognize(captcha.GetCaracteres());
                             break;
                         }
                         case TipoPadraoConsigRJ.Verde:
                         {
-                            palavra = redeVerde.Recognize(captcha.GetCaracteresImgArray());
+                            palavra = redeVerde.Recognize(captcha.GetCaracteres());
                             break;
                         }
                     }

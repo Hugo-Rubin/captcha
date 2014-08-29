@@ -1,10 +1,9 @@
 ﻿namespace Core.Common
 {
-    public abstract class Singleton<T> where T : new()
+    public abstract class Singleton<T> : ISingleton
+        where T : new()
     {
-        static Singleton()
-        {
-        }
+        static Singleton() { }
 
         private static readonly T PrivateInstance = new T();
 
@@ -15,5 +14,15 @@
                 return PrivateInstance;
             }
         }
+
+        public object GetInstance()
+        {
+            return Instance;
+        }
+    }
+
+    public interface ISingleton
+    {
+        object GetInstance();
     }
 }

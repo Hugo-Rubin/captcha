@@ -15,6 +15,7 @@ using Core.Logic.Predict;
 using Core.Logic.Predict.Abstract;
 using Core.Logic.Types;
 using Core.Logic.Utils;
+using TestesManuais.Extensions;
 
 #endregion
 
@@ -140,12 +141,13 @@ namespace TestesManuais
                     }
                     captcha.ImgArray.Save(separadosPath + "Captcha.png");
                     var dt2 = DateTime.Now;
-                    var caracteres = captcha.GetCaracteresImgArray();
+                    var caracteres = captcha.GetCaracteres();
                     times.Add(contabilizarTempo(DateTime.Now - dt2));
 
-                    var CountCaracteres = caracteres.SalvarTodos(separadosPath);
+                    caracteres.SalvarTodos(separadosPath);
+                    
 
-                    if (CountCaracteres < captcha.NumeroMinimoDeLetras)
+                    if (caracteres.Count() < captcha.NumeroMinimoDeLetras)
                     {
                         Erros++;
                     }
@@ -295,7 +297,7 @@ namespace TestesManuais
                         continue;
                     }
 
-                    var caracteres = captcha.GetCaracteresImgArray();
+                    var caracteres = captcha.GetCaracteres().ToArray();
 
                     var dt = DateTime.Now;
                     var resposta = p.Recognize(caracteres);
@@ -637,7 +639,7 @@ namespace TestesManuais
             {
                 var dt = DateTime.Now;
                 captcha = CreateCaptchaInstance(file.FullName);
-                var caracteres = captcha.GetCaracteresImgArray();
+                var caracteres = captcha.GetCaracteres();
                 var resposta = predict.Recognize(caracteres);
                 times.Add(contabilizarTempo(DateTime.Now - dt));
                 respostas.Add(String.Format("{0};{1};{2}", file.Name, resposta, captcha.PadraoIdentificado));

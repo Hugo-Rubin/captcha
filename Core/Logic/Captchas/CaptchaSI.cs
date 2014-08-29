@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Obsolete;
 using Core.Logic.Types;
@@ -37,7 +38,7 @@ namespace Core.Logic.Captchas
             get { return 4; }
         }
 
-        public override ImgArray[] GetCaracteresImgArray()
+        public override IEnumerable<ImgArray> GetCaracteres()
         {
             throw new NotImplementedException();
         }
@@ -53,7 +54,7 @@ namespace Core.Logic.Captchas
             }
             else
             {
-                var bmp = source.MakeGrayscale().Otsu().InvertImageColors();
+                var bmp = source.TransformToGrayscale().Otsu().InvertImageColors();
                 ConectarPixels(bmp);
                 return bmp;
             }

@@ -1,12 +1,8 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Web;
 using System.Web.Caching;
 using Core.Logic;
 using Core.Logic.Predict;
-
-#endregion
 
 namespace WebCRJ
 {
@@ -34,30 +30,6 @@ namespace WebCRJ
                     new CacheDependency(PredictCaptchaCRJVerde.Instance.CacheDependencyFile));
                 ServerLog.Append("O PredictVerdeConsigRJ foi carregado em cache.");
             }
-        }
-
-        protected void Session_Start(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_Error(object sender, EventArgs e)
-        {
-        }
-
-        protected void Session_End(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_End(object sender, EventArgs e)
-        {
         }
     }
 }

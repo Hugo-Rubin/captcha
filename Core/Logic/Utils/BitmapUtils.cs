@@ -23,21 +23,18 @@ namespace Core.Logic.Utils
             return new Bitmap(width > 0 ? width : 1, height > 0 ? height : 1).InserirFundoBranco();
         }
 
-        public static void SalvarTodos(this Bitmap[] vetor, string diretorio, string nome = "")
-        {
-            SalvarTodos(new List<Bitmap>(vetor), diretorio, nome);
-        }
-
-        public static void SalvarTodos(this List<Bitmap> lista, string diretorio, string nome = "")
+        public static void SalvarTodos(this IEnumerable<ImgArray> lista, string diretorio, string nome = "")
         {
             var i = 0;
             if (!File.Exists(diretorio))
             {
                 Directory.CreateDirectory(diretorio);
             }
-            lista.ForEach(img => img.Save(String.Format(@"{0}\{1}{2}.png", diretorio, nome, i++)));
+            foreach (var item in lista)
+            {
+                item.Save(String.Format(@"{0}\{1}{2}.png", diretorio, nome, i++));
+            }
         }
-
 
         /// <summary>
         ///   Retorna uma imagem com fundo branco e apenas copia para ela os pixels pretos da imagem de origem
