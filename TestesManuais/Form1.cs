@@ -1269,7 +1269,7 @@ namespace TestesManuais
         {
             var result = LoteSintegraSP.Reconhecer(typeof(PredictCaptchaSP));
             MessageBox.Show("Tempo médio do CaptchaTipo3: " + result.Chave.ToString());
-            Util.GravarLinhasEmArquivo(@"C:\CaptchaTipo3.txt", result.Valor, true);
+            Log.GravarLinhasEmArquivo(@"C:\CaptchaTipo3.txt", result.Valor, true);
         }
 
         private void button18_Click(object sender, EventArgs e)

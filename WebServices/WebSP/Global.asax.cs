@@ -1,44 +1,19 @@
-﻿#region
-
-using System;
-using System.Web;
-using Core.Logic;
-using Core.Logic.Predict;
-
-#endregion
+﻿using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
+using WebCommon;
 
 namespace WebSP
 {
-    public class Global : HttpApplication
+    public class Global : BaseHttpApplication
     {
-        protected void Application_Start(object sender, EventArgs e)
+        public override string PredictObjectCacheName
         {
-            ServerLog.Append("WebAppOCRTipo3 instanciou o PredictCaptchaSp.");
-            Application.Add("Rede", PredictCaptchaSP.Instance);
+            get { return "RedeSP"; }
         }
 
-        protected void Session_Start(object sender, EventArgs e)
+        protected override ICacheable PredictInstance
         {
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_Error(object sender, EventArgs e)
-        {
-        }
-
-        protected void Session_End(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_End(object sender, EventArgs e)
-        {
+            get { return PredictCaptchaSP.Instance; }
         }
     }
 }

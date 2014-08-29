@@ -1,25 +1,19 @@
-﻿using System;
-using System.Web;
-using System.Web.Caching;
-using Core.Logic;
-using Core.Logic.Predict;
+﻿using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
+using WebCommon;
 
 namespace WebRF
 {
-    public class Global : HttpApplication
+    public class Global : BaseHttpApplication
     {
-        public const string PredictObjectCacheName = "RedeRF";
-
-        protected void Application_Start(object sender, EventArgs e)
+        public override string PredictObjectCacheName()
         {
-            ServerLog.Append("Aplicação Receita Federal foi iniciada.");
-            if (HttpContext.Current.Cache[PredictObjectCacheName] != null)
-            {
-                return;
-            }
-            HttpContext.Current.Cache.Insert(PredictObjectCacheName, PredictCaptchaMG.Instance,
-                new CacheDependency(PredictCaptchaMG.Instance.CacheDependencyFile));
-            ServerLog.Append(PredictObjectCacheName + " foi carregado em cache.");
+            return "RedeRF";
+        }
+
+        protected override ICacheable PredictInstance
+        {
+            get { return PredictCaptchaRF.Instance; }
         }
     }
 }

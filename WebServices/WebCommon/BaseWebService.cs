@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -53,7 +52,7 @@ namespace WebCommon
                 catch (Exception exception)
                 {
                     ServerLog.AppendErrorLog(exception.Message, new ImgArray(10, 10).ToBitmap());
-                    throw;
+                    throw exception;
                 }
                 finally
                 {

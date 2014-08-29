@@ -1,51 +1,19 @@
-﻿#region
-
-using System;
-using System.Web;
-using System.Web.Caching;
-using Core.Logic;
-using Core.Logic.Predict;
-
-#endregion
+﻿using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
+using WebCommon;
 
 namespace WebNFE
 {
-    public class Global : HttpApplication
+    public class Global : BaseHttpApplication
     {
-        protected void Application_Start(object sender, EventArgs e)
+        public override string PredictObjectCacheName
         {
-            ServerLog.Append("WebNFE instanciou o PredictCaptchaNFE.");
-
-            if (HttpContext.Current.Cache["RedeNFE"] == null)
-            {
-                HttpContext.Current.Cache.Insert("RedeNFE", PredictCaptchaNFE.Instance,
-                    new CacheDependency(PredictCaptchaNFE.Instance.CacheDependencyFile));
-                ServerLog.Append("O PredictNFE foi carregado em cache.");
-            }
+            get { return "RedeNFE"; }
         }
 
-        protected void Session_Start(object sender, EventArgs e)
+        protected override ICacheable PredictInstance
         {
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_Error(object sender, EventArgs e)
-        {
-        }
-
-        protected void Session_End(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_End(object sender, EventArgs e)
-        {
+            get { return PredictCaptchaNFE.Instance; }
         }
     }
 }

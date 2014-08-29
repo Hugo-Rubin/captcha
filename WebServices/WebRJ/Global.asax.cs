@@ -1,51 +1,19 @@
-﻿#region
-
-using System;
-using System.Web;
-using System.Web.Caching;
-using Core.Logic;
-using Core.Logic.Predict;
-
-#endregion
+﻿using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
+using WebCommon;
 
 namespace WebRJ
 {
-    public class Global : HttpApplication
+    public class Global : BaseHttpApplication
     {
-        protected void Application_Start(object sender, EventArgs e)
+        public override string PredictObjectCacheName
         {
-            ServerLog.Append("Aplicação Sintegra RJ foi iniciada.");
-
-            if (HttpContext.Current.Cache["RedeRJ"] == null)
-            {
-                HttpContext.Current.Cache.Insert("RedeRJ", PredictCaptchaRJ.Instance,
-                    new CacheDependency(PredictCaptchaRJ.Instance.CacheDependencyFile));
-                ServerLog.Append("O PredictRJ foi carregado em cache.");
-            }
+            get { return "RedeRJ"; }
         }
 
-        protected void Session_Start(object sender, EventArgs e)
+        protected override ICacheable PredictInstance
         {
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_Error(object sender, EventArgs e)
-        {
-        }
-
-        protected void Session_End(object sender, EventArgs e)
-        {
-        }
-
-        protected void Application_End(object sender, EventArgs e)
-        {
+            get { return PredictCaptchaRJ.Instance; }
         }
     }
 }

@@ -6,8 +6,7 @@ using Core.Logic.Types;
 
 namespace Core.Logic.Predict.Abstract
 {
-    public abstract class Predict<T> : Singleton<T>, IPredict 
-        where T : new()
+    public abstract class Predict<T> : Singleton<T>, IPredict, ICacheable where T : new()
     {
         public abstract String CacheDependencyFile { get; }
         public abstract String SiglaServico { get; }

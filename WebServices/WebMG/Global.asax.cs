@@ -1,23 +1,19 @@
-﻿using System;
-using System.Web;
-using System.Web.Caching;
-using Core.Logic;
-using Core.Logic.Predict;
+﻿using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
+using WebCommon;
 
 namespace WebMG
 {
-    public class Global : HttpApplication
+    public class Global : BaseHttpApplication
     {
-        protected void Application_Start(object sender, EventArgs e)
+        public override string PredictObjectCacheName
         {
-            ServerLog.Append("Aplicação Sintegra MG foi iniciada.");
-            if (HttpContext.Current.Cache["RedeMG"] != null)
-            {
-                return;
-            }
-            HttpContext.Current.Cache.Insert("RedeMG", PredictCaptchaMG.Instance,
-                new CacheDependency(PredictCaptchaMG.Instance.CacheDependencyFile));
-            ServerLog.Append("O PredictMG foi carregado em cache.");
+            get { return "RedeMG"; }
+        }
+
+        protected override ICacheable PredictInstance
+        {
+            get { return PredictCaptchaMG.Instance; }
         }
     }
 }
