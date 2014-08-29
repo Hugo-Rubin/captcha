@@ -1,16 +1,11 @@
-﻿using Core.Logic.Predict;
-using Core.Logic.Predict.Abstract;
+﻿using Core.Logic;
+using Core.Logic.Predict;
 using WebCommon;
 
 namespace WebRJ
 {
     public class Global : BaseHttpApplication
     {
-        public override string PredictObjectCacheName
-        {
-            get { return "RedeRJ"; }
-        }
-
         protected override ICacheable PredictInstance
         {
             get { return PredictCaptchaRJ.Instance; }

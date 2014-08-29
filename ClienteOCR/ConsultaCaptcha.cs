@@ -12,7 +12,7 @@ namespace ClienteSintegra
     public class ConsultaCaptcha
     {
         private readonly WebProxy wp = WebProxy.GetDefaultProxy();
-        private readonly RemoteGateway.Gateway ws = new RemoteGateway.Gateway();
+        private readonly Gateway.Gateway ws = new Gateway.Gateway();
 
         private byte[] imageArray;
         public Bitmap ImgCaptcha { get; set; }

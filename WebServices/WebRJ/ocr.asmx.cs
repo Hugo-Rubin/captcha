@@ -12,7 +12,7 @@ namespace WebRJ
     {
         protected override string CachePredictItemName
         {
-            get { return "RedeRJ"; }
+            get { return Global.PredictObjectCacheName; }
         }
     }
 }

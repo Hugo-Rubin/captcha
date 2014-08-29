@@ -12,7 +12,7 @@ namespace WebNFE
     {
         protected override string CachePredictItemName
         {
-            get { return "RedeNFE"; }
+            get { return Global.PredictObjectCacheName; }
         }
     }
 }

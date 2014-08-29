@@ -12,7 +12,7 @@ namespace WebMG
     {
         protected override string CachePredictItemName
         {
-            get { return "RedeMG"; }
+            get { return Global.PredictObjectCacheName; }
         }
     }
 }

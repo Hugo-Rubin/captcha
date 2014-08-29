@@ -1,13 +1,11 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Core.Common;
+using Core.Common.Extensions;
 using Core.Logic;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
@@ -15,9 +13,6 @@ using Core.Logic.Predict;
 using Core.Logic.Predict.Abstract;
 using Core.Logic.Types;
 using Core.Logic.Utils;
-using TestesManuais.Extensions;
-
-#endregion
 
 namespace TestesManuais
 {

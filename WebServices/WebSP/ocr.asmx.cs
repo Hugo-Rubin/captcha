@@ -12,7 +12,7 @@ namespace WebSP
     {
         protected override string CachePredictItemName
         {
-            get { return "Rede"; }
+            get { return Global.PredictObjectCacheName; }
         }
     }
 }

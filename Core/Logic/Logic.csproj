@@ -83,11 +83,11 @@
     <Compile Include="Captchas\CaptchaCM.cs" />
     <Compile Include="Captchas\CaptchaCRJ.cs" />
     <Compile Include="Captchas\CctCaptchaA.cs" />
+    <Compile Include="ICacheable.cs" />
     <Compile Include="Obsolete\Graph.cs" />
     <Compile Include="GraphProcesserDijkstra.cs" />
     <Compile Include="Obsolete\SeamCarving.cs" />
     <Compile Include="Obsolete\ColorFillingSegmentation.cs" />
-    <Compile Include="Predict\Abstract\ICacheable.cs" />
     <Compile Include="Predict\Abstract\IPredict.cs" />
     <Compile Include="Predict\PredictCaptchaCAM.cs" />
     <Compile Include="Predict\PredictCaptchaCRJVerde.cs" />
@@ -248,9 +248,6 @@
       <Project>{E511F63F-F352-400D-9DEB-7931E3E3A2E0}</Project>
       <Name>Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

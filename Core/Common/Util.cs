@@ -110,5 +110,42 @@ namespace Core.Common
                 idx++;
             }
         }
+
+        public static Bitmap BitmapFromNanoArray(this int[] imgNanoArray, int width, int height)
+        {
+            var result = ConvertNanoArrayToImgArray(imgNanoArray).ToArray();
+            return result.BitmapFromArray(width, height);
+        }
+
+        public static Bitmap BitmapFromArray(this int[] imgArray, int width, int height)
+        {
+            var bmp = new Bitmap(width, height);
+
+            var k = 0;
+            for (var x = 0; x < bmp.Width; x++)
+            {
+                for (var y = 0; y < bmp.Height; y++)
+                {
+                    var c = Color.White;
+
+                    if (imgArray[k++] == 0)
+                    {
+                        c = Color.Black;
+                    }
+                    bmp.SetPixel(x, y, c);
+                }
+            }
+
+            return bmp;
+        }
+
+        public static Bitmap ToBitmap(this byte[] byteArray)
+        {
+            if (byteArray == null || byteArray.Length == 0)
+            {
+                return (null);
+            }
+            return (Bitmap)Image.FromStream(new MemoryStream(byteArray));
+        }
     }
 }

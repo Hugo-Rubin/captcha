@@ -14,12 +14,22 @@
 #pragma warning disable 1591
 
 namespace WebGateway.WS_SP {
+    using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.Xml.Serialization;
+    using System.ComponentModel;
+    
+    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="OCRSPSoap", Namespace="http://tempuri.org/")]
     public partial class OCRSP : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private System.Threading.SendOrPostCallback GetTextFromNanoOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetTextOperationCompleted;
         
@@ -62,34 +72,72 @@ namespace WebGateway.WS_SP {
         }
         
         /// <remarks/>
+        public event GetTextFromNanoCompletedEventHandler GetTextFromNanoCompleted;
+        
+        /// <remarks/>
         public event GetTextCompletedEventHandler GetTextCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetText", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetText(int[] NanoImg, int w, int h, string Token) {
-            object[] results = this.Invoke("GetText", new object[] {
-                        NanoImg,
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTextFromNano", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetTextFromNano(int[] nanoImg, int w, int h, string token) {
+            object[] results = this.Invoke("GetTextFromNano", new object[] {
+                        nanoImg,
                         w,
                         h,
-                        Token});
+                        token});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetTextAsync(int[] NanoImg, int w, int h, string Token) {
-            this.GetTextAsync(NanoImg, w, h, Token, null);
+        public void GetTextFromNanoAsync(int[] nanoImg, int w, int h, string token) {
+            this.GetTextFromNanoAsync(nanoImg, w, h, token, null);
         }
         
         /// <remarks/>
-        public void GetTextAsync(int[] NanoImg, int w, int h, string Token, object userState) {
+        public void GetTextFromNanoAsync(int[] nanoImg, int w, int h, string token, object userState) {
+            if ((this.GetTextFromNanoOperationCompleted == null)) {
+                this.GetTextFromNanoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTextFromNanoOperationCompleted);
+            }
+            this.InvokeAsync("GetTextFromNano", new object[] {
+                        nanoImg,
+                        w,
+                        h,
+                        token}, this.GetTextFromNanoOperationCompleted, userState);
+        }
+        
+        private void OnGetTextFromNanoOperationCompleted(object arg) {
+            if ((this.GetTextFromNanoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetTextFromNanoCompleted(this, new GetTextFromNanoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetText", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetText([System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] rawImage, int w, int h, string token) {
+            object[] results = this.Invoke("GetText", new object[] {
+                        rawImage,
+                        w,
+                        h,
+                        token});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetTextAsync(byte[] rawImage, int w, int h, string token) {
+            this.GetTextAsync(rawImage, w, h, token, null);
+        }
+        
+        /// <remarks/>
+        public void GetTextAsync(byte[] rawImage, int w, int h, string token, object userState) {
             if ((this.GetTextOperationCompleted == null)) {
                 this.GetTextOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTextOperationCompleted);
             }
             this.InvokeAsync("GetText", new object[] {
-                        NanoImg,
+                        rawImage,
                         w,
                         h,
-                        Token}, this.GetTextOperationCompleted, userState);
+                        token}, this.GetTextOperationCompleted, userState);
         }
         
         private void OnGetTextOperationCompleted(object arg) {
@@ -115,6 +163,32 @@ namespace WebGateway.WS_SP {
                 return true;
             }
             return false;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void GetTextFromNanoCompletedEventHandler(object sender, GetTextFromNanoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetTextFromNanoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetTextFromNanoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
         }
     }
     

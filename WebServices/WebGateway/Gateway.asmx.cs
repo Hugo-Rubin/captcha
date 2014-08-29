@@ -167,14 +167,14 @@ namespace WebGateway
         {
             var captcha = new CaptchaRF(imagem);
             var ws = new OCRRF();
-            return ws.GetText(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
+            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
         }
 
         private string NotaFiscalEletronica(Bitmap imagem, string token)
         {
             var captcha = new CaptchaNFE(imagem);
             var ws = new OCRNFE();
-            return ws.GetText(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
+            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
         }
 
         private string Siscarga(Bitmap imagem, string token)
@@ -191,7 +191,7 @@ namespace WebGateway
             {
                 var captcha = new CaptchaSP(imagem);
                 var ws = new OCRSP();
-                result = ws.GetText(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height,
+                result = ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height,
                     token);
             }
             catch (Exception e)

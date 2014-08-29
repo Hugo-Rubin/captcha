@@ -12,7 +12,7 @@ namespace WebCA
     {
         protected override string CachePredictItemName
         {
-            get { return "RedeCAM"; }
+            get { return Global.PredictObjectCacheName; }
         }
     }
 }

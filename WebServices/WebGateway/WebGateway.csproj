@@ -299,10 +299,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebGateway_WS_CRJ_OCRCRJ</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost:51282/ocr.asmx">
+    <WebReferenceUrl Include="http://localhost:29333/ocr.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WS_CA\</RelPath>
-      <UpdateFromURL>http://localhost:51282/ocr.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:29333/ocr.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

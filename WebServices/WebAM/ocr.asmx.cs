@@ -12,7 +12,7 @@ namespace WebAM
     {
         protected override string CachePredictItemName
         {
-            get { return "RedeAM"; }
+            get { return Global.PredictObjectCacheName; }
         }
     }
 }
