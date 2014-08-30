@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Core.Common;
 using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;

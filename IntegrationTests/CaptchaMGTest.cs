@@ -14,7 +14,7 @@ namespace IntegrationTests
         }
 
         [TestMethod]
-        public void CanPredict()
+        public override void CanPredict()
         {
             var response = PredictImage("001.png");
             Assert.IsNotNull(response);
@@ -22,7 +22,7 @@ namespace IntegrationTests
         }
 
         [TestMethod]
-        public void PredictIsRight()
+        public override void PredictIsRight()
         {
             var response1 = PredictImage("001.png");
             var response2 = PredictImage("002.png");

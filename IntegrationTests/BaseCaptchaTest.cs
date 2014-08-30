@@ -26,6 +26,12 @@ namespace IntegrationTests
         [TestInitialize]
         public abstract void Initialize();
 
+        [TestMethod]
+        public abstract void CanPredict();
+
+        [TestMethod]
+        public abstract void PredictIsRight();
+
         protected Captcha CreateCaptchaInstance(String filename, Type captchaType)
         {
             return (Captcha)Activator.CreateInstance(captchaType, new object[] { filename });

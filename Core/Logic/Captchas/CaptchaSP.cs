@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Core.Common;
 using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;

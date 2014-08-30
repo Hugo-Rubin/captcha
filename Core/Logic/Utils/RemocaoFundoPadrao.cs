@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using Core.Common;
 using Core.Common.Extensions;
 using Core.Logic.RemocaoFundo;
 

@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="packages.config" />
     <None Include="Properties\DataSources\ocrdbEntities.datasource" />
   </ItemGroup>
   <ItemGroup>

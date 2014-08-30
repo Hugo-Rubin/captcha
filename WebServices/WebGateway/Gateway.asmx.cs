@@ -12,6 +12,7 @@ using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas;
 using Core.Logic.Types;
+using Elmah;
 using WebGateway.WS_AM;
 using WebGateway.WS_CA;
 using WebGateway.WS_CM;
@@ -65,33 +66,30 @@ namespace WebGateway
             {
                 return "Licença inválida!";
             }
+
             if (!AcessoConcedido(cliente, Servico))
             {
                 return "Acesso negado. O serviço solicitado não está contemplado em sua licença de uso.";
             }
+            var palavra = "!!!!";
 
-            // create Image Object using rear image byte[]
-            var imag = Image.FromStream(new MemoryStream((Imagem)));
-            // Derive BitMap object using Image instance, so that you can avoid the issue
-            //"a graphics object cannot be created from an image that has an indexed pixel format"
-            var bmp = new Bitmap(new Bitmap(imag));
-            //Bitmap bmp = (Bitmap)Imagem.ToImage();
-
-            string palavra;
             try
             {
+                var imag = Image.FromStream(new MemoryStream((Imagem)));
+                // Derive BitMap object using Image instance, so that you can avoid the issue
+                //"a graphics object cannot be created from an image that has an indexed pixel format"
+                var bmp = new Bitmap(new Bitmap(imag));
+
                 var ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                 palavra = ReconhecerCaptcha(Servico, bmp, Token);
 
                 var arquivoLog = cliente.Nome == "Tester" ? "testes.txt" : "requisicoes.txt";
                 GravarLogExecucao(cliente.Nome, ip, Servico, palavra, arquivoLog);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                ServerLog.AppendErrorLog(e.Message, new ImgArray(10, 10).ToBitmap());
-                throw;
+                ErrorSignal.FromCurrentContext().Raise(exception);
             }
-
             return palavra;
         }
 
@@ -118,19 +116,12 @@ namespace WebGateway
 
         private Clientes ListarClientePeloToken(String token)
         {
-            try
-            {
-                var cliente = (from c in db.Clientes
-                               where c.Token == token
-                               select c).First();
-                cliente.Nome = cliente.Nome.Trim();
-                cliente.Token = cliente.Token.Trim();
-                return cliente;
-            }
-            catch
-            {
-                return null;
-            }
+            var cliente = (from c in db.Clientes
+                           where c.Token == token
+                           select c).First();
+            cliente.Nome = cliente.Nome.Trim();
+            cliente.Token = cliente.Token.Trim();
+            return cliente;
         }
 
         private IQueryable<Servicos> ListarServicosPorCliente(Clientes cliente)
@@ -186,19 +177,10 @@ namespace WebGateway
 
         private string SintegraSP(Bitmap imagem, string token)
         {
-            var result = string.Empty;
-            try
-            {
-                var captcha = new CaptchaSP(imagem);
-                var ws = new OCRSP();
-                result = ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height,
-                    token);
-            }
-            catch (Exception e)
-            {
-                ServerLog.Append(e.Message);
-            }
-            return result;
+            var captcha = new CaptchaSP(imagem);
+            var ws = new OCRSP();
+            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height,
+                token);
         }
 
         private string SintegraRJ(Bitmap imagem, string token)

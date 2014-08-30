@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.Caching;
-using Core.Common;
 using Core.Logic;
 
 namespace WebCommon

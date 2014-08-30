@@ -1,0 +1,1 @@
+Ajudar para configurar ELMAH? https://code.google.com/p/elmah/wiki/DotNetSlackersArticle#Logging
