@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Core.Logic.Captchas;
+using Core.Logic.Predict;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace IntegrationTests
+{
+    [TestClass]
+    public class CaptchaSPTest : BaseCaptchaTest<CaptchaSP>
+    {
+        [TestInitialize]
+        public override void Initialize()
+        {
+            PredictInstance = PredictCaptchaSP.Instance;
+        }
+
+        [TestMethod]
+        public void CanPredict()
+        {
+            var response = PredictImage("001.png");
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.Contains("!") == false);
+        }
+
+        [TestMethod]
+        public void PredictIsRight()
+        {
+            var response1 = PredictImage("001.png");
+            var response2 = PredictImage("002.png");
+
+            Assert.IsTrue(response1.Equals("YTU7"));
+            Assert.IsTrue(response2.Equals("2wTK"));
+        }
+    }
+}
