@@ -39,6 +39,40 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSP", "WebServices\WebSP\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRF", "WebServices\WebRF\WebRF.csproj", "{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{E376048F-72B5-4199-9882-E73E16B22C26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{07C4CAFE-930E-4302-8D24-2F93B64CB09A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaRF", "CaptchaRF", "{BF7C9DF4-C013-462E-955C-8869CD2B67F5}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\CaptchaRF\001.png = Samples\CaptchaRF\001.png
+		Samples\CaptchaRF\002.png = Samples\CaptchaRF\002.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaRJ", "CaptchaRJ", "{A6F16937-CF34-47D4-8348-5EE9D52582F7}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\CaptchaRJ\001.png = Samples\CaptchaRJ\001.png
+		Samples\CaptchaRJ\002.png = Samples\CaptchaRJ\002.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaSP", "CaptchaSP", "{86DF5B9E-0BBA-4CF6-B840-C583637BCB6B}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\CaptchaSP\001.png = Samples\CaptchaSP\001.png
+		Samples\CaptchaSP\002.png = Samples\CaptchaSP\002.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaMG", "CaptchaMG", "{BBD07614-F6C4-4181-B415-4ACA15907801}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\CaptchaMG\001.png = Samples\CaptchaMG\001.png
+		Samples\CaptchaMG\002.png = Samples\CaptchaMG\002.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaNFE", "CaptchaNFE", "{BC7B15F6-F33D-4B64-B5E0-E61B6B80FECC}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\CaptchaNFE\001.png = Samples\CaptchaNFE\001.png
+		Samples\CaptchaNFE\002.png = Samples\CaptchaNFE\002.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +253,16 @@ Global
 		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0}.Release|x86.ActiveCfg = Release|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E376048F-72B5-4199-9882-E73E16B22C26}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,5 +283,10 @@ Global
 		{748D8A85-EDE7-4932-8B53-39B3AD4A99CC} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
 		{1F0C37DD-31AF-4E16-B232-352A68C47C1A} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
 		{0CE79006-9DF8-4EE5-8AF5-9A81EB2512B0} = {F6C3E70A-9A59-46E9-BF07-EF71D09E1D5A}
+		{BF7C9DF4-C013-462E-955C-8869CD2B67F5} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
+		{A6F16937-CF34-47D4-8348-5EE9D52582F7} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
+		{86DF5B9E-0BBA-4CF6-B840-C583637BCB6B} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
+		{BBD07614-F6C4-4181-B415-4ACA15907801} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
+		{BC7B15F6-F33D-4B64-B5E0-E61B6B80FECC} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
 	EndGlobalSection
 EndGlobal

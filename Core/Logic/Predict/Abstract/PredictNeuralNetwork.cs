@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Configuration;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using Accord.Math;
+using Core.Common;
 using Core.Logic.Types;
 using Core.Logic.Utils;
 
 namespace Core.Logic.Predict.Abstract
 {
-    public abstract class PredictNeuralNetwork<T> : Predict<T> 
-        where T: new()
+    public abstract class PredictNeuralNetwork<T> : Predict<T>
+        where T : new()
     {
         private double[,] th1;
         private double[,] th2;
@@ -38,15 +38,16 @@ namespace Core.Logic.Predict.Abstract
         {
             get
             {
-                var chave = ResourceFromConfigKey(ChaveTheta1);
-                var constante = ServerUtil.ResourcesDir + "theta1.csv";
-                return chave ?? constante;
+                return ResourceFromConfigKey(ChaveTheta1) ?? ServerUtil.ResourcesDir + "theta1.csv";
             }
         }
 
         public String ArquivoTheta2
         {
-            get { return ResourceFromConfigKey(ChaveTheta2) ?? ServerUtil.ResourcesDir + "theta2.csv"; }
+            get
+            {
+                return ResourceFromConfigKey(ChaveTheta2) ?? ServerUtil.ResourcesDir + "theta2.csv";
+            }
         }
 
         protected int Saidas
@@ -68,10 +69,12 @@ namespace Core.Logic.Predict.Abstract
 
         private String ResourceFromConfigKey(string key)
         {
-            var chave = ConfigurationManager.AppSettings[key];
-            if (chave != null)
-                return ServerUtil.ResourcesDir + chave;
-            return null;
+            var typeName = typeof(T).ToString();
+            typeName = typeName.Substring(typeName.LastIndexOf(".", StringComparison.Ordinal) + 1);
+
+            var keyTypeSpecific = string.Format("{0}.{1}", key, typeName);
+            return CustomConfigurationManager.ReadAppSetting(key)
+                ?? CustomConfigurationManager.ReadAppSetting(keyTypeSpecific);
         }
 
         private void CarregarThetasUsandoAppConfig()

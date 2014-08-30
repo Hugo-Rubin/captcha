@@ -48,10 +48,13 @@
       <HintPath>..\Logic\bin\Debug\Core.Logic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomConfigurationManager.cs" />
+    <Compile Include="DirectoryManager.cs" />
     <Compile Include="Extensions\BitmapExtension.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="ImgArrayLite.cs" />
