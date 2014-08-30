@@ -46,7 +46,7 @@
             // 
             // pbImagem
             // 
-            this.pbImagem.Location = new System.Drawing.Point(12, 89);
+            this.pbImagem.Location = new System.Drawing.Point(12, 91);
             this.pbImagem.Name = "pbImagem";
             this.pbImagem.Size = new System.Drawing.Size(200, 90);
             this.pbImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
