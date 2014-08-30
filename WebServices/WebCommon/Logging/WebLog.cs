@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Linq;
+using Core.Common;
 using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas.Abstract;
@@ -48,7 +48,7 @@ namespace WebCommon.Logging
 
         public string GravarImagemRequisicao(string token, Captcha captcha)
         {
-            var dir = ConfigurationManager.AppSettings["LogDir"] + "\\requisicoes\\" + token;
+            var dir = CustomConfigurationManager.ReadAppSetting("LogDir") + "\\requisicoes\\" + token;
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);

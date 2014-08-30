@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using Core.Common;
 using Core.Logic.Types;
 
 namespace Core.Logic
 {
     public static class ServerLog
     {
-        private static readonly string LogDir = ConfigurationManager.AppSettings["LogDir"] ?? ServerUtil.AbsolutePath + @"\log\";
+        private static readonly string LogDir = CustomConfigurationManager.ReadAppSetting("LogDir") ?? ServerUtil.AbsolutePath + @"\log\";
 
         public static void Append(string linha, string logName = "Log.txt")
         {

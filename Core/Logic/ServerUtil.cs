@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -25,12 +24,12 @@ namespace Core.Logic
 
         public static string ResourcesDir
         {
-            get { return ConfigurationManager.AppSettings["ResourcesDir"] ?? AbsolutePath + @"\resources\"; }
+            get { return CustomConfigurationManager.ReadAppSetting("ResourcesDir") ?? AbsolutePath + @"\resources\"; }
         }
 
         public static string LogDir
         {
-            get { return ConfigurationManager.AppSettings["LogDir"] ?? AbsolutePath + @"\log\"; }
+            get { return CustomConfigurationManager.ReadAppSetting("LogDir") ?? AbsolutePath + @"\log\"; }
         }
 
         public static string AbsolutePath

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -292,7 +291,7 @@ namespace Core.Logic.Captchas
 
         public string Reconhecer()
         {
-            var templates = ConfigurationManager.AppSettings["TemplatesC2"];
+            var templates = CustomConfigurationManager.ReadAppSetting("TemplatesC2");
 
             var connected = ImgArray.InvertImageColors().ToBitmap();
             //TODO: Adaptar o método ConectarPixels para trabalhar com img convencional de fundo branco 

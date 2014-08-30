@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -24,13 +23,13 @@ namespace TestesManuais
 {
     public partial class Form1 : Form
     {
-        private readonly string DirTeste = ConfigurationManager.AppSettings["ImagesDir"];
+        private readonly string dirTeste = CustomConfigurationManager.ReadAppSetting("ImagesDir");
 
-        private readonly Batch LoteSintegraSP = new Batch(typeof(CaptchaSP), @"C:\SintegraSP", "SP");
+        private readonly Batch loteSintegraSP = new Batch(typeof(CaptchaSP), @"C:\SintegraSP", "SP");
 
-        private String PostURLLocal = "http://localhost:50231/GetText.aspx";
-        private String PostURLServidor = "http://www.ml-research.com/testes2Redes/GetText.aspx";
-        private object WebService;
+        private const String PostUrlLocal = "http://localhost:50231/GetText.aspx";
+        private const String PostUrlServidor = "http://www.ml-research.com/testes2Redes/GetText.aspx";
+        private object webService;
 
         public Form1()
         {
@@ -136,7 +135,7 @@ namespace TestesManuais
                 }
             }
 
-            var di = new DirectoryInfo(DirTeste);
+            var di = new DirectoryInfo(dirTeste);
 
             var imagens = di.GetFiles("*.png");
 
@@ -145,13 +144,13 @@ namespace TestesManuais
 
             if (chkServidor.Checked)
             {
-                WebService = new OCR();
-                (WebService as OCR).Proxy = wp;
+                webService = new OCR();
+                (webService as OCR).Proxy = wp;
             }
             else
             {
-                WebService = new WSLocal.OCR();
-                (WebService as WSLocal.OCR).Proxy = wp;
+                webService = new WSLocal.OCR();
+                (webService as WSLocal.OCR).Proxy = wp;
             }
 
             #endregion
@@ -165,7 +164,7 @@ namespace TestesManuais
 
                     var dt1 = DateTime.Now;
 
-                    var palavra = ReconhecerCaracteresViaWebService(captcha, WebService);
+                    var palavra = ReconhecerCaracteresViaWebService(captcha, webService);
 
                     var dt2 = DateTime.Now;
                     var tempo = dt2 - dt1;
@@ -200,11 +199,11 @@ namespace TestesManuais
                 }
             }
 
-            var di = new DirectoryInfo(DirTeste);
+            var di = new DirectoryInfo(dirTeste);
 
             var imagens = di.GetFiles("*.png");
 
-            var postURL = chkServidor.Checked ? PostURLServidor : PostURLLocal;
+            var postURL = chkServidor.Checked ? PostUrlServidor : PostUrlLocal;
             listBox1.Items.Add("Consultando em: " + postURL);
 
             foreach (var i in imagens)
@@ -260,7 +259,7 @@ namespace TestesManuais
                 }
             }
 
-            var di = new DirectoryInfo(DirTeste);
+            var di = new DirectoryInfo(dirTeste);
 
             var imagens = di.GetFiles("*.png");
 
@@ -1037,7 +1036,7 @@ namespace TestesManuais
             var dt = DateTime.Now;
             Text = String.Format("Inicio do processo: {0}", dt);
             Application.DoEvents();
-            var resp = LoteSintegraSP.SepararCaracteres();
+            var resp = loteSintegraSP.SepararCaracteres();
             var erros = resp.Chave;
             var tempoMedio = resp.Valor;
             MessageBox.Show(String.Format(
@@ -1047,13 +1046,13 @@ namespace TestesManuais
         private void btnVerificarSintegraSP_Click(object sender, EventArgs e)
         {
             //TimeSpan tempoMedio = LoteSintegraSP.ValidarRemocaoDeFundo();
-            LoteSintegraSP.ChecarErrosSeparacao();
+            loteSintegraSP.ChecarErrosSeparacao();
             MessageBox.Show("Processo concluído."); // Tempo médio: " + tempoMedio.ToString());
         }
 
         private void btnSepararSintegraRJ_Click(object sender, EventArgs e)
         {
-            var tempoMedio = LoteSintegraSP.ValidarRemocaoDeFundo();
+            var tempoMedio = loteSintegraSP.ValidarRemocaoDeFundo();
             MessageBox.Show("Processo concluído. Tempo médio: " + tempoMedio.ToString());
         }
 
@@ -1267,7 +1266,7 @@ namespace TestesManuais
 
         private void btnBatchReconhecer_Click(object sender, EventArgs e)
         {
-            var result = LoteSintegraSP.Reconhecer(typeof(PredictCaptchaSP));
+            var result = loteSintegraSP.Reconhecer(typeof(PredictCaptchaSP));
             MessageBox.Show("Tempo médio do CaptchaTipo3: " + result.Chave.ToString());
             Log.GravarLinhasEmArquivo(@"C:\CaptchaTipo3.txt", result.Valor, true);
         }
