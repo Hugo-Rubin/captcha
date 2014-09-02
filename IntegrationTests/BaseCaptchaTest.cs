@@ -11,7 +11,6 @@ namespace IntegrationTests
         where TCaptcha : Captcha
     {
         protected readonly Type CaptchaType;
-        protected IPredict PredictInstance;
         protected readonly string SamplesDir;
 
         protected BaseCaptchaTest()
@@ -22,9 +21,6 @@ namespace IntegrationTests
 
             SamplesDir = string.Format(@"{0}\{1}", DirectoryManager.SamplesDirectory.FullName, typeName);
         }
-
-        [TestInitialize]
-        public abstract void Initialize();
 
         [TestMethod]
         public abstract void CanPredict();
@@ -43,11 +39,11 @@ namespace IntegrationTests
             return predict.Recognize(characters);
         }
 
-        protected string PredictImage(string fileName)
+        protected string PredictImage(string fileName, IPredict predictInstance)
         {
             var fullName = string.Format(@"{0}\{1}", SamplesDir, fileName);
             var captcha = CreateCaptchaInstance(fullName, CaptchaType);
-            return PredictInstance.Recognize(captcha);
+            return predictInstance.Recognize(captcha);
         }
     }
 }

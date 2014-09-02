@@ -1,34 +1,32 @@
 ﻿using Core.Logic.Captchas;
 using Core.Logic.Predict;
+using Core.Logic.Predict.Abstract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpTestsEx;
 
 namespace IntegrationTests
 {
     [TestClass]
     public class CaptchaSPTest : BaseCaptchaTest<CaptchaSP>
     {
-        [TestInitialize]
-        public override void Initialize()
-        {
-            PredictInstance = PredictCaptchaSP.Instance;
-        }
+        private readonly IPredict predict = PredictCaptchaSP.Instance;
 
         [TestMethod]
         public override void CanPredict()
         {
-            var response = PredictImage("001.png");
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.Contains("!") == false);
+            var response = PredictImage("001.png", predict);
+            response.Should().Not.Be.Null();
+            response.Should().Not.Contain("!");
         }
 
         [TestMethod]
         public override void PredictIsRight()
         {
-            var response1 = PredictImage("001.png");
-            var response2 = PredictImage("002.png");
+            var response1 = PredictImage("001.png", predict);
+            var response2 = PredictImage("002.png", predict);
 
-            Assert.IsTrue(response1.Equals("YTU7"));
-            Assert.IsTrue(response2.Equals("2wTK"));
+            response1.Should().Be.EqualTo("YTU7");
+            response2.Should().Be.EqualTo("2wTK");
         }
     }
 }
