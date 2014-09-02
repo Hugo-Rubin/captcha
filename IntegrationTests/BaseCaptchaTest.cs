@@ -18,7 +18,6 @@ namespace IntegrationTests
             CaptchaType = typeof(TCaptcha);
             var typeName = CaptchaType.ToString();
             typeName = typeName.Substring(typeName.LastIndexOf(".", StringComparison.Ordinal) + 1);
-
             SamplesDir = string.Format(@"{0}\{1}", DirectoryManager.SamplesDirectory.FullName, typeName);
         }
 
