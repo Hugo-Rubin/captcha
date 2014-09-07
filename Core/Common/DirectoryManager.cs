@@ -32,7 +32,7 @@ namespace Core.Common
                     }
                     throw new Exception("A estrutura de pastas da solution deve ter mudado. Corrija GetSolutionDirectory()");
                 }
-                return solutionDirectory;
+                return new DirectoryInfo(solutionDirectory.FullName);
             }
         }
     }

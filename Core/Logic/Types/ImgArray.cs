@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using Core.Common.Extensions;
 using Core.Logic.Utils;
@@ -246,6 +247,18 @@ namespace Core.Logic.Types
 
         public void Save(String fileName = "C:\\ImgArray.png")
         {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var dir = Path.GetDirectoryName(fileName);
+            if (dir == null
+                || Directory.Exists(dir) == false)
+            {
+                throw new DirectoryNotFoundException();
+            }
+            
             ToBitmap().Save(fileName, ImageFormat.Png);
         }
 

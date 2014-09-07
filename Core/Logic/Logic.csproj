@@ -67,6 +67,9 @@
     <Reference Include="QuickGraph.Serialization">
       <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -83,6 +86,8 @@
     <Compile Include="Captchas\CaptchaCM.cs" />
     <Compile Include="Captchas\CaptchaCRJ.cs" />
     <Compile Include="Captchas\CctCaptchaA.cs" />
+    <Compile Include="Filtros\GringoFilter.cs" />
+    <Compile Include="Filtros\GringoFilterType.cs" />
     <Compile Include="ICacheable.cs" />
     <Compile Include="Obsolete\Graph.cs" />
     <Compile Include="GraphProcesserDijkstra.cs" />
