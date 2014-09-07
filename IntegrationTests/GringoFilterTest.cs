@@ -174,6 +174,8 @@ namespace IntegrationTests
             }
 
             imgArray.Save(fullName);
+
+            return baseFolder;
         }
     }
 }
