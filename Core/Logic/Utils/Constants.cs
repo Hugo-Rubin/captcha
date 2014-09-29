@@ -8,7 +8,7 @@
         /// <summary>
         ///   Coloque as constantes abaixo
         /// </summary>
-        public const string DesktopHugo = @"C:\Users\Hugo\Desktop\";
+        public const string DesktopHugo = @"E:\Users\Hugo\Desktop\";
 
         public const string DesktopPablo = @"C:\Users\Pablo\Desktop\";
 

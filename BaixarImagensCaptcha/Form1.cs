@@ -52,6 +52,11 @@ namespace BaixarImagensCaptcha
             InicializarContador();
         }
 
+        private void txtQtde_TextChanged(object sender, EventArgs e)
+        {
+            this.qtde = Int32.Parse(txtQtde.Text);
+        }
+
         private void InicializarContador()
         {
             if (CreateFolder(path))

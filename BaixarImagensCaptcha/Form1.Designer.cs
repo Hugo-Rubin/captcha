@@ -83,6 +83,7 @@
             this.txtQtde.Size = new System.Drawing.Size(46, 20);
             this.txtQtde.TabIndex = 0;
             this.txtQtde.Text = "10";
+            this.txtQtde.TextChanged += new System.EventHandler(this.txtQtde_TextChanged);
             // 
             // groupBox1
             // 
@@ -261,7 +262,7 @@
             this.txtFolder.Name = "txtFolder";
             this.txtFolder.Size = new System.Drawing.Size(170, 20);
             this.txtFolder.TabIndex = 14;
-            this.txtFolder.Text = "C:\\OCR\\Testes\\RF3\\";
+            this.txtFolder.Text = "E:\\Users\\Hugo\\Desktop\\RF3\\";
             // 
             // Form1
             // 

@@ -5,6 +5,7 @@ using System.Linq;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;
 using Core.Logic.Utils;
+using Core.Logic.Filtros;
 
 namespace Core.Logic.Captchas
 {
@@ -32,6 +33,8 @@ namespace Core.Logic.Captchas
 
         public override IEnumerable<ImgArray> GetCaracteres()
         {
+            /// SEPARAR COM CORTE RETO
+
             var separar = new SeparacaoPadrao(this);
             return
                 separar.ColorFillingSegmentation2AndSeamCarving2(ImgArray, false).CortarECentralizarTodos(
@@ -40,6 +43,8 @@ namespace Core.Logic.Captchas
 
         public override Bitmap RemoverFundo(Bitmap source)
         {
+            /// REMOVER O RUÍDO DA PARTE DE CIMA DA IMAGEM
+            
             var removerFundo = new RemocaoFundoPadrao(source);
             var img = removerFundo.UsandoKmeansEErosao();
 
@@ -53,6 +58,9 @@ namespace Core.Logic.Captchas
             }
 
             img = RemoverRuidos(new ImgArray(img), 70).ToBitmap();
+
+            /*var gringoFilter = new GringoFilter();
+            img = gringoFilter.Apply(img, GringoFilterType.COUNTOUR_LS_PLUS_GRAPH).ToBitmap();*/
 
             return img;
         }

@@ -8,6 +8,12 @@ using Core.Logic;
 using Core.Logic.Predict;
 using Core.Logic.Types;
 using Core.Logic.Utils;
+using Core.Logic.Filtros;
+using System.Drawing;
+using Core.Logic.Captchas.Abstract;
+using Core.Logic.Captchas;
+using Core.Logic.Tratamento;
+using System.IO.Compression;
 
 namespace TestesManuais
 {
@@ -704,6 +710,43 @@ namespace TestesManuais
                     }
                 }
             }
+        }
+
+        private void intTestsBtn_Click(object sender, EventArgs e)
+        {
+            var dirs = new DirectoryInfo(Constants.DesktopHugo + @"\RF3\").GetDirectories();
+            var destination = Constants.DesktopHugo + @"\results\";
+
+            foreach (var d in dirs)
+            {
+                string startPath = d.FullName;
+                string zipPath = startPath + @"\compressed.zip";
+
+                try
+                {
+                    ZipFile.CreateFromDirectory(startPath, zipPath, CompressionLevel.Optimal, false);
+                }
+                catch (Exception) { }
+
+                var gringoFilter = new GringoFilter();
+                var bitmap = gringoFilter.Apply(zipPath);
+
+                bitmap.Save(Constants.DesktopHugo + "test.png");
+
+                /*Captcha c = new CaptchaRF(bitmap);
+                c.ImgArray.Save(destination + d.Name + "_POST.png");*/
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ImgArray src = new ImgArray((Bitmap) Image.FromFile(@"E:\Users\Hugo\Desktop\1.png"));
+            ImgArray dtn = new ImgArray(src.Width * 2, src.Height * 2);
+
+            var end = new Endireitamento(true, false);
+            dtn = end.ApplyTo(src);
+
+            dtn.Save(@"E:\Users\Hugo\Desktop\2.png");
         }
 
     }
