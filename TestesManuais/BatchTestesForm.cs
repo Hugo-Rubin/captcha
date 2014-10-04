@@ -728,10 +728,12 @@ namespace TestesManuais
                 }
                 catch (Exception) { }
 
-                var gringoFilter = new GringoFilter();
-                var bitmap = gringoFilter.Apply(zipPath);
+                
 
-                bitmap.Save(Constants.DesktopHugo + "test.png");
+                var gringoFilter = new GringoFilter();
+                Bitmap bmp = new Bitmap(gringoFilter.Apply(zipPath));
+
+                bmp.Save(Constants.DesktopHugo + "test.png");
 
                 /*Captcha c = new CaptchaRF(bitmap);
                 c.ImgArray.Save(destination + d.Name + "_POST.png");*/

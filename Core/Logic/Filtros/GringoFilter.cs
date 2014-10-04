@@ -70,8 +70,7 @@ namespace Core.Logic.Filtros
                 AlwaysMultipartFormData = true
             };
 
-            //request.AddParameter("algorithm", filterType.ToString());
-            request.AddFile("images", File.ReadAllBytes(zippedImages), "mlresearch.zip", "application/zip");
+            request.AddFile("zip", File.ReadAllBytes(zippedImages), "mlresearch.zip", "application/zip");
             
             var response = client.Execute<object>(request);
 
