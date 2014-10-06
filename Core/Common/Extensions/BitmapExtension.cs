@@ -185,7 +185,7 @@ namespace Core.Common.Extensions
             return m;
         }
 
-        public static byte[] PixelIntensityByte(this Bitmap img, bool grayscale = false)
+        public static byte[] PixelIntensityByte(this Bitmap img, bool grayscale = false, int colorThreshold = 127)
         {
             var result = new byte[img.Height * img.Width];
             var controller = 0;
@@ -231,7 +231,7 @@ namespace Core.Common.Extensions
                             {
                                 var idx = x * bmd.Height + y;
                                 var pixel = row[(int)(x * pixelSize)];
-                                var color = Convert.ToByte(pixel > 127 ? 1 : 0);
+                                var color = Convert.ToByte(pixel > colorThreshold ? 1 : 0);
                                 result[idx] = color;
                             }
                         }

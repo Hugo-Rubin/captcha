@@ -733,9 +733,11 @@ namespace TestesManuais
                 var gringoFilter = new GringoFilter();
                 Bitmap bmp = new Bitmap(gringoFilter.Apply(zipPath));
 
-                bmp.Save(Constants.DesktopHugo + "test.png");
+                bmp.Save(destination + d.Name + "_POST.png");
 
-                /*Captcha c = new CaptchaRF(bitmap);
+                ImgArray img = new ImgArray(bmp);
+
+                /*Captcha c = new CaptchaRF(bmp);
                 c.ImgArray.Save(destination + d.Name + "_POST.png");*/
             }
         }
