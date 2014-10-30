@@ -40,7 +40,7 @@ namespace WebGateway
             servicosSuportados = new Dictionary<string, Func<Bitmap, string, string>>
             {
                 {"RF", ReceitaFederal},
-                {"RF3", ReceitaFederal},
+                {"RF3", ReceitaFederal3},
                 {"NFE", NotaFiscalEletronica},
                 {"SI", Siscarga},
                 {"SP", SintegraSP},
@@ -56,16 +56,18 @@ namespace WebGateway
             };
         }
 
+        // ReSharper disable InconsistentNaming
         // Apesar do nome dos parametros estarem em pascalcase qdo deveriam ser camel, é melhor nao mudar
         // pq vai ter que corrigir a referencia do servico no cliente
         [WebMethod]
-        // ReSharper disable InconsistentNaming
+
         public string GetText(string Servico, byte[] Imagem, int w, int h, string Token)
         // ReSharper restore InconsistentNaming
         {
             var cliente = ListarClientePeloToken(Token);
             if (cliente == null)
             {
+                ErrorSignal.FromCurrentContext().Raise(new Exception("Token not found " + Token));
                 return "Licença inválida!";
             }
 
@@ -81,8 +83,15 @@ namespace WebGateway
                 // Derive BitMap object using Image instance, so that you can avoid the issue
                 //"a graphics object cannot be created from an image that has an indexed pixel format"
                 var bmp = new Bitmap(new Bitmap(imag));
-
-                var ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                string ip;
+                try
+                {
+                    ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                }
+                catch
+                {
+                    ip = "Desconhecido";
+                }
                 palavra = ReconhecerCaptcha(Servico, bmp, Token);
 
                 var arquivoLog = cliente.Nome == "Tester" ? "testes.txt" : "requisicoes.txt";
@@ -101,6 +110,7 @@ namespace WebGateway
             var cliente = ListarClientePeloToken(token);
             if (cliente == null)
             {
+                ErrorSignal.FromCurrentContext().Raise(new Exception("Token not found " + token));
                 return "Licença inválida!";
             }
             var palavra = "!!!!";
@@ -111,13 +121,13 @@ namespace WebGateway
                 var grigoFilter = new GringoFilter();
                 var bmp = grigoFilter.ApplyRF3FromStream(zip);
 
-#if DEBUG
-                //Salvar imagem para evitar de chamar servico da amazon para nossos testes
-                var bmp2 = new Bitmap(bmp);
-                const string path = @"C:\OCR\Testes\RF3\";
-                var number = (new DirectoryInfo(path)).GetFiles("*.png").Count() +1;
-                bmp2.Save(String.Format(@"C:\OCR\Testes\RF3\{0:000}.png", number));
-#endif
+                //#if DEBUG
+                //                //Salvar imagem para evitar de chamar servico da amazon para nossos testes
+                //                var bmp2 = new Bitmap(bmp);
+                //                const string path = @"C:\OCR\Testes\RF3\";
+                //                var number = (new DirectoryInfo(path)).GetFiles("*.png").Count() + 1;
+                //                bmp2.Save(String.Format(@"C:\OCR\Testes\RF3\{0:000}.png", number));
+                //#endif
                 palavra = ReceitaFederal3(bmp, token);
 
                 var arquivoLog = cliente.Nome == "Tester" ? "testes.txt" : "requisicoes.txt";
@@ -153,12 +163,20 @@ namespace WebGateway
 
         private Clientes ListarClientePeloToken(String token)
         {
-            var cliente = (from c in db.Clientes
-                           where c.Token == token
-                           select c).First();
-            cliente.Nome = cliente.Nome.Trim();
-            cliente.Token = cliente.Token.Trim();
-            return cliente;
+            try
+            {
+                var cliente = (from c in db.Clientes
+                               where c.Token == token
+                               select c).First();
+                cliente.Nome = cliente.Nome.Trim();
+                cliente.Token = cliente.Token.Trim();
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                return null;
+            }
         }
 
         private bool AcessoConcedido(Clientes cliente, String servico)
@@ -193,65 +211,74 @@ namespace WebGateway
         {
             var captcha = new CaptchaRF3(imagem);
             var ws = new OCRRF3();
-            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
+            var nanoImg = captcha.ImgArray.ToNanoArray().GetInternalArray();
+            return ws.GetTextFromNano(nanoImg, imagem.Width, imagem.Height, token);
         }
 
         private string NotaFiscalEletronica(Bitmap imagem, string token)
         {
             var captcha = new CaptchaNFE(imagem);
             var ws = new OCRNFE();
-            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
+            var nanoImg = captcha.ImgArray.ToNanoArray().GetInternalArray();
+            return ws.GetTextFromNano(nanoImg, imagem.Width, imagem.Height, token);
         }
 
         private string Siscarga(Bitmap imagem, string token)
         {
             var captcha = new CaptchaSI(imagem);
             var ws = new OCRSI();
-            return ws.GetText(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
+            var nanoImg = captcha.ImgArray.ToNanoArray().GetInternalArray();
+            return ws.GetText(nanoImg, imagem.Width, imagem.Height, token);
         }
 
         private string SintegraSP(Bitmap imagem, string token)
         {
             var captcha = new CaptchaSP(imagem);
             var ws = new OCRSP();
-            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height,
-                token);
+            var nanoImg = captcha.ImgArray.ToNanoArray().GetInternalArray();
+            return ws.GetTextFromNano(nanoImg, imagem.Width, imagem.Height, token);
         }
 
         private string SintegraRJ(Bitmap imagem, string token)
         {
             var ws = new OCRRJ();
-            return ws.GetText(imagem.ToByteArray(ImageFormat.Png), imagem.Width, imagem.Height, token);
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
 
         private string SintegraMG(Bitmap imagem, string token)
         {
             var ws = new OCRMG();
-            return ws.GetText(imagem.ToByteArray(ImageFormat.Png), imagem.Width, imagem.Height, token);
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
 
         private string SintegraAM(Bitmap imagem, string token)
         {
             var ws = new OCRAM();
-            return ws.GetText(imagem.ToByteArray(ImageFormat.Png), imagem.Width, imagem.Height, token);
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
 
         private string ConsigRJ(Bitmap imagem, string token)
         {
             var ws = new OCRCRJ();
-            return ws.GetText(imagem.ToByteArray(ImageFormat.Png), imagem.Width, imagem.Height, token);
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
 
         private string ConsigAeronautica(Bitmap imagem, string token)
         {
             var ws = new OCRCA();
-            return ws.GetText(imagem.ToByteArray(ImageFormat.Png), imagem.Width, imagem.Height, token);
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
 
         private string ConsigMarinha(Bitmap imagem, string token)
         {
             var ws = new OCRCM();
-            return ws.GetText(imagem.ToByteArray(ImageFormat.Png), imagem.Width, imagem.Height, token);
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
     }
 }

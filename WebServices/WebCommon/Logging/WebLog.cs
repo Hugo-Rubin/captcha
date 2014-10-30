@@ -5,6 +5,7 @@ using Core.Common;
 using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas.Abstract;
+using Elmah;
 
 namespace WebCommon.Logging
 {
@@ -42,24 +43,32 @@ namespace WebCommon.Logging
             }
             catch (Exception e)
             {
+                ErrorSignal.FromCurrentContext().Raise(e);
                 ServerLog.Append("Erro ao gravar requisiçao no BD: " + e.Message);
             }
         }
 
         public string GravarImagemRequisicao(string token, Captcha captcha)
         {
-            var dir = CustomConfigurationManager.ReadAppSetting("LogDir") + "\\requisicoes\\" + token;
-            if (!Directory.Exists(dir))
+            try
             {
-                Directory.CreateDirectory(dir);
+                var dir = CustomConfigurationManager.ReadAppSetting("LogDir") + "\\requisicoes\\" + token;
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                var arquivo = String.Format(@"{0}\{1}.png",
+                    dir,
+                    DateTime.Now.ToHorarioBrasileiro().ToString("yyyyMMddhhmmssffff"));
+                captcha.ImgArray.Save(arquivo);
+                arquivo = arquivo.Replace(dir, @"/requisicoes/" + token).Replace(@"\", @"/");
+                return arquivo;
             }
-            var arquivo = String.Format(@"{0}\{1}.png",
-                dir,
-                DateTime.Now.ToHorarioBrasileiro().ToString("yyyyMMddhhmmssffff"));
-            captcha.ImgArray.Save(arquivo);
-            arquivo = arquivo.Replace(dir, @"/requisicoes/" + token).Replace(@"\", @"/");
-            return arquivo;
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);   
+            }
+            return null;
         }
-
     }
 }

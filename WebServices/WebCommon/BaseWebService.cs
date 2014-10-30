@@ -7,6 +7,7 @@ using Core.Data;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Predict.Abstract;
 using Core.Logic.Types;
+using Elmah;
 using WebCommon.Logging;
 
 namespace WebCommon
@@ -39,10 +40,19 @@ namespace WebCommon
 
         protected Clientes ListarClientePeloToken(String token)
         {
-            var clientes = (from c in db.Clientes
-                            where c.Token == token
-                            select c).FirstOrDefault();
-            return clientes;
+            try
+            {
+                var clientes = (from c in db.Clientes
+                                where c.Token == token
+                                select c).FirstOrDefault();
+                return clientes;
+
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+                throw;
+            }
         }
 
         private string GetText(int[] nanoImg, byte[] rawImage, int w, int h, string token)
@@ -50,6 +60,7 @@ namespace WebCommon
             var cliente = ListarClientePeloToken(token);
             if (cliente == null)
             {
+                ErrorSignal.FromCurrentContext().Raise(new Exception("Token not found " + token));
                 return "Licença inválida!";
             }
 
@@ -65,7 +76,7 @@ namespace WebCommon
             {
                 captcha = (Captcha)Activator.CreateInstance(typeof(T), new object[] { rawImage.ToBitmap() });
             }
-            
+
             try
             {
                 var caracteres = captcha.GetCaracteres();
