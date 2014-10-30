@@ -13,8 +13,8 @@ namespace Core.Logic.Filtros
     public class GringoFilter
     {
         private const string ServiceBaseUrl =
-            "http://localhost:8080/cctrace-rest/rf3/";
-            //"http://ec2-54-191-202-244.us-west-2.compute.amazonaws.com:8080/cctrace-rest/ccTrace/";
+            //"http://localhost:8080/cctrace-rest/rf3/";
+            "http://ec2-54-191-202-244.us-west-2.compute.amazonaws.com:8080/cctrace-rest/ccTrace/";
 
         public ImgArray Apply(Image image, GringoFilterType filterType)
         {
@@ -61,17 +61,22 @@ namespace Core.Logic.Filtros
             }
         }
 
-        public Bitmap Apply(string zippedImages)
+        public Bitmap ApplyRF3(string zipFilePath, GringoFilterType filterType)
         {
-            var client = new RestClient(ServiceBaseUrl);
+            return ApplyRF3FromStream(File.ReadAllBytes(zipFilePath));
+        }
+
+        public Bitmap ApplyRF3FromStream(Byte[] zipFile)
+        {
+            var client = new RestClient(@"http://ec2-54-191-202-244.us-west-2.compute.amazonaws.com:8080/cctrace-rest/rf3/");
 
             var request = new RestRequest("apply", Method.POST)
             {
                 AlwaysMultipartFormData = true
             };
 
-            request.AddFile("zip", File.ReadAllBytes(zippedImages), "mlresearch.zip", "application/zip");
-            
+            request.AddFile("zip", zipFile, "mlresearch.zip", "application/zip");
+
             var response = client.Execute<object>(request);
 
             if (response.StatusCode != HttpStatusCode.OK

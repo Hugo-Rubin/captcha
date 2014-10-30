@@ -215,8 +215,55 @@ namespace TestesManuais
 
         private void btnClassificacao_Click(object sender, EventArgs e)
         {
+            //Rede
+            var di = new DirectoryInfo(@"C:\OCR\Testes\RF3\Separados\");
+            var dirs = di.GetDirectories();
+
+            var i = 1;
+            var letra = 97;
+
+            foreach (var dir in dirs)
+            {
+                foreach (var file in dir.GetFiles())
+                {
+                    var baseDir = @"C:\OCR\Testes\RF3\Rede\" + (char)letra;
+                    if (Directory.Exists(baseDir) == false)
+                    {
+                        Directory.CreateDirectory(baseDir);
+                    }
+                    var destination = string.Format(@"{0}\{1}-{2}", baseDir, dir.Name, file.Name);
+                    File.Copy(file.FullName, destination);
+                    i++;
+                    if (i % 40 == 0)
+                    {
+                        letra++;
+                    }
+                }
+
+            }
+
+
+            ////Separados
+            //var di = new DirectoryInfo(@"C:\Users\Pablo\Downloads\Felipe\");
+            //var files = di.GetFiles();
+
+
+            //foreach (var file in files)
+            //{
+            //    var baseDir = @"C:\OCR\Testes\RF3\Separados\" + file.Name.Split('_')[0] + @"\";
+            //    if (Directory.Exists(baseDir) == false)
+            //    {
+            //        Directory.CreateDirectory(baseDir);
+            //    }
+            //    var destination = string.Format(@"{0}\{1}", baseDir, file.Name.Split(' ')[1]);
+            //    File.Copy(file.FullName, destination);
+            //}
+
+
+
+
             inicioProcessamento = DateTime.Now;
-            var predict = predictType == null ? typeof(PredictCaptchaNFE) : predictType;
+            var predict = predictType == null ? typeof(PredictCaptchaSP) : predictType;
             if (
                 MessageBox.Show(
                     "Este procedimento utiliza o " + predict +
@@ -728,10 +775,10 @@ namespace TestesManuais
                 }
                 catch (Exception) { }
 
-                
+
 
                 var gringoFilter = new GringoFilter();
-                Bitmap bmp = new Bitmap(gringoFilter.Apply(zipPath));
+                Bitmap bmp = new Bitmap(gringoFilter.ApplyRF3(zipPath, GringoFilterType.RF3));
 
                 bmp.Save(destination + d.Name + "_POST.png");
 
@@ -744,7 +791,7 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            ImgArray src = new ImgArray((Bitmap) Image.FromFile(@"E:\Users\Hugo\Desktop\1.png"));
+            ImgArray src = new ImgArray((Bitmap)Image.FromFile(@"E:\Users\Hugo\Desktop\1.png"));
             ImgArray dtn = new ImgArray(src.Width * 2, src.Height * 2);
 
             var end = new Endireitamento(true, false);

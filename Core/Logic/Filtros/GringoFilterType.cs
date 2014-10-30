@@ -18,6 +18,7 @@
         COUNTOUR_LS_PLUS_GRAPH,
         COUNTOR_LIMIT,
         CASR_SEGUIMENTS,
+        RF3
         // ReSharper restore InconsistentNaming
     }
 }

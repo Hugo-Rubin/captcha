@@ -17,7 +17,7 @@ namespace WebCommon
             if (HttpContext.Current.Cache[PredictObjectCacheName] == null)
             {
                 HttpContext.Current.Cache.Insert(PredictObjectCacheName, PredictInstance, new CacheDependency(PredictInstance.CacheDependencyFile));
-                ServerLog.Append("O PredictMG foi carregado em cache.");
+                ServerLog.Append("O Predict foi carregado em cache.");
             }
         }
     }

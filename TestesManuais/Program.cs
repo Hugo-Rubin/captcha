@@ -14,6 +14,8 @@ namespace TestesManuais
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BatchTestesForm()); //new Form1()); //new BatchTestesForm()); //new TreinamentoRede());
+
+            //new ClassificacaoManual(@"C:\OCR\Testes\SP\Rede")
         }
     }
 }

@@ -144,6 +144,7 @@
             this.Name = "ClassificacaoManual";
             this.Text = "ClassificacaoManual";
             this.Load += new System.EventHandler(this.ClassificacaoManual_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ClassificacaoManual_KeyUp);
             this.panelMover.ResumeLayout(false);
             this.panelMover.PerformLayout();
             this.ResumeLayout(false);

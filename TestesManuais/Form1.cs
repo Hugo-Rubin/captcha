@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -44,11 +45,12 @@ namespace TestesManuais
 
             if (chkServidor.Checked)
             {
-                result = (webService as OCR).GetText(nano, captcha.Width, captcha.Height, "yWAmlOxGfMEiIz0FY58B");
+                result = (webService as OCRNFE).GetText(nano, captcha.Width, captcha.Height, "yWAmlOxGfMEiIz0FY58B");
             }
             else
             {
-                result = (webService as WSLocal.OCR).GetText(nano, captcha.Width, captcha.Height, "yWAmlOxGfMEiIz0FY58B");
+                //todo: corrigir chamada de metodo
+                result = (webService as WSLocal.OCRNFE).GetText(null, captcha.Width, captcha.Height, "yWAmlOxGfMEiIz0FY58B");
             }
             return result;
         }
@@ -144,13 +146,13 @@ namespace TestesManuais
 
             if (chkServidor.Checked)
             {
-                webService = new OCR();
-                (webService as OCR).Proxy = wp;
+                webService = new OCRNFE();
+                (webService as OCRNFE).Proxy = wp;
             }
             else
             {
-                webService = new WSLocal.OCR();
-                (webService as WSLocal.OCR).Proxy = wp;
+                webService = new WSLocal.OCRNFE();
+                (webService as WSLocal.OCRNFE).Proxy = wp;
             }
 
             #endregion

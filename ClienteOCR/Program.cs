@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Core.Common;
 
@@ -42,8 +43,16 @@ namespace ClienteSintegra
              * /out=Endereço_do_txt_com_resposta
              */
             var respFile = String.Empty;
-            var debbug = false;
+            var debug = false;
             var palavra = "!!!!";
+
+            //args = new[]
+            //{
+            //    "/ser=RF",
+            //    @"/in=9cedff0d-748a-48de-bf02-02fd8062e1fb",
+            //    @"/out=C:\OCR\resposta.txt"
+            //};
+
 
             var parametros = new List<String>(args);
             if (parametros.Count >= 3)
@@ -63,15 +72,28 @@ namespace ClienteSintegra
 
                     if (parametros.Count > 3)
                     {
-                        debbug = parametros[3].Replace("/tempo=", "").Replace("'", "'").ToUpper() == "S";
+                        debug = parametros[3].Replace("/tempo=", "").Replace("'", "'").ToUpper() == "S";
                     }
 
-                    var consulta = new ConsultaCaptcha();
-                    consulta.CarregarCaptcha(imgEntradaFile);
+                    bool usarRF3;
+                    bool.TryParse(CustomConfigurationManager.ReadAppSetting("usarRF3"), out usarRF3);
                     var dt = DateTime.Now;
-                    palavra = consulta.ReconhecerCaptcha(servico, token.Key);
+                    if (usarRF3 && ((new[] {"RF3", "RF"}).Contains(servico)))
+                    {
+                        var manager = new RF3Manager();
+                        var images = manager.BaixarImagens(imgEntradaFile);
+                        //todo: remove hard coded numbers
+                        palavra = manager.Reconhecer("RF3", images, 181, 51, token.Key);
+                    }
+                    else
+                    {
+                        var consulta = new ConsultaCaptcha();
+                        consulta.CarregarCaptcha(imgEntradaFile);
+                        palavra = consulta.ReconhecerCaptcha(servico, token.Key);
+                    }
+
                     var tempo = DateTime.Now - dt;
-                    if (debbug)
+                    if (debug)
                     {
                         palavra = String.Format("{0}; Tempo: {1} segundos.", palavra, tempo.ToString(@"s\.fff"));
                     }

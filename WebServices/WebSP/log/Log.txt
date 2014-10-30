@@ -1,0 +1,15 @@
+29/10/2014 06:49:10 - Aplicação foi iniciada.
+29/10/2014 06:49:10 - CacheDependencyFile = C:\DEV\ML-Research\Captchas\WebServices\WebSP\\resources\theta1.csv
+29/10/2014 06:49:10 - O Predict foi carregado em cache.
+29/10/2014 06:49:11 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:45 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:46 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:47 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:47 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:48 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:49 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:49 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:50 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:51 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:52 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.
+29/10/2014 07:34:53 - Erro ao gravar requisiçao no BD: An error occurred while updating the entries. See the inner exception for details.

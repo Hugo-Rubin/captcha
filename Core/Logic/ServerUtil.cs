@@ -1319,7 +1319,7 @@ namespace Core.Logic
             var targetColor = img.GetPixel(startPosition.X, startPosition.Y);
             //TODO: 30 devera ser calculado de acordo com numero de clusters = 255/clusters
             var fillColor = Color.FromArgb((30 * color) % 255, (30 * color) % 255, (30 * color) % 255);
-            var hash = new Dictionary<Point, Color> {{startPosition, targetColor}};
+            var hash = new Dictionary<Point, Color> { { startPosition, targetColor } };
 
             while (hash.Count != 0)
             {
@@ -1773,6 +1773,13 @@ namespace Core.Logic
                                      Chave = typeof(CaptchaRF),
                                      Valor = typeof(PredictCaptchaRF)
                                  };
+                    break;
+                case "RF3":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = typeof(CaptchaRF3),
+                        Valor = typeof(PredictCaptchaRF3)
+                    };
                     break;
                 case "NFE":
                     result = new ChaveValor<Type, Type>

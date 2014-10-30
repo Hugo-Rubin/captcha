@@ -132,5 +132,15 @@ namespace WebGateway.Properties {
                 return ((string)(this["WebGateway_WS_CA_OCRCAM"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:7373/ocr.asmx")]
+        public string WebGateway_WS_RF3_OCRRF3 {
+            get {
+                return ((string)(this["WebGateway_WS_RF3_OCRRF3"]));
+            }
+        }
     }
 }

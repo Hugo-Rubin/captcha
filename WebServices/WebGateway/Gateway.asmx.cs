@@ -11,7 +11,7 @@ using Core.Common.Extensions;
 using Core.Data;
 using Core.Logic;
 using Core.Logic.Captchas;
-using Core.Logic.Types;
+using Core.Logic.Filtros;
 using Elmah;
 using WebGateway.WS_AM;
 using WebGateway.WS_CA;
@@ -20,6 +20,7 @@ using WebGateway.WS_CRJ;
 using WebGateway.WS_MG;
 using WebGateway.WS_NFE;
 using WebGateway.WS_RF;
+using WebGateway.WS_RF3;
 using WebGateway.WS_RJ;
 using WebGateway.WS_SI;
 using WebGateway.WS_SP;
@@ -39,6 +40,7 @@ namespace WebGateway
             servicosSuportados = new Dictionary<string, Func<Bitmap, string, string>>
             {
                 {"RF", ReceitaFederal},
+                {"RF3", ReceitaFederal},
                 {"NFE", NotaFiscalEletronica},
                 {"SI", Siscarga},
                 {"SP", SintegraSP},
@@ -93,6 +95,41 @@ namespace WebGateway
             return palavra;
         }
 
+        [WebMethod]
+        public string GetTextFromZip(string servico, byte[] zip, int w, int h, string token)
+        {
+            var cliente = ListarClientePeloToken(token);
+            if (cliente == null)
+            {
+                return "Licença inválida!";
+            }
+            var palavra = "!!!!";
+            var ip = HttpContext.Current.Request.UserHostAddress;
+
+            try
+            {
+                var grigoFilter = new GringoFilter();
+                var bmp = grigoFilter.ApplyRF3FromStream(zip);
+
+#if DEBUG
+                //Salvar imagem para evitar de chamar servico da amazon para nossos testes
+                var bmp2 = new Bitmap(bmp);
+                const string path = @"C:\OCR\Testes\RF3\";
+                var number = (new DirectoryInfo(path)).GetFiles("*.png").Count() +1;
+                bmp2.Save(String.Format(@"C:\OCR\Testes\RF3\{0:000}.png", number));
+#endif
+                palavra = ReceitaFederal3(bmp, token);
+
+                var arquivoLog = cliente.Nome == "Tester" ? "testes.txt" : "requisicoes.txt";
+                GravarLogExecucao(cliente.Nome, ip, servico, palavra, arquivoLog);
+            }
+            catch (Exception exception)
+            {
+                ErrorSignal.FromCurrentContext().Raise(exception);
+            }
+            return palavra;
+        }
+
         private string ReconhecerCaptcha(string servico, Bitmap bmp, string token)
         {
             if (servicosSuportados.ContainsKey(servico) == false)
@@ -124,15 +161,6 @@ namespace WebGateway
             return cliente;
         }
 
-        private IQueryable<Servicos> ListarServicosPorCliente(Clientes cliente)
-        {
-            return from sc in db.ServicosCliente
-                   join s in db.Servicos
-                       on sc.IdServico equals s.Id
-                   where sc.IdCliente == cliente.id
-                   select s;
-        }
-
         private bool AcessoConcedido(Clientes cliente, String servico)
         {
             //TODO: Criar tabelas no BD
@@ -158,6 +186,13 @@ namespace WebGateway
         {
             var captcha = new CaptchaRF(imagem);
             var ws = new OCRRF();
+            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
+        }
+
+        private string ReceitaFederal3(Bitmap imagem, string token)
+        {
+            var captcha = new CaptchaRF3(imagem);
+            var ws = new OCRRF3();
             return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
         }
 

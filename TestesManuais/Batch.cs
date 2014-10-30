@@ -581,6 +581,10 @@ namespace TestesManuais
             {
                 return PredictCaptchaRF.Instance;
             }
+            if (predictType == typeof(PredictCaptchaRF3))
+            {
+                return PredictCaptchaRF3.Instance;
+            }
             if (predictType == typeof (PredictCaptchaRJ))
             {
                 return PredictCaptchaRJ.Instance;

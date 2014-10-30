@@ -11,9 +11,6 @@ namespace ClienteSintegra
 {
     public class ConsultaCaptcha
     {
-        private readonly WebProxy wp = WebProxy.GetDefaultProxy();
-        private readonly Gateway.Gateway ws = new Gateway.Gateway();
-
         private byte[] imageArray;
         public Bitmap ImgCaptcha { get; set; }
 
@@ -45,12 +42,10 @@ namespace ClienteSintegra
 
         public string ReconhecerCaptcha(string servico, string token)
         {
-            wp.UseDefaultCredentials = true;
-            ws.Proxy = wp;
             var palavra = "!!!!";
             try
             {
-                palavra = ws.GetText(servico, imageArray, ImgCaptcha.Width, ImgCaptcha.Height, token);
+                palavra = Config.Ws.GetText(servico, imageArray, ImgCaptcha.Width, ImgCaptcha.Height, token);
             }
             catch (Exception exception)
             {

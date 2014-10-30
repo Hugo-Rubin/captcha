@@ -52,6 +52,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -103,6 +105,11 @@
     <None Include="Web References\WS_CRJ\ocr.disco" />
     <None Include="Web References\WS_MG\ocr.disco" />
     <None Include="Web References\WS_NFE\ocr.disco" />
+    <Content Include="Web References\WS_RF3\ocr.wsdl" />
+    <Content Include="Web References\WS_RF3\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\WS_RF\ocr.wsdl" />
     <None Include="Web References\WS_RF\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -112,6 +119,7 @@
     <None Include="Web References\WS_RF\ocr.disco" />
     <None Include="Web References\WS_SI\ocr.disco" />
     <None Include="Web References\WS_SP\ocr.disco" />
+    <Content Include="Web References\WS_RF3\ocr.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -177,6 +185,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\WS_NFE\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WS_RF3\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -336,6 +349,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebGateway_WS_SI_OCRSI</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:7373/ocr.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_RF3\</RelPath>
+      <UpdateFromURL>http://localhost:7373/ocr.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebGateway_WS_RF3_OCRRF3</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

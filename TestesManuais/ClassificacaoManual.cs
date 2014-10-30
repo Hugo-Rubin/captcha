@@ -51,6 +51,7 @@ namespace TestesManuais
             var tab = (sender as TabPage);
             CarregarTabPage(tab);
             (sender as Control).Focus();
+            tab.KeyUp += ClassificacaoManual_KeyUp;
         }
 
         private void CarregarTabPage(TabPage tab)
@@ -60,11 +61,17 @@ namespace TestesManuais
                 item.Dispose();
             }
             tab.Controls.Clear();
-            var panel = new Panel();
-            panel.Name = "container" + tab.Text;
-            panel.Size = tab.Size;
-            panel.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel.AutoScroll = true;
+            
+            Application.DoEvents();
+
+            var panel = new Panel
+            {
+                Name = "container" + tab.Text,
+                Size = tab.Size,
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                AutoScroll = true
+            };
+
             tab.Controls.Add(panel);
 
             if (naoListar != String.Empty)
@@ -99,6 +106,7 @@ namespace TestesManuais
                 imgCaptcha.Top = 3;
                 imgCaptcha.Height = imgCaptcha.Image.Height + 6;
                 imgCaptcha.Width = imgCaptcha.Image.Width + 6;
+                imgCaptcha.KeyUp += ClassificacaoManual_KeyUp;
                 linha.Controls.Add(imgCaptcha);
 
                 /*PictureBox imgSemFundo = new PictureBox();
@@ -121,6 +129,7 @@ namespace TestesManuais
                 imgLetra.Width = imgLetra.Image.Width + 10;
                 imgLetra.SizeMode = PictureBoxSizeMode.CenterImage;
                 imgLetra.Tag = false;
+                imgLetra.KeyUp += ClassificacaoManual_KeyUp;
 
                 linha.Controls.Add(imgLetra);
 
@@ -176,6 +185,7 @@ namespace TestesManuais
                 check.Top = 3;
                 linha.Controls.Add(check);
                 linha.Height = Math.Max(imgLetra.Height, imgCaptcha.Height);
+                linha.KeyUp += ClassificacaoManual_KeyUp;
                 i += linha.Height + 5;
                 panel.Controls.Add(linha);
             }
@@ -208,7 +218,7 @@ namespace TestesManuais
 
         private void btnMover_Click(object sender, EventArgs e)
         {
-            foreach (var imgName in imagensParaMover)
+           foreach (var imgName in imagensParaMover)
             {
                 var origem = String.Format(@"{0}\{1}\{2}.png",
                                               pastaBaseRede,
@@ -272,6 +282,16 @@ namespace TestesManuais
         {
             e.TabPage.ImageIndex = 0;
             ValidaSePainelEstaHabilitado();
+        }
+
+        private void ClassificacaoManual_KeyUp(object sender, KeyEventArgs e)
+        {
+            var letra = (char) e.KeyValue;
+            var idx = cbMoverPara.Items.IndexOf(letra.ToString());
+            if (idx > -1)
+            {
+                cbMoverPara.SelectedIndex = idx;
+            }
         }
     }
 }

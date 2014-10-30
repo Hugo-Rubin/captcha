@@ -1,11 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-                  xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema"
-                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/"
-                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="GetText">
@@ -26,6 +20,34 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetTextFromZip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="servico" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zip" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="w" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="h" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTextFromZipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTextFromZipResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WakeUp">
+        <s:complexType />
+      </s:element>
+      <s:element name="WakeUpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WakeUpResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetTextSoapIn">
@@ -34,10 +56,30 @@
   <wsdl:message name="GetTextSoapOut">
     <wsdl:part name="parameters" element="tns:GetTextResponse" />
   </wsdl:message>
+  <wsdl:message name="GetTextFromZipSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTextFromZip" />
+  </wsdl:message>
+  <wsdl:message name="GetTextFromZipSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTextFromZipResponse" />
+  </wsdl:message>
+  <wsdl:message name="WakeUpSoapIn">
+    <wsdl:part name="parameters" element="tns:WakeUp" />
+  </wsdl:message>
+  <wsdl:message name="WakeUpSoapOut">
+    <wsdl:part name="parameters" element="tns:WakeUpResponse" />
+  </wsdl:message>
   <wsdl:portType name="GatewaySoap">
     <wsdl:operation name="GetText">
       <wsdl:input message="tns:GetTextSoapIn" />
       <wsdl:output message="tns:GetTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTextFromZip">
+      <wsdl:input message="tns:GetTextFromZipSoapIn" />
+      <wsdl:output message="tns:GetTextFromZipSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WakeUp">
+      <wsdl:input message="tns:WakeUpSoapIn" />
+      <wsdl:output message="tns:WakeUpSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="GatewaySoap" type="tns:GatewaySoap">
@@ -51,11 +93,47 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetTextFromZip">
+      <soap:operation soapAction="http://tempuri.org/GetTextFromZip" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WakeUp">
+      <soap:operation soapAction="http://tempuri.org/WakeUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="GatewaySoap12" type="tns:GatewaySoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetText">
       <soap12:operation soapAction="http://tempuri.org/GetText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTextFromZip">
+      <soap12:operation soapAction="http://tempuri.org/GetTextFromZip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WakeUp">
+      <soap12:operation soapAction="http://tempuri.org/WakeUp" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

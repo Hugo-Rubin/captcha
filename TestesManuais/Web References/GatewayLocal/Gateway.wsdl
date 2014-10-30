@@ -20,6 +20,24 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetTextFromZip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="servico" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zip" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="w" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="h" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTextFromZipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTextFromZipResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WakeUp">
         <s:complexType />
       </s:element>
@@ -38,6 +56,12 @@
   <wsdl:message name="GetTextSoapOut">
     <wsdl:part name="parameters" element="tns:GetTextResponse" />
   </wsdl:message>
+  <wsdl:message name="GetTextFromZipSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTextFromZip" />
+  </wsdl:message>
+  <wsdl:message name="GetTextFromZipSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTextFromZipResponse" />
+  </wsdl:message>
   <wsdl:message name="WakeUpSoapIn">
     <wsdl:part name="parameters" element="tns:WakeUp" />
   </wsdl:message>
@@ -49,6 +73,10 @@
       <wsdl:input message="tns:GetTextSoapIn" />
       <wsdl:output message="tns:GetTextSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetTextFromZip">
+      <wsdl:input message="tns:GetTextFromZipSoapIn" />
+      <wsdl:output message="tns:GetTextFromZipSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WakeUp">
       <wsdl:input message="tns:WakeUpSoapIn" />
       <wsdl:output message="tns:WakeUpSoapOut" />
@@ -58,6 +86,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetText">
       <soap:operation soapAction="http://tempuri.org/GetText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTextFromZip">
+      <soap:operation soapAction="http://tempuri.org/GetTextFromZip" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -79,6 +116,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetText">
       <soap12:operation soapAction="http://tempuri.org/GetText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTextFromZip">
+      <soap12:operation soapAction="http://tempuri.org/GetTextFromZip" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

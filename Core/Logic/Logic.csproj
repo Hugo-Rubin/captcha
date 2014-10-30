@@ -85,6 +85,7 @@
     <Compile Include="Captchas\CaptchaCA.cs" />
     <Compile Include="Captchas\CaptchaCM.cs" />
     <Compile Include="Captchas\CaptchaCRJ.cs" />
+    <Compile Include="Captchas\CaptchaRF3.cs" />
     <Compile Include="Captchas\CctCaptchaA.cs" />
     <Compile Include="Filtros\GringoFilter.cs" />
     <Compile Include="Filtros\GringoFilterType.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Predict\PredictCaptchaCRJ.cs" />
     <Compile Include="Predict\PredictCaptchaCRJAzul.cs" />
     <Compile Include="GraphSearch.cs" />
+    <Compile Include="Predict\PredictCaptchaRF3.cs" />
     <Compile Include="Separacao\ColorFillingSegmentation2.cs" />
     <Compile Include="RemocaoFundo\Erosion.cs" />
     <Compile Include="Predict\Abstract\Predict.cs" />

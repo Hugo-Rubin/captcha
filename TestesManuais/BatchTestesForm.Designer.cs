@@ -38,6 +38,7 @@
             this.btnChecarErros = new System.Windows.Forms.Button();
             this.btnSeparacao = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.lblUltimaExecucao = new System.Windows.Forms.Label();
             this.comboPadroes = new System.Windows.Forms.ComboBox();
             this.btnLog = new System.Windows.Forms.Button();
@@ -69,7 +70,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.intTestsBtn = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -85,6 +85,7 @@
             this.comboEstado.Items.AddRange(new object[] {
             "NFE - Nota Fiscal Eletrônica",
             "RF - Receita Federal",
+            "RF3 - Receita Federal 3",
             "SI - Siscarga",
             "CAM - Sistema de Consignações da Aeronáutica/Marinha",
             "CA - Sistema de Consignações da Aeronáutica",
@@ -227,6 +228,16 @@
             this.groupBox2.Size = new System.Drawing.Size(672, 181);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(146, 141);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 27;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // lblUltimaExecucao
             // 
@@ -554,16 +565,6 @@
             this.intTestsBtn.Text = "Testes";
             this.intTestsBtn.UseVisualStyleBackColor = true;
             this.intTestsBtn.Click += new System.EventHandler(this.intTestsBtn_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(146, 141);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 27;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // BatchTestesForm
             // 
