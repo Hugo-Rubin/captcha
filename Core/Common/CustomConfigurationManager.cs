@@ -58,6 +58,11 @@ namespace Core.Common
             }
             if (customKey.StartsWith("{WEB"))
             {
+                //TODO: Find a way to get the physical path of the server dynamically to avoid this hard coded path
+                #if !DEBUG
+                    return string.Format(@"{0}\9799333\html\{1}", solutionDir, customKey.Replace("{WEB", "ocr").Replace("}", string.Empty));
+                #endif
+
                 return string.Format(@"{0}\WebServices\{1}", solutionDir, customKey.Replace("{", string.Empty).Replace("}", string.Empty));
             }
             return customKey;

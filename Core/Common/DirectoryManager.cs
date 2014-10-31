@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Web;
 
 namespace Core.Common
 {
@@ -21,7 +22,9 @@ namespace Core.Common
             {
                 if (solutionDirectory == null)
                 {
-                    var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+                    var dir = HttpContext.Current != null ? HttpContext.Current.Server.MapPath("/") : Directory.GetCurrentDirectory();
+
+                    var directoryInfo = Directory.GetParent(dir).Parent;
                     if (directoryInfo != null)
                     {
                         if (directoryInfo.Parent != null)
