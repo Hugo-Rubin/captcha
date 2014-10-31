@@ -46,12 +46,12 @@ namespace ClienteSintegra
             var debug = false;
             var palavra = "!!!!";
 
-            args = new[]
-            {
-                "/ser=RF",
-                @"/in=a7fdb988-fe1e-421d-a320-e83b60819517",
-                @"/out=C:\OCR\resposta.txt"
-            };
+            //args = new[]
+            //{
+            //    "/ser=RF",
+            //    @"/in=90517e40-74d4-4f2f-8f10-131756838b0c",
+            //    @"/out=C:\OCR\resposta.txt"
+            //};
 
 
             var parametros = new List<String>(args);
