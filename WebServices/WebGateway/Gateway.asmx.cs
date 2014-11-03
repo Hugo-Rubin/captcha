@@ -269,9 +269,12 @@ namespace WebGateway
 
         private string ConsigAeronautica(Bitmap imagem, string token)
         {
-            var ws = new OCRCA();
-            var rawImage = imagem.ToByteArray(ImageFormat.Png);
-            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
+            //var ws = new OCRCA();
+            //var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            //return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
+
+            // Calling ConsigMarinha on purpose until we fix ConsigAeronautica
+            return ConsigMarinha(imagem, token);
         }
 
         private string ConsigMarinha(Bitmap imagem, string token)
