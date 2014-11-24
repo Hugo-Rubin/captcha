@@ -217,7 +217,7 @@ namespace TestesManuais
         private void btnClassificacao_Click(object sender, EventArgs e)
         {
             //Rede
-            var di = new DirectoryInfo(@"C:\OCR\Testes\RF3\Separados\");
+            var di = new DirectoryInfo(@"C:\OCR\Testes\TRTSP\Separados\");
             var dirs = di.GetDirectories();
 
             var i = 1;

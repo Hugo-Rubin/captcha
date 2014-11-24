@@ -89,12 +89,8 @@ namespace TestesManuais
 
             if (total != 0)
             {
-                //ExibirImagensSeparadas();
-                string nImagem = captchaFiles[index].Name.Substring(0, captchaFiles[index].Name.Length - 9);
-                imagemAtual.Image = Image.FromFile(@"C:\Users\Hugo\Desktop\RF3\" + nImagem + @"\0001.png");
-                //TODO: Comentar linha acima e descomentar esta: imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+                ExibirImagens(index);
 
-                //imagemAseguir.Image = Image.FromFile(this.captchaFiles[index + 1].FullName);
                 btnVoltar.Enabled = false;
                 if (total == 1)
                 {
@@ -105,9 +101,19 @@ namespace TestesManuais
             else
             {
                 MessageBox.Show("Todas as imagens foram processadas.");
-                Close();
-                Dispose();
+                //Close();
+                //Dispose();
             }
+        }
+
+        private void ExibirImagens(int index)
+        {
+            if (index > 0)
+            {
+                imagemAnterior.Image = Image.FromFile(captchaFiles[index - 1].FullName);
+            }
+            imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+            imagemOriginal.Image = Image.FromFile(pastaBase + captchaFiles[index].Name);
         }
 
         private void btnAvançar_Click(object sender, EventArgs e)
@@ -124,48 +130,29 @@ namespace TestesManuais
                     Dispose();
                 }
 
-                imagemAnterior.Image = Image.FromFile(captchaFiles[index - 1].FullName);
-
-                string nImagem = captchaFiles[index].Name.Substring(0, captchaFiles[index].Name.Length - 9);
-                imagemAtual.Image = Image.FromFile(@"C:\Users\Hugo\Desktop\RF3\" + nImagem + @"\0001.png");
-                //TODO: Comentar linha acima e descomentar esta: imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+                ExibirImagens(index);
 
                 ClearPictures();
-                //ExibirImagensSeparadas();
 
-                if (index == total - 1)
-                {
-                    imagemAseguir.Image = null;
-                }
-                else
-                {
-                    //    imagemAseguir.Image = Image.FromFile(this.captchaFiles[index + 1].FullName);
-                }
 
-                if (!btnVoltar.Enabled)
-                {
-                    btnVoltar.Enabled = true;
-                }
+
+
+                btnVoltar.Enabled = true;
+
                 if (index == total - 1)
                 {
                     btnAvançar.Enabled = false;
                 }
 
-                if (resposta.Text != null && resposta.Text != "")
-                {
-                    respostaAnterior.Visible = false;
-                }
-                else
-                {
-                    respostaAnterior.Text = resposta.Text;
-                    respostaAnterior.Visible = true;
-                }
 
+                respostaAnterior.Visible = string.IsNullOrEmpty(resposta.Text);
+                respostaAnterior.Text = resposta.Text;
                 resposta.Clear();
                 LabelNimg.Text = string.Format("{0:0000}", index + 1);
             }
-            catch
+            catch (Exception exception)
             {
+                MessageBox.Show("Erro: " + exception.Message);
             }
         }
 
@@ -182,7 +169,7 @@ namespace TestesManuais
             imagemAseguir.Image = Image.FromFile(captchaFiles[index + 1].FullName);
             imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
             ClearPictures();
-            //ExibirImagensSeparadas();
+
 
             if (index == 0)
             {
@@ -194,12 +181,7 @@ namespace TestesManuais
                 imagemAnterior.Image = Image.FromFile(captchaFiles[index - 1].FullName);
             }
 
-
-            if (!btnAvançar.Enabled)
-            {
-                btnAvançar.Enabled = true;
-            }
-
+            btnAvançar.Enabled = true;
             LabelNimg.Text = string.Format("{0:0000}", index + 1);
         }
 
