@@ -9,7 +9,7 @@ namespace TestesManuais
 {
     public partial class TreinamentoRede : Form
     {
-        private const string rootDirectory = @"C:\OCR\Testes\CAM\Rede";
+        private const string rootDirectory = @"C:\OCR\Testes\RF\Rede";
 
         public TreinamentoRede()
         {
@@ -20,9 +20,10 @@ namespace TestesManuais
         {
             var dicio = new[]
                             {
-                                '2', '3', '4', '5', '6', '7', '8', 'b', 'c', 'd', 'e', 'f', 'g', 'm', 'n', 'p', 'w', 'x'
-                                ,
-                                'y'
+                                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+                                'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                                'U', 'V', 'W', 'X', 'Y', 'Z'
                             };
 
             var parent = new DirectoryInfo(rootDirectory); // diretório pai
@@ -67,8 +68,8 @@ namespace TestesManuais
                     }
                     //s.Append(string.Format("{0};", m[0, k]));
 
-                    //s.Append((Array.IndexOf(dicio, char.ToLower(dir.Name[0])) + 1) + ";\n");
-                    s.Append((Array.IndexOf(dicio, dir.Name[0]) + 1) + ";\n");
+                    s.Append((Array.IndexOf(dicio, char.ToUpper(dir.Name[0])) + 1) + ";\n");
+                    //s.Append((Array.IndexOf(dicio, dir.Name[0]) + 1) + ";\n");
 
                     s.Remove(s.Length - 1, 1);
                     if (i.Name != imagens[imagens.Length - 1].Name)
@@ -121,6 +122,11 @@ namespace TestesManuais
         {
             PixelIntensityAction();
             MessageBox.Show("Pronto.");
+        }
+
+        private void TreinamentoRede_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

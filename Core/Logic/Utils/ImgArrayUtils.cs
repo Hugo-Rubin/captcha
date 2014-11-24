@@ -395,27 +395,53 @@ namespace Core.Logic.Utils
             return new ImgArray(rotatedBmp);
         }
 
-        public static ImgArray RemoverMargem(this ImgArray img)
+        public static ImgArray RemoverMargem(this ImgArray img, int tam = 1)
         {
             if (img.GetPixel(0, 0) == Color.White || img.GetPixel(img.Width - 1, img.Height - 1) == Color.White)
             {
                 return img;
             }
 
-            for (var y = 0; y < img.Height; y += img.Height - 1)
+            int y = 0;
+            int x = 0;
+
+            while(y < tam)
             {
-                for (var x = 0; x < img.Width; x++)
+                for (x = 0; x < img.Width; x++)
                 {
                     img.SetPixel(x, y, Color.White);
                 }
+                y++;
             }
 
-            for (var x = 0; x < img.Width; x += img.Width - 1)
+            y = 0;
+            while (y < tam)
             {
-                for (var y = 0; y < img.Height; y++)
+                for (x = 0; x < img.Width; x++)
+                {
+                    img.SetPixel(x, img.Height - 1 - y, Color.White);
+                }
+                y++;
+            }
+
+            x = 0;
+            while(x < tam)
+            {
+                for (y = 0; y < img.Height; y++)
                 {
                     img.SetPixel(x, y, Color.White);
                 }
+                x++;
+            }
+
+            x = 0;
+            while (x < tam)
+            {
+                for (y = 0; y < img.Height; y++)
+                {
+                    img.SetPixel(img.Width - 1 - x, y, Color.White);
+                }
+                x++;
             }
 
             return img;

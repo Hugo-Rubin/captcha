@@ -5,6 +5,9 @@ using System.Linq;
 using Core.Logic.Captchas.Abstract;
 using Core.Logic.Types;
 using Core.Logic.Utils;
+using Core.Logic.Filtros;
+using System.Drawing.Imaging;
+using Core.Common.Extensions;
 
 namespace Core.Logic.Captchas
 {
@@ -32,29 +35,60 @@ namespace Core.Logic.Captchas
 
         public override IEnumerable<ImgArray> GetCaracteres()
         {
-            var separar = new SeparacaoPadrao(this);
-            return
-                separar.ColorFillingSegmentation2AndSeamCarving2(ImgArray, false).CortarECentralizarTodos(
-                    TamanhoImagemLetra.X, TamanhoImagemLetra.Y);
+            int[] cuttingPointsX = { 40, 70, 100, 130, 160 };
+            int qtdLetras = cuttingPointsX.Length + 1;
+            ImgArray[] chars = new ImgArray[qtdLetras];
+            ImgArray clusterAtual = new ImgArray(this.ImgArray.Width, this.ImgArray.Height);
+
+            chars.Populate<ImgArray>(new ImgArray(45, 30));
+                        
+            for (int idx = 0; idx < qtdLetras; idx++)
+            {
+                for (int y = 0; y < this.ImgArray.Height; y++)
+                {
+                    int posInicialX = idx != 0 ? cuttingPointsX[idx - 1] : 0; // caso seja o primeiro cluster, parte da posição 0
+                    int posFinalX = idx != qtdLetras - 1 ? cuttingPointsX[idx] : this.ImgArray.Width; // caso seja o último cluster, vai até o final da imagem
+                    
+                    for (int x = posInicialX; x < posFinalX; x++)
+                    {
+                        clusterAtual.SetPixel(x - posInicialX, y, ImgArray.GetPixel(x, y));
+                    }
+                }
+
+                chars[idx] = clusterAtual.CortarECentralizar(45, 30);
+                clusterAtual.Clear();
+            }
+
+            return chars;
         }
 
         public override Bitmap RemoverFundo(Bitmap source)
         {
-            var removerFundo = new RemocaoFundoPadrao(source);
-            var img = removerFundo.UsandoKmeansEErosao();
+            ImgArray result = new ImgArray(source.Width, source.Height);
 
-            // Usar CropRectangle para apagar os 12 primeiros pixels da imagem para melhorar o desempenho. 
-            for (var x = 0; x < img.Width; x++)
+            // A imagem volta do servidor com o fundo preto e as letras em tons de roxo. O código abaixo deixa o fundo branco e todo o resto preto.
+            unsafe
             {
-                for (var y = 0; y < 13; y++)
+                var bmd = source.LockBits(new Rectangle(0, 0, source.Width, source.Height), ImageLockMode.ReadOnly,
+                                              source.PixelFormat);
+                var pixelSize = BitmapExtension.GetPixelSize(source.PixelFormat);
+
+                for (var y = 0; y < bmd.Height; y++)
                 {
-                    img.SetPixel(x, y, Color.White);
+                    var row = (byte*)bmd.Scan0 + (y * bmd.Stride);
+                    for (var x = 0; x < bmd.Width; x++)
+                    {
+                        var idx = x * bmd.Height + y;
+                        var pixel = row[(int)(x * pixelSize)];
+                        var color = Convert.ToByte(pixel == 0); // Aqui a cor do pixel é alterada
+                        result[idx] = color;
+                    }
                 }
+
+                source.UnlockBits(bmd);
             }
 
-            img = RemoverRuidos(new ImgArray(img), 70).ToBitmap();
-
-            return img;
+            return result.ToBitmap();
         }
 
         /// <summary>

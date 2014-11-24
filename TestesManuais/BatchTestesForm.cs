@@ -14,6 +14,7 @@ using Core.Logic.Captchas.Abstract;
 using Core.Logic.Captchas;
 using Core.Logic.Tratamento;
 using System.IO.Compression;
+using Core.Logic.RemocaoFundo;
 
 namespace TestesManuais
 {
@@ -499,8 +500,56 @@ namespace TestesManuais
 
         private void button4_Click(object sender, EventArgs e)
         {
+            /// Quebra CAPTCHA A:
+
+            Bitmap bmp = (Bitmap) Image.FromFile(@"C:\Users\Hugo\Desktop\a3.png");
+            ImgArray img = new ImgArray(bmp.KeepGrayscale());
+
+            Erosion er = new Erosion(img.InvertColors());
+            er.Result.InvertColors().RemoverRuidos(15).Save(@"C:\Users\Hugo\Desktop\a3-postErosion4.png");
+
+            /// Quebra CAPTCHA B:
+
+            Bitmap bmp2 = (Bitmap)Image.FromFile(@"C:\Users\Hugo\Desktop\b2.png");
+
+            ImgArray img2 = new ImgArray(bmp2.Width, bmp2.Height);
+            
+            for (int y = 0; y < bmp2.Height; y++)
+            {
+                for (int x = 0; x < bmp2.Width; x++)
+                {
+                    Color c = bmp2.GetPixel(x, y);
+                    if (c.R < 180 && c.R > 120)
+                    {
+                        //if (c.B < 100)
+                        //{
+                            byte threshold = (byte)(c.R - 15);
+                            if (threshold > c.G && threshold > c.B)
+                            {
+                                img2.SetPixel(x, y, Color.Black);
+                            }
+                        //}
+                    }
+                }
+            }
+            
+            img2.Save(@"C:\Users\Hugo\Desktop\b2-post.png");
+
+            /// Quebra CAPTCHA C:
+
+            Bitmap bmp3 = (Bitmap)Image.FromFile(@"C:\Users\Hugo\Desktop\c2.png");
+            ImgArray img3 = new ImgArray(bmp3.KeepColorEqualOrLower(60, 60, 60));
+            
+            ForwardDerivative fd = new ForwardDerivative();
+            fd.Apply(img3, true, false);
+            fd.Apply(img3, true, false).RemoverRuidos(15);
+
+            img3.Save(@"C:\Users\Hugo\Desktop\c2-postFD.png");
+
+            // ------------------------------------------------------------------------------- //
+
             //Cria pastas do alfabeto
-            ServerUtil.CriarPastas(@"C:\Users\Hugo\Desktop\Characters\RF");
+            //ServerUtil.CriarPastas(@"C:\Users\Hugo\Desktop\Characters\RF");
 
             // Extrai arquivos de uma pasta
             //ExtrairArquivos(@"C:\OCR\Testes\CAM Pão\Rede_Pao\_Lixo", "*.*", true);
@@ -791,13 +840,33 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            ImgArray src = new ImgArray((Bitmap)Image.FromFile(@"E:\Users\Hugo\Desktop\1.png"));
-            ImgArray dtn = new ImgArray(src.Width * 2, src.Height * 2);
+            var images = new DirectoryInfo(@"C:\OCR\Testes\TJPE").GetFiles("*.png");
+            var semFundoDir = new DirectoryInfo(@"C:\OCR\Testes\TJPE\SemFundo\");
+            var separadasDir = new DirectoryInfo(@"C:\OCR\Testes\TJPE\Separadas\");
+            var redeDir = new DirectoryInfo(@"C:\OCR\Testes\TJPE\Rede\");
 
-            var end = new Endireitamento(true, false);
-            dtn = end.ApplyTo(src);
+            foreach (var imagem in images)
+            {
+                Bitmap source = (Bitmap)Image.FromFile(imagem.FullName);
+                Rectangle areaValida = new Rectangle(1, 1, source.Width-3, source.Height-2);
+                source = source.CropRectangle(areaValida);
+                //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-            dtn.Save(@"E:\Users\Hugo\Desktop\2.png");
+                CaptchaTJPE crf = new CaptchaTJPE(source);
+
+                crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
+
+                var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
+                var letras = crf.GetCaracteres();
+
+                int i = 0;
+                foreach (var letra in letras)
+                {
+                    letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + " " + i++ + ".png");
+                    letra.Save(currentDir.FullName + @"\" + i++ + ".png");
+                }
+            }
+
         }
 
     }

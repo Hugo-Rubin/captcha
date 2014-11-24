@@ -36,8 +36,7 @@ namespace Core.Logic.Utils
         ///   Executa a separação com ColorFillingSegmentation2 e só exexuta SeamCarving2 se for necessário
         /// </summary>
         /// <returns> </returns>
-        public ImgArray[] ColorFillingSegmentation2AndSeamCarving2(ImgArray imgTratado = null,
-                                                                   bool tamanhoVariavel = true)
+        public ImgArray[] ColorFillingSegmentation2AndSeamCarving2(ImgArray imgTratado = null, bool tamanhoVariavel = true, bool checkclusters = false)
         {
             // TODO: Essa chamada ao CFS2 mescla caracteres que cruzam no eixo X (onde algum pixel do caractere X está na mesma coluna de algum pixel do caractere Y), o que pode fazer com...
             // TODO: ...que duas imagens que não se tocam sejam colocadas e retornadas em um mesmo cluster, sobrando para o SeamCarving2 a tarefa de separá-las.
@@ -48,6 +47,16 @@ namespace Core.Logic.Utils
 
             var chars = cfs.GetCaracteres().RemoveWhiteBordersTodos();
 
+            for (int i = 0; i < chars.Count; i++)
+            {
+                int pCount = chars[i].CountPixelsWithColor(Color.Black);
+                if (pCount < 1)
+                {
+                    chars.RemoveAt(i);
+                }
+            }
+
+            // TODO: Precisamos organizar melhor essa parte de verificação dos clusters.
             if (tamanhoVariavel == false)
             {
                 while (chars.Count > numeroMinimoDeLetras)
@@ -65,6 +74,19 @@ namespace Core.Logic.Utils
                     chars.RemoveAt(menorCluster);
                 }
             }
+
+            /*if (checkclusters)
+            {
+                int tamMin = tamanhoImagemLetra.X > tamanhoImagemLetra.Y ? tamanhoImagemLetra.X : tamanhoImagemLetra.Y;
+                for (int i = 0; i < chars.Count; i++)
+                {
+                    int pCount = chars[i].CountPixelsWithColor(Color.Black);
+                    if (pCount < tamMin)
+                    {
+                        chars.RemoveAt(i);
+                    }
+                }
+            }*/
 
             while (chars.Count < numeroMinimoDeLetras && chars.Count > 0)
             {
@@ -93,8 +115,8 @@ namespace Core.Logic.Utils
 
                 // Substitui Imagem Colada pelos clusters encontrados
                 chars.RemoveAt(maxIdx);
-                chars.InsertRange(maxIdx, clusters);
-            }
+                chars.InsertRange(maxIdx, clusters);                
+            }            
 
             return chars.ToArray().CortarECentralizarTodos(tamanhoImagemLetra.X, tamanhoImagemLetra.Y).ToArray();
         }

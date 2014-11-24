@@ -90,7 +90,10 @@ namespace TestesManuais
             if (total != 0)
             {
                 //ExibirImagensSeparadas();
-                imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+                string nImagem = captchaFiles[index].Name.Substring(0, captchaFiles[index].Name.Length - 9);
+                imagemAtual.Image = Image.FromFile(@"C:\Users\Hugo\Desktop\RF3\" + nImagem + @"\0001.png");
+                //TODO: Comentar linha acima e descomentar esta: imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+
                 //imagemAseguir.Image = Image.FromFile(this.captchaFiles[index + 1].FullName);
                 btnVoltar.Enabled = false;
                 if (total == 1)
@@ -122,7 +125,11 @@ namespace TestesManuais
                 }
 
                 imagemAnterior.Image = Image.FromFile(captchaFiles[index - 1].FullName);
-                imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+
+                string nImagem = captchaFiles[index].Name.Substring(0, captchaFiles[index].Name.Length - 9);
+                imagemAtual.Image = Image.FromFile(@"C:\Users\Hugo\Desktop\RF3\" + nImagem + @"\0001.png");
+                //TODO: Comentar linha acima e descomentar esta: imagemAtual.Image = Image.FromFile(pastaSemFundo + captchaFiles[index].Name);
+
                 ClearPictures();
                 //ExibirImagensSeparadas();
 

@@ -86,6 +86,8 @@
     <Compile Include="Captchas\CaptchaCM.cs" />
     <Compile Include="Captchas\CaptchaCRJ.cs" />
     <Compile Include="Captchas\CaptchaRF3.cs" />
+    <Compile Include="Captchas\CaptchaTJPE.cs" />
+    <Compile Include="Captchas\CaptchaTRTSP.cs" />
     <Compile Include="Captchas\CctCaptchaA.cs" />
     <Compile Include="Filtros\GringoFilter.cs" />
     <Compile Include="Filtros\GringoFilterType.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="Tratamento\ICM_MRF.cs" />
     <Compile Include="Tratamento\ICM_Basic.cs" />
     <Compile Include="Tratamento\ManhattanDilation.cs" />
+    <Compile Include="Tratamento\MedianFilter.cs" />
     <Compile Include="Tratamento\Thinning.cs" />
     <Compile Include="Tratamento\Neighbors.cs" />
     <Compile Include="Tratamento\ThinningStentiford.cs" />

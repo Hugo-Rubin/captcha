@@ -87,6 +87,7 @@
             "RF - Receita Federal",
             "RF3 - Receita Federal 3",
             "SI - Siscarga",
+            "TRTSP - Tribunal Regional do Trabalho de São Paulo ",
             "CAM - Sistema de Consignações da Aeronáutica/Marinha",
             "CA - Sistema de Consignações da Aeronáutica",
             "CM - Sistema de Consignações da Marinha",

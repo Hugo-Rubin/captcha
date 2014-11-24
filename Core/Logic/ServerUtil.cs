@@ -1873,6 +1873,13 @@ namespace Core.Logic
                         Valor = null
                     };
                     break;
+                case "TRTSP":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = typeof(CaptchaTRTSP),
+                        Valor = null
+                    };
+                    break;
                 default:
                     throw new Exception(
                         "Captcha não implementado ou não especificado em Bll.ServerUtil.GetTypeCaptchaByID!");

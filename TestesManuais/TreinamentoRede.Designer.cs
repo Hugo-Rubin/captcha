@@ -33,9 +33,10 @@
             // 
             // PixelIntensity
             // 
-            this.PixelIntensity.Location = new System.Drawing.Point(194, 98);
+            this.PixelIntensity.Location = new System.Drawing.Point(146, 80);
+            this.PixelIntensity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PixelIntensity.Name = "PixelIntensity";
-            this.PixelIntensity.Size = new System.Drawing.Size(128, 44);
+            this.PixelIntensity.Size = new System.Drawing.Size(96, 36);
             this.PixelIntensity.TabIndex = 1;
             this.PixelIntensity.Text = "Pixel Intensity";
             this.PixelIntensity.UseVisualStyleBackColor = true;
@@ -43,12 +44,14 @@
             // 
             // TreinamentoRede
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 310);
+            this.ClientSize = new System.Drawing.Size(250, 252);
             this.Controls.Add(this.PixelIntensity);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TreinamentoRede";
             this.Text = "TreinamentoRede";
+            this.Load += new System.EventHandler(this.TreinamentoRede_Load);
             this.ResumeLayout(false);
 
         }

@@ -37,7 +37,7 @@ namespace Core.Logic.Utils
         }
 
         /// <summary>
-        ///   Retorna uma imagem com fundo branco e apenas copia para ela os pixels pretos da imagem de origem
+        /// Retorna uma imagem com fundo branco e apenas copia para ela os pixels pretos da imagem de origem
         /// </summary>
         /// <param name="origem"> </param>
         /// <returns> </returns>
@@ -56,6 +56,82 @@ namespace Core.Logic.Utils
                     }
                 }
             }
+            return destino;
+        }
+
+        /// <summary>
+        /// Mantém apenas os pixels com a cor (RGB) passada por parâmetro na imagem, apagando todos os outros.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static ImgArray KeepColor(this Bitmap origem, byte r, byte g, byte b)
+        {
+            var destino = new ImgArray(origem.Width, origem.Height);
+
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (c.R == r && c.G == g && c.B == b)
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return destino;
+        }
+
+        /// <summary>
+        /// Mantém apenas os pixels com a cor igual ou menor (RGB) que a passada por parâmetro na imagem, apagando todos os outros.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static ImgArray KeepColorEqualOrLower(this Bitmap origem, byte r, byte g, byte b)
+        {
+            var destino = new ImgArray(origem.Width, origem.Height);
+
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (c.R <= r && c.G <= g && c.B <= b)
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return destino;
+        }
+        
+        /// <summary>
+        /// Pinta os pixels em escala de cinza de preto, todos os outros de branco
+        /// </summary>
+        /// <param name="origem"></param>
+        /// <returns></returns>
+        public static ImgArray KeepGrayscale(this Bitmap origem)
+        {
+            var destino = new ImgArray(origem.Width, origem.Height);
+
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (c.R == c.G && c.R == c.B)
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
             return destino;
         }
     }
