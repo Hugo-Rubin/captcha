@@ -177,7 +177,7 @@ namespace TestesManuais
 
         private void comboEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtPasta.Text = @"C:\OCR\Testes\";
+            txtPasta.Text = @"E:\OCR\Testes\";
             try
             {
                 var idx = comboEstado.Text.IndexOf(" - ");
@@ -840,10 +840,10 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var images = new DirectoryInfo(@"C:\OCR\Testes\TJPE").GetFiles("*.png");
-            var semFundoDir = new DirectoryInfo(@"C:\OCR\Testes\TJPE\SemFundo\");
-            var separadasDir = new DirectoryInfo(@"C:\OCR\Testes\TJPE\Separadas\");
-            var redeDir = new DirectoryInfo(@"C:\OCR\Testes\TJPE\Rede\");
+            var images = new DirectoryInfo(@"E:\OCR\Testes\TRTSP").GetFiles("*.png");
+            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\TRTSP\SemFundo\");
+            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\TRTSP\Separadas\");
+            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\TRTSP\Rede\");
 
             foreach (var imagem in images)
             {
@@ -852,7 +852,7 @@ namespace TestesManuais
                 source = source.CropRectangle(areaValida);
                 //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-                CaptchaTJPE crf = new CaptchaTJPE(source);
+                CaptchaTRTSP crf = new CaptchaTRTSP(source);
 
                 crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
@@ -862,7 +862,7 @@ namespace TestesManuais
                 int i = 0;
                 foreach (var letra in letras)
                 {
-                    letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + " " + i++ + ".png");
+                    letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + "-" + i++ + ".png");
                     letra.Save(currentDir.FullName + @"\" + i++ + ".png");
                 }
             }

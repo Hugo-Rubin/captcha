@@ -350,9 +350,12 @@ namespace TestesManuais
 
                         foreach (var f in fi)
                         {
-                            var destino = pastaRede + temp[1][i] + @"\" + nomeImagem + "-" + i + ".png";
-                            f.CopyTo(destino, true);
-                            i++;
+                            try
+                            {
+                                var destino = pastaRede + temp[1][i] + @"\" + nomeImagem + "-" + i + ".png";
+                                f.CopyTo(destino, true);
+                                i++;
+                            } catch(IndexOutOfRangeException) { }
                         }
                     }
                     catch (DirectoryNotFoundException)
