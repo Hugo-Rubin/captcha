@@ -1868,31 +1868,31 @@ namespace Core.Logic
                     break;
                 case "CCT":
                     result = new ChaveValor<Type, Type>
-                    {
-                        Chave = typeof(CctCaptchaA),
-                        Valor = null
-                    };
+                                {
+                                    Chave = typeof(CctCaptchaA),
+                                    Valor = null
+                                };
                     break;
                 case "TRTSP":
                     result = new ChaveValor<Type, Type>
-                    {
-                        Chave = typeof(CaptchaTRTSP),
-                        Valor = null
-                    };
+                                {
+                                    Chave = typeof(CaptchaTRTSP),
+                                    Valor = typeof(PredictCaptchaTRTSP)
+                                };
                     break;
                 case "TJPE":
                     result = new ChaveValor<Type, Type>
-                    {
-                        Chave = typeof(CaptchaTJPE),
-                        Valor = null
-                    };
+                                {
+                                    Chave = typeof(CaptchaTJPE),
+                                    Valor = typeof(PredictCaptchaTJPE)
+                                };
                     break;
                 case "TJMG":
                     result = new ChaveValor<Type, Type>
-                    {
-                        Chave = null,
-                        Valor = null
-                    };
+                                {
+                                    Chave = null,
+                                    Valor = null
+                                };
                     break;
                 default:
                     throw new Exception(

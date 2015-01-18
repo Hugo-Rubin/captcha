@@ -104,6 +104,8 @@
     <Compile Include="Predict\PredictCaptchaCRJAzul.cs" />
     <Compile Include="GraphSearch.cs" />
     <Compile Include="Predict\PredictCaptchaRF3.cs" />
+    <Compile Include="Predict\PredictCaptchaTJPE.cs" />
+    <Compile Include="Predict\PredictCaptchaTRTSP.cs" />
     <Compile Include="Separacao\ColorFillingSegmentation2.cs" />
     <Compile Include="RemocaoFundo\Erosion.cs" />
     <Compile Include="Predict\Abstract\Predict.cs" />
