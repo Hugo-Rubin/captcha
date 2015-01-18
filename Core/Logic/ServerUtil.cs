@@ -1880,6 +1880,13 @@ namespace Core.Logic
                         Valor = null
                     };
                     break;
+                case "TJPE":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = typeof(CaptchaTJPE),
+                        Valor = null
+                    };
+                    break;
                 default:
                     throw new Exception(
                         "Captcha não implementado ou não especificado em Bll.ServerUtil.GetTypeCaptchaByID!");

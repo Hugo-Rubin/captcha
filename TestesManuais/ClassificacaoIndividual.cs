@@ -195,9 +195,12 @@ namespace TestesManuais
                 var files = di.GetFiles("*.png");
                 for (var c = 0; c < txt.Length; c++)
                 {
-                    File.Copy(files[c].FullName,
-                              pastaRede + NomePasta(txt[c]) + @"\" + captchaFiles[index].Name.Split('.')[0] + "-" +
-                              files[c].Name, true);
+                    if (c < files.Count())
+                    {
+                        File.Copy(files[c].FullName,
+                                  pastaRede + NomePasta(txt[c]) + @"\" + captchaFiles[index].Name.Split('.')[0] + "-" +
+                                  files[c].Name, true);
+                    }
                 }
             }
 
