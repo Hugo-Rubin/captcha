@@ -120,6 +120,7 @@
     <None Include="Web References\WS_SI\ocr.disco" />
     <None Include="Web References\WS_SP\ocr.disco" />
     <Content Include="Web References\WS_RF3\ocr.disco" />
+    <None Include="Web References\WS_TJPE\ocr.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -144,6 +145,11 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\WS_TJPE\ocr.wsdl" />
+    <Content Include="Web References\WS_TJPE\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gateway.asmx.cs">
@@ -214,6 +220,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\WS_TJPE\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Logic\Logic.csproj">
@@ -240,6 +251,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:13502/ocr.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_TJPE\</RelPath>
+      <UpdateFromURL>http://localhost:13502/ocr.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebGateway_WS_TJPE_OCRTJPE</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:1770/ocr.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\WS_RF\</RelPath>

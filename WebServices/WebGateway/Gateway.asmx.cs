@@ -24,6 +24,7 @@ using WebGateway.WS_RF3;
 using WebGateway.WS_RJ;
 using WebGateway.WS_SI;
 using WebGateway.WS_SP;
+using WebGateway.WS_TJPE;
 
 namespace WebGateway
 {
@@ -52,7 +53,8 @@ namespace WebGateway
                 {"CRJv", ConsigRJ},
                 {"CAM", ConsigAeronautica},
                 {"CA", ConsigAeronautica},
-                {"CM", ConsigMarinha}
+                {"CM", ConsigMarinha},
+                {"TJPE", TribunalJusticaPE}
             };
         }
 
@@ -280,6 +282,13 @@ namespace WebGateway
         private string ConsigMarinha(Bitmap imagem, string token)
         {
             var ws = new OCRCM();
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
+        }
+
+        private string TribunalJusticaPE(Bitmap imagem, string token)
+        {
+            var ws = new OCRTJPE();
             var rawImage = imagem.ToByteArray(ImageFormat.Png);
             return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
