@@ -9,7 +9,7 @@ namespace TestesManuais
 {
     public partial class TreinamentoRede : Form
     {
-        private const string rootDirectory = @"C:\OCR\Testes\RF\Rede";
+        private const string rootDirectory = @"E:\OCR\Testes\TJPE\Rede\";
 
         public TreinamentoRede()
         {
@@ -20,11 +20,13 @@ namespace TestesManuais
         {
             var dicio = new[]
                             {
-                                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-                                'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                                'U', 'V', 'W', 'X', 'Y', 'Z'
+                                '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'b' ,'B', 'c',
+                                'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'j', 'J',
+                                'k', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'q', 'Q', 'r',
+                                'R', 's', 't', 'T', 'u', 'U', 'v', 'w', 'W', 'x', 'y', 'Y', 'z'
                             };
+            
+            bool brk = false;
 
             var parent = new DirectoryInfo(rootDirectory); // diretório pai
             ServerUtil.ValidatePath(parent.FullName);
@@ -68,14 +70,28 @@ namespace TestesManuais
                     }
                     //s.Append(string.Format("{0};", m[0, k]));
 
-                    s.Append((Array.IndexOf(dicio, char.ToUpper(dir.Name[0])) + 1) + ";\n");
-                    //s.Append((Array.IndexOf(dicio, dir.Name[0]) + 1) + ";\n");
+                    //int index = (Array.IndexOf(dicio, char.ToUpper(dir.Name[0])) + 1); // Caso o dicionário só use letras maiúsculas...
+                    int index = (Array.IndexOf(dicio, dir.Name[0]) + 1); // ...caso contrário.
+
+                    if (index == 0)
+                    {
+                        MessageBox.Show("O nome da pasta " + dir.Name[0] + " não foi encontrado no dicionário. Verifique se está usando o código de letras maiúsculas com um dicionário de letras minúsculas.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        brk = true;
+                        break;
+                    }
+                    
+                    s.Append(index + ";\n");
 
                     s.Remove(s.Length - 1, 1);
                     if (i.Name != imagens[imagens.Length - 1].Name)
                     {
                         s.AppendLine();
                     }
+                }
+
+                if (brk)
+                {
+                    break;
                 }
 
                 var sw = new StreamWriter(vImg);

@@ -1887,6 +1887,13 @@ namespace Core.Logic
                         Valor = null
                     };
                     break;
+                case "TJMG":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = null,
+                        Valor = null
+                    };
+                    break;
                 default:
                     throw new Exception(
                         "Captcha não implementado ou não especificado em Bll.ServerUtil.GetTypeCaptchaByID!");
