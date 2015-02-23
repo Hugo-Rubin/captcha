@@ -41,3 +41,4 @@ namespace Core.Logic.Predict
     }
 
 }
+

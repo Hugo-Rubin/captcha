@@ -458,6 +458,27 @@ namespace Core.Logic.Utils
             return imgArray;
         }
 
+        public static ImgArray ApagarMargem(this ImgArray img, Byte cor = 255)
+        {
+            for (int y = 0; y < img.Height; y += img.Height - 1)
+            {
+                for (int x = 0; x < img.Width; x++)
+                {
+                    img.SetPixel(x, y, Color.FromArgb(cor, cor, cor));
+                }
+            }
+
+            for (int y = 0; y < img.Height; y++)
+            {
+                for (int x = 0; x < img.Width; x += img.Width - 1)
+                {
+                    img.SetPixel(x, y, Color.FromArgb(cor, cor, cor));
+                }
+            }
+
+            return img;
+        }
+
         public static void Populate<T>(this T[] arr, T value)
         {
             for (int i = 0; i < arr.Length; i++)

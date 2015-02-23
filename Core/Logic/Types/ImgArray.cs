@@ -33,6 +33,14 @@ namespace Core.Logic.Types
             imgArray = bmpSourceBlackAndWhite.PixelIntensityByte();
         }
 
+        public ImgArray(Bitmap bmpSourceBlackAndWhite, bool isGrayscale, byte threshold)
+        {
+            width = bmpSourceBlackAndWhite.Width;
+            height = bmpSourceBlackAndWhite.Height;
+            length = width * height;
+            imgArray = bmpSourceBlackAndWhite.PixelIntensityByte(isGrayscale, threshold);
+        }
+
         public ImgArray(ImgArray imgSource)
         {
             width = imgSource.Width;

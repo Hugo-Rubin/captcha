@@ -185,7 +185,7 @@ namespace Core.Common.Extensions
             return m;
         }
 
-        public static byte[] PixelIntensityByte(this Bitmap img, bool grayscale = false, int colorThreshold = 127)
+        public static byte[] PixelIntensityByte(this Bitmap img, bool grayscale = false, byte colorThreshold = 127)
         {
             var result = new byte[img.Height * img.Width];
             var controller = 0;

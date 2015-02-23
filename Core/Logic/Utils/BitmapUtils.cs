@@ -86,6 +86,81 @@ namespace Core.Logic.Utils
         }
 
         /// <summary>
+        /// Mantém apenas os pixels com a cor (RGB) passada por parâmetro na imagem, apagando todos os outros.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static ImgArray KeepColor(this Bitmap origem, Color cor)
+        {
+            var destino = new ImgArray(origem.Width, origem.Height);
+
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (c == cor)
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return destino;
+        }
+
+        /// <summary>
+        /// Mantém apenas os pixels com as cores (RGB) passadas por parâmetro na imagem, apagando todos os outros.
+        /// </summary>
+        /// <param name="cores"></param>
+        /// <returns></returns>
+        public static ImgArray KeepColors(this Bitmap origem, List<Color> cores)
+        {
+            var destino = new ImgArray(origem.Width, origem.Height);
+            
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (cores.Contains(c))
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return destino;
+        }
+
+        /// <summary>
+        /// Mantém apenas os pixels com as cores (RGB) passadas por parâmetro na imagem, apagando todos os outros.
+        /// </summary>
+        /// <param name="cores"></param>
+        /// <returns></returns>
+        public static Bitmap KeepColorsBMP(this Bitmap origem, List<Color> cores)
+        {
+            var destino = new Bitmap(origem.Width, origem.Height).InserirFundoBranco();
+
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (cores.Contains(c))
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return destino;
+        }
+
+
+        /// <summary>
         /// Mantém apenas os pixels com a cor igual ou menor (RGB) que a passada por parâmetro na imagem, apagando todos os outros.
         /// </summary>
         /// <param name="r"></param>

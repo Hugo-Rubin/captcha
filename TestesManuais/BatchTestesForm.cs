@@ -840,23 +840,23 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var images = new DirectoryInfo(@"E:\OCR\Testes\TRTSP").GetFiles("*.png");
-            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\TRTSP\SemFundo\");
-            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\TRTSP\Separadas\");
-            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\TRTSP\Rede\");
+            var images = new DirectoryInfo(@"E:\OCR\Testes\PJE").GetFiles("*.png");
+            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\PJE\SemFundo\");
+            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\PJE\Separadas\");
+            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\PJE\Rede\");
 
             foreach (var imagem in images)
             {
                 Bitmap source = (Bitmap)Image.FromFile(imagem.FullName);
-                Rectangle areaValida = new Rectangle(1, 1, source.Width-3, source.Height-2);
-                source = source.CropRectangle(areaValida);
+                //Rectangle areaValida = new Rectangle(1, 1, source.Width-3, source.Height-2);
+                //source = source.CropRectangle(areaValida);
                 //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-                CaptchaTRTSP crf = new CaptchaTRTSP(source);
+                CaptchaPJE crf = new CaptchaPJE(source);
 
                 crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
-                var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
+                /*var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
                 var letras = crf.GetCaracteres();
 
                 int i = 0;
@@ -864,7 +864,7 @@ namespace TestesManuais
                 {
                     letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + "-" + i++ + ".png");
                     letra.Save(currentDir.FullName + @"\" + i++ + ".png");
-                }
+                }*/
             }
 
         }

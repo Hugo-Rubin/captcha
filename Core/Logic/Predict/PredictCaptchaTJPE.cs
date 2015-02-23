@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Core.Logic.Predict.Abstract;
 using Core.Logic.Captchas;
+=======
+﻿using Core.Logic.Predict.Abstract;
+>>>>>>> E-SAJ e PJE quebrados. Alguns ajustes ainda precisam ser feitos.
 
 namespace Core.Logic.Predict
 {
@@ -40,3 +44,4 @@ namespace Core.Logic.Predict
         }
     }
 }
+

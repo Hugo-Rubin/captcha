@@ -85,10 +85,12 @@
     <Compile Include="Captchas\CaptchaCA.cs" />
     <Compile Include="Captchas\CaptchaCM.cs" />
     <Compile Include="Captchas\CaptchaCRJ.cs" />
+    <Compile Include="Captchas\CaptchaPJE.cs" />
     <Compile Include="Captchas\CaptchaRF3.cs" />
     <Compile Include="Captchas\CaptchaTJPE.cs" />
     <Compile Include="Captchas\CaptchaTRTSP.cs" />
     <Compile Include="Captchas\CctCaptchaA.cs" />
+    <Compile Include="Captchas\CaptchaESAJ.cs" />
     <Compile Include="Filtros\GringoFilter.cs" />
     <Compile Include="Filtros\GringoFilterType.cs" />
     <Compile Include="ICacheable.cs" />
