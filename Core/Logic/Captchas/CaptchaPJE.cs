@@ -33,7 +33,7 @@ namespace Core.Logic.Captchas
 
         public override int NumeroMinimoDeLetras
         {
-            get { return 5; }
+            get { return 6; }
         }
 
         public override Point TamanhoImagemLetra
@@ -50,7 +50,8 @@ namespace Core.Logic.Captchas
             letras.Add(this.ImgArray.GetSegment(new Rectangle(17, 0, 15, this.ImgArray.Height)));
             letras.Add(this.ImgArray.GetSegment(new Rectangle(33, 0, 15, this.ImgArray.Height)));
             letras.Add(this.ImgArray.GetSegment(new Rectangle(49, 0, 15, this.ImgArray.Height)));
-            letras.Add(this.ImgArray.GetSegment(new Rectangle(65, 0, 14, this.ImgArray.Height)));
+            letras.Add(this.ImgArray.GetSegment(new Rectangle(65, 0, 15, this.ImgArray.Height)));
+            letras.Add(this.ImgArray.GetSegment(new Rectangle(81, 0, 15, this.ImgArray.Height)));
 
             return letras.CortarECentralizarTodos(TamanhoImagemLetra.X, TamanhoImagemLetra.Y);
         }
@@ -87,7 +88,7 @@ namespace Core.Logic.Captchas
                 }
             }
 
-            return img.GetSegment(new Rectangle(12, 13, 78, 22)).ToBitmap(); // Corta a imagem nas bordas do texto
+            return img.GetSegment(new Rectangle(12, 13, 94, 22)).ToBitmap(); // Corta a imagem nas bordas do texto
         }
 
 
