@@ -7,25 +7,42 @@ namespace Core.Logic.Tratamento
     public class Neighbors
     {
         private int p2;
-
+        public Point p2Position;
+        
         private int p3;
+        public Point p3Position;
 
         private int p4;
+        public Point p4Position;
 
         private int p5;
+        public Point p5Position;
 
         private int p6;
+        public Point p6Position;
 
         private int p7;
+        public Point p7Position;
 
         private int p8;
+        public Point p8Position;
 
         private int p9;
+        public Point p9Position;
 
         public Neighbors(ImgArray img, Point p1, bool invertValues = true)
         {
             var x = p1.X;
             var y = p1.Y;
+
+            p2Position = new Point(x, y - 1);
+            p3Position = new Point(x + 1, y - 1);
+            p4Position = new Point(x + 1, y);
+            p5Position = new Point(x + 1, y + 1);
+            p6Position = new Point(x, y + 1);
+            p7Position = new Point(x - 1, y + 1);
+            p8Position = new Point(x - 1, y);
+            p9Position = new Point(x - 1, y - 1);
 
             if (invertValues)
             {

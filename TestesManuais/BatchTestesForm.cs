@@ -840,10 +840,10 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var images = new DirectoryInfo(@"E:\OCR\Testes\PJE").GetFiles("*.png");
-            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\PJE\SemFundo\");
-            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\PJE\Separadas\");
-            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\PJE\Rede\");
+            var images = new DirectoryInfo(@"E:\OCR\Testes\ESAJ").GetFiles("*.png");
+            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\ESAJ\SemFundo\");
+            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\ESAJ\Separadas\");
+            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\ESAJ\Rede\");
 
             foreach (var imagem in images)
             {
@@ -852,9 +852,9 @@ namespace TestesManuais
                 //source = source.CropRectangle(areaValida);
                 //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-                CaptchaPJE crf = new CaptchaPJE(source);
+                CaptchaESAJ crf = new CaptchaESAJ(source);
 
-                crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
+                //crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
                 var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
                 var letras = crf.GetCaracteres();

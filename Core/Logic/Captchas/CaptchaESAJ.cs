@@ -16,6 +16,10 @@ namespace Core.Logic.Captchas
 {
     public class CaptchaESAJ : Captcha
     {
+        private const int EspessuraMaximaDoRisco = 1;
+        private readonly List<Point> colToErase = new List<Point>();
+        private int sentido;
+
         public CaptchaESAJ(String fileName)
             : base(fileName)
         {
@@ -74,13 +78,13 @@ namespace Core.Logic.Captchas
 
             if (posTratamento)
             {
-                img = LocalizarERemoverRiscos(img);
+                img = RemoverRiscos(img);
             }
 
             return img.ToBitmap();
         }
 
-        private ImgArray LocalizarERemoverRiscos(ImgArray source)
+        private ImgArray RemoverRiscos(ImgArray source)
         {
             List<Point> pontosPretos = VarrerBordas(source);
 
@@ -89,17 +93,61 @@ namespace Core.Logic.Captchas
                 return source;
             }
 
-            ImgArray img = new ImgArray(source.Width, source.Height);
+            ImgArray img = source.Clone();
 
-            foreach (var p in pontosPretos)
+            foreach (var pInicio in pontosPretos)
             {
-                int x = p.X;
-                int y = p.Y;
+                int x = pInicio.X;
+                int y = pInicio.Y;
 
-                if (source.GetPixel(x, y).IsBlackPixel())
+                if (img.GetPixel(x, y).IsBlackPixel())
                 {
-                    Neighbors n = new Neighbors(source, p);
-                    // Usar Graph para percorrer o caminho do traço e apagar os pixels
+                    // Pegar o angulo da reta entre o ponto p com todos os outros pontos pi em relação ao eixo de origem
+                    List<ChaveValor<Point, double>> angulos = new List<ChaveValor<Point, double>>();
+                    var vertices = pontosPretos.Where(p => !pontosPretos.Any(pv => pv == pInicio)); // retorno uma lista com todos os pontos com exceção do ponto atual
+
+                    #region Pego o ângulo da reta com seu eixo
+
+                    Point p2 = Ponto2ParaMedirAngulo(img, pInicio);
+                    var eixo = EixoDoPonto(pInicio, img.Width, img.Height);
+
+                    double anguloComEixo = AnguloEntreDuasRetas(pInicio, p2, pInicio, eixo == 1 ? new Point(x + 1, y) : new Point(x, y + 1));
+
+                    if (anguloComEixo > 90.0)
+                    {
+                        anguloComEixo = Math.Abs(180.0 - anguloComEixo);
+                    }
+
+                    #endregion
+
+                    #region Pego o ângulo da reta formado pelo ponto atual e cada um dos outros pontos em relação ao eixo X
+
+                    foreach (var v in vertices)
+                    {
+                        // Retorna uma lista com o ângulo entre o ponto P e todos os outros pontos das bordas em relação ao eixo X
+                        var angV = Math.Abs(Math.Atan2(v.Y - y, v.X - x) * ((double)180 / Math.PI));
+
+                        if (angV > 90.0)
+                        {
+                            angV = Math.Abs(180.0 - angV);
+                        }
+
+                        angulos.Add(new ChaveValor<Point, double> { Chave = v, Valor = angV });
+                        // Para medir em relação à outra reta (como o eixo Y por exemplo), fazer:
+                        // Double Angle = Math.Atan2(y2 - y1, x2 - x1) - Math.Atan2(y4 - y3, x4 - x3);
+                    }
+
+                    #endregion
+
+                    Point pFim = CompararAngulos(angulos, anguloComEixo);
+
+                    ImgArray linhaImg = PintarLinha(img, pInicio, pFim);
+
+                    // Apagar linha na imagem original seguindo os pontos pretos em linhaImg, não apagar caso na imagem original os vizinhos de cima ou de baixo também forem pretos
+
+                    img = ApagarRisco(img, linhaImg.ToList());
+
+                    //RemoverLinhas(source); // Provavelmente preciso girar a imagem para que o pixel q é passado fique sempre à esquerda. Fazer testes para descobrir.
                 }
             }
 
@@ -139,7 +187,252 @@ namespace Core.Logic.Captchas
                 }
             }
 
-            return pontos;
+            return EliminarPontosDesnecessarios(pontos, img);
+        }
+
+        /// <summary>
+        /// Remove os pontos com mais de um vizinho para que fiquem apenas os pontos das extremidades da retas
+        /// </summary>
+        /// <param name="pontos"></param>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        private List<Point> EliminarPontosDesnecessarios(List<Point> pontos, ImgArray img)
+        {
+            List<Point> cPontos = new List<Point>();
+
+            foreach (var p in pontos)
+            {
+                Neighbors n = new Neighbors(img, p);
+                if (n.ToStack().Sum() == 1)
+                {
+                    cPontos.Add(p);
+                }
+            }
+
+            return cPontos;
+        }
+
+        private ImgArray ApagarRisco(ImgArray source, List<Point> linha)
+        {
+            ImgArray img = source.Clone();
+
+            foreach (var ponto in linha)
+            {
+                int x = ponto.X;
+                int y = ponto.Y;
+
+                if (y > 0 && y < img.Height - 1)
+                {
+                    if (!img.GetPixel(x, y - 1).IsBlackPixel() && !img.GetPixel(x, y + 1).IsBlackPixel())
+                    {
+                        img.SetPixel(x, y, Color.White);
+                    }
+                }
+                else
+                {
+                    img.SetPixel(x, y, Color.White);
+                }
+            }
+
+            return img;
+        }
+
+        /*private ImgArray RemoverLinhas(ImgArray img)
+        {
+            var thin = new ThinningZhangSuen();
+            var thinImg = thin.Apply(img);
+
+            var gs = new GraphSearch(thinImg);
+            gs.FindGraphs();
+            var paths = gs.GetLongestPaths();
+
+            var imgCopy = new ImgArray(img.Width, img.Height);
+
+            var cols = (from graph in paths
+                        from point in graph
+                        where GetColThickness(img, point) <= EspessuraMaximaDoRisco
+                        select point).Count();
+
+            if (cols > 0)
+            {
+                return EraseCol(img);
+            }
+
+            return img;
+        }
+
+        private int GetColThickness(ImgArray img, Point p)
+        {
+            colToErase.Clear();
+            var c = img.GetPixel(p.X, p.Y);
+            var count = 0;
+            var point = p;
+
+            while (c.IsBlackPixel())
+            {
+                count++;
+                colToErase.Add(point);
+                c = img.GetPixel(point.X, ++point.Y);
+            }
+
+            point = new Point(p.X, p.Y - 1);
+            c = img.GetPixel(point.X, point.Y);
+
+            while (c.IsBlackPixel())
+            {
+                count++;
+                colToErase.Add(point);
+                c = img.GetPixel(point.X, --point.Y);
+            }
+
+            return count;
+        }
+
+        private ImgArray EraseCol(ImgArray img)
+        {
+            foreach (var p in colToErase)
+            {
+                img.SetPixel(p.X, p.Y, Color.White);
+            }
+
+            colToErase.Clear();
+            return img;
+        }*/
+
+        private Point CompararAngulos(List<ChaveValor<Point, double>> angulos, double anguloReta)
+        {
+            double anguloMaisProximo = angulos[0].Valor;
+            Point pixel = new Point();
+
+            //int closest = list.Aggregate((x, y) => Math.Abs(x - number) < Math.Abs(y - number) ? x : y);
+
+            for (int i = 0; i < angulos.Count; ++i)
+            {
+                if (Math.Abs(angulos[i].Valor - anguloReta) < Math.Abs(anguloMaisProximo - anguloReta))
+                {
+                    anguloMaisProximo = angulos[i].Valor;
+                    pixel = angulos[i].Chave;
+                }
+            }
+
+            return pixel;
+        }
+
+        private Point Ponto2ParaMedirAngulo(ImgArray img, Point origem)
+        {
+            int nivelMaximo = 2; // numero de linhas do traço que desejamos subir/descer até chegarmos na posição desejada para pedir o ângulo em relação à um dos eixos.
+            int count = 0;
+            bool direcaoDireita; // Se a linha estiver indo para a esquerda = false, se estiver indo para a direita = true
+
+            Neighbors n = new Neighbors(img, origem);
+
+            if (n.P3 == 1 || n.P4 == 1 || n.P5 == 1)
+            {
+                direcaoDireita = true;
+            }
+            else
+            {
+                direcaoDireita = false;
+            }
+
+            while (count < nivelMaximo)
+            {
+                if (direcaoDireita)
+                {
+                    if (n.P4 == 1)
+                    {
+                        origem = n.p4Position;
+                    }
+
+                    else if (n.P3 == 1)
+                    {
+                        origem = n.p3Position;
+                        count++;
+                    }
+
+                    else if (n.P5 == 1)
+                    {
+                        origem = n.p5Position;
+                        count++;
+                    }
+                }
+
+                else
+                {
+                    if (n.P8 == 1)
+                    {
+                        origem = n.p8Position;
+                    }
+
+                    else if (n.P7 == 1)
+                    {
+                        origem = n.p7Position;
+                        count++;
+                    }
+
+                    else if (n.P9 == 1)
+                    {
+                        origem = n.p9Position;
+                        count++;
+                    }
+                }
+
+                n = new Neighbors(img, origem);
+            }
+
+            return origem;
+        }
+
+        /// <param name="p1">Ponto 1 da primeira reta</param>
+        /// <param name="p2">Ponto 2 da primeira reta</param>
+        /// <param name="p3">Ponto 1 da segunda reta</param>
+        /// <param name="p4">Ponto 2 da segunda reta</param>
+        /// <returns></returns>
+        private double AnguloEntreDuasRetas(Point p1, Point p2, Point p3, Point p4)
+        {
+            int x1 = p1.X;
+            int y1 = p1.Y;
+            int x2 = p2.X;
+            int y2 = p2.Y;
+            int x3 = p3.X;
+            int y3 = p3.Y;
+            int x4 = p4.X;
+            int y4 = p4.Y;
+
+            return Math.Abs(Math.Atan2(y2 - y1, x2 - x1) - Math.Atan2(y4 - y3, x4 - x3)) * ((double)180 / Math.PI);
+        }
+
+        // Retorna 1 caso o ponto esteja no eixo X (topo ou base), 2 caso esteja no eixo Y (margem esquerda ou direita)
+        private int EixoDoPonto(Point ponto, int largura, int altura)
+        {
+            if (ponto.X == 0 || ponto.X == largura - 1) // eixo Y
+            {
+                return 2;
+            }
+            else if (ponto.Y == 0 || ponto.Y == altura - 1) // eixo X
+            {
+                return 1;
+            }
+
+            return 0;
+        }
+
+        private ImgArray PintarLinha(ImgArray source, Point p1, Point p2)
+        {
+            Bitmap result = new Bitmap(source.Width, source.Height);
+            Pen caneta = new Pen(Color.Black, 1);
+
+            int x1 = p1.X;
+            int y1 = p1.Y;
+            int x2 = p2.X;
+            int y2 = p2.Y;
+
+            using (var graphics = Graphics.FromImage(result))
+            {
+                graphics.DrawLine(caneta, x1, y1, x2, y2);
+            }
+
+            return new ImgArray(result);
         }
 
 

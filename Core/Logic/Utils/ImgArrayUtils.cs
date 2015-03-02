@@ -486,5 +486,24 @@ namespace Core.Logic.Utils
                 arr[i] = value;
             }
         }
+
+        public static List<Point> ToList(this ImgArray img)
+        {
+            List<Point> pixelsPretos = new List<Point>();
+
+            for (int y = 0; y < img.Height; y++)
+            {
+                for (int x = 0; x < img.Width; x++)
+                {
+                    if (img.GetPixel(x, y).IsBlackPixel())
+                    {
+                        pixelsPretos.Add(new Point(x, y));
+                    }
+                }
+            }
+            
+            return pixelsPretos;
+        }
+
     }
 }
