@@ -97,7 +97,7 @@ namespace Core.Logic.Captchas
 
             //foreach (var pInicio in pontosPretos)
             //{
-            while(pontosPretos.Count > 1)
+            while (pontosPretos.Count > 1)
             {
                 var pInicio = pontosPretos.FirstOrDefault();
 
@@ -146,17 +146,19 @@ namespace Core.Logic.Captchas
 
                 Point pFim = CompararAngulos(angulos, anguloComEixo);
 
-                ImgArray linhaImg = PintarLinha(img, pInicio, pFim);
+                ImgArray linhaImg = PintarLinha(img.Width, img.Height, pInicio, pFim);
 
                 // Apagar linha na imagem original seguindo os pontos pretos em linhaImg, não apagar caso na imagem original os vizinhos de cima ou de baixo também forem pretos
 
-                img = ApagarRisco(img, linhaImg.ToList());
+                var linhaImgLista = ReposicionarLinha(linhaImg.ToList(), img);
+
+                img = ApagarRisco(img, linhaImgLista);
                 pontosPretos.Remove(pInicio);
                 pontosPretos.Remove(pFim);
                 //RemoverLinhas(source); // Provavelmente preciso girar a imagem para que o pixel q é passado fique sempre à esquerda. Fazer testes para descobrir.
             }
-            
-            return img.RemoverRuidos(4);
+
+            return LimparBordas(img).RemoverRuidos(4);
         }
 
         /// <summary>
@@ -241,68 +243,6 @@ namespace Core.Logic.Captchas
 
             return img;
         }
-
-        /*private ImgArray RemoverLinhas(ImgArray img)
-        {
-            var thin = new ThinningZhangSuen();
-            var thinImg = thin.Apply(img);
-
-            var gs = new GraphSearch(thinImg);
-            gs.FindGraphs();
-            var paths = gs.GetLongestPaths();
-
-            var imgCopy = new ImgArray(img.Width, img.Height);
-
-            var cols = (from graph in paths
-                        from point in graph
-                        where GetColThickness(img, point) <= EspessuraMaximaDoRisco
-                        select point).Count();
-
-            if (cols > 0)
-            {
-                return EraseCol(img);
-            }
-
-            return img;
-        }
-
-        private int GetColThickness(ImgArray img, Point p)
-        {
-            colToErase.Clear();
-            var c = img.GetPixel(p.X, p.Y);
-            var count = 0;
-            var point = p;
-
-            while (c.IsBlackPixel())
-            {
-                count++;
-                colToErase.Add(point);
-                c = img.GetPixel(point.X, ++point.Y);
-            }
-
-            point = new Point(p.X, p.Y - 1);
-            c = img.GetPixel(point.X, point.Y);
-
-            while (c.IsBlackPixel())
-            {
-                count++;
-                colToErase.Add(point);
-                c = img.GetPixel(point.X, --point.Y);
-            }
-
-            return count;
-        }
-
-        private ImgArray EraseCol(ImgArray img)
-        {
-            foreach (var p in colToErase)
-            {
-                img.SetPixel(p.X, p.Y, Color.White);
-            }
-
-            colToErase.Clear();
-            return img;
-        }*/
 
         private Point CompararAngulos(List<ChaveValor<Point, double>> angulos, double anguloReta)
         {
@@ -420,9 +360,9 @@ namespace Core.Logic.Captchas
             }
         }
 
-        private ImgArray PintarLinha(ImgArray source, Point p1, Point p2)
+        private ImgArray PintarLinha(int width, int height, Point p1, Point p2)
         {
-            Bitmap result = new Bitmap(source.Width, source.Height).InserirFundoBranco();
+            Bitmap result = new Bitmap(width, height).InserirFundoBranco();
             Pen caneta = new Pen(Color.Black, 1);
 
             int x1 = p1.X;
@@ -436,6 +376,77 @@ namespace Core.Logic.Captchas
             }
 
             return new ImgArray(result);
+        }
+
+        private List<Point> ReposicionarLinha(List<Point> linha, ImgArray imgCaptcha)
+        {
+            int[] erro = new int[9];
+            List<Point>[] linhasDeslocadas = new List<Point>[9];
+
+            int x = 0;
+            int y = 0;
+
+            linhasDeslocadas[0] = linha;
+
+            for (int i = 0; i < 9; i++)
+            {
+                int[] deslocamento = Deslocar(i);
+
+                if (i < 8)
+                {
+                    linhasDeslocadas[i + 1] = new List<Point>();
+                }
+
+                for (int p = 0; p < linhasDeslocadas[i].Count; p++)
+                {
+                    x = linhasDeslocadas[i][p].X;
+                    y = linhasDeslocadas[i][p].Y;
+
+                    if (x < 0 || x > imgCaptcha.Width - 1 || y < 0 || y > imgCaptcha.Height - 1)
+                    {
+                        continue;
+                    }
+
+                    if (!imgCaptcha.GetPixel(x, y).IsBlackPixel())
+                    {
+                        erro[i]++;
+                    }
+
+                    if (i < 8 && deslocamento != null)
+                    {
+                        linhasDeslocadas[i + 1].Add(new Point(linha[p].X + deslocamento[0], linha[p].Y + deslocamento[1]));
+                    }
+                }
+            }
+
+            return linhasDeslocadas[Array.IndexOf(erro, erro.Min())];
+        }
+
+        /// <summary>
+        /// Recebe a posição da vizinhança e retorna o deslocamento dos eixos X e Y
+        /// </summary>
+        /// <param name="posicao"></param>
+        /// <returns></returns>
+        private int[] Deslocar(int posicao)
+        {
+            switch (posicao)
+            {
+                case 0: return new int[] { -1, -1 };
+                case 1: return new int[] { 0, -1 };
+                case 2: return new int[] { 1, -1 };
+                case 3: return new int[] { -1, 0 };
+                case 4: return new int[] { 1, 0 };
+                case 5: return new int[] { -1, 1 };
+                case 6: return new int[] { 0, 1 };
+                case 7: return new int[] { 1, 1 };
+                default: return null;
+            }
+        }
+
+        private ImgArray LimparBordas(ImgArray img)
+        {
+            // Froteiras da parte onde fica o texto na imagem
+            return img.GetSegment(new Rectangle(9, 13, 98, 19)).CortarECentralizar(img.Width, img.Height);
         }
 
 

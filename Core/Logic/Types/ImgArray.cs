@@ -74,6 +74,24 @@ namespace Core.Logic.Types
             imgArray.Init<byte>(1);
         }
 
+        public ImgArray(List<Point> blackPixels, int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            length = width * height;
+            imgArray = new byte[length];
+            imgArray.Init<byte>(1);
+
+            foreach (var pixel in blackPixels)
+            {
+                var idx = pixel.X * height + pixel.Y;
+                if (idx < imgArray.Length)
+                {
+                    imgArray[idx] = 0;
+                }
+            }
+        }
+
         public int Width
         {
             get { return width; }
@@ -208,7 +226,7 @@ namespace Core.Logic.Types
         public void SetPixel(int x, int y, Color cor)
         {
             var idx = x * height + y;
-            if (idx < imgArray.Length)
+            if (idx < imgArray.Length && idx > 0)
             {
                 var c = ByteFromColor(cor);
                 imgArray[idx] = c;

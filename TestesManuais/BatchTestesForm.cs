@@ -502,7 +502,7 @@ namespace TestesManuais
         {
             /// Quebra CAPTCHA A:
 
-            Bitmap bmp = (Bitmap) Image.FromFile(@"C:\Users\Hugo\Desktop\a3.png");
+            Bitmap bmp = (Bitmap)Image.FromFile(@"C:\Users\Hugo\Desktop\a3.png");
             ImgArray img = new ImgArray(bmp.KeepGrayscale());
 
             Erosion er = new Erosion(img.InvertColors());
@@ -513,7 +513,7 @@ namespace TestesManuais
             Bitmap bmp2 = (Bitmap)Image.FromFile(@"C:\Users\Hugo\Desktop\b2.png");
 
             ImgArray img2 = new ImgArray(bmp2.Width, bmp2.Height);
-            
+
             for (int y = 0; y < bmp2.Height; y++)
             {
                 for (int x = 0; x < bmp2.Width; x++)
@@ -523,23 +523,23 @@ namespace TestesManuais
                     {
                         //if (c.B < 100)
                         //{
-                            byte threshold = (byte)(c.R - 15);
-                            if (threshold > c.G && threshold > c.B)
-                            {
-                                img2.SetPixel(x, y, Color.Black);
-                            }
+                        byte threshold = (byte)(c.R - 15);
+                        if (threshold > c.G && threshold > c.B)
+                        {
+                            img2.SetPixel(x, y, Color.Black);
+                        }
                         //}
                     }
                 }
             }
-            
+
             img2.Save(@"C:\Users\Hugo\Desktop\b2-post.png");
 
             /// Quebra CAPTCHA C:
 
             Bitmap bmp3 = (Bitmap)Image.FromFile(@"C:\Users\Hugo\Desktop\c2.png");
             ImgArray img3 = new ImgArray(bmp3.KeepColorEqualOrLower(60, 60, 60));
-            
+
             ForwardDerivative fd = new ForwardDerivative();
             fd.Apply(img3, true, false);
             fd.Apply(img3, true, false).RemoverRuidos(15);
@@ -854,9 +854,9 @@ namespace TestesManuais
 
                 CaptchaESAJ crf = new CaptchaESAJ(source);
 
-                //crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
+                crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
-                var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
+                /*var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
                 var letras = crf.GetCaracteres();
 
                 int i = 0;
@@ -864,7 +864,7 @@ namespace TestesManuais
                 {
                     letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + "-" + i++ + ".png");
                     letra.Save(currentDir.FullName + @"\" + i++ + ".png");
-                }
+                }*/
             }
 
         }
