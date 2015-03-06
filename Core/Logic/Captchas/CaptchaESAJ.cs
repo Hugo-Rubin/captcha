@@ -18,7 +18,6 @@ namespace Core.Logic.Captchas
     {
         private const int EspessuraMaximaDoRisco = 1;
         private readonly List<Point> colToErase = new List<Point>();
-        private int sentido;
 
         public CaptchaESAJ(String fileName)
             : base(fileName)
@@ -48,8 +47,8 @@ namespace Core.Logic.Captchas
 
         public override IEnumerable<ImgArray> GetCaracteres()
         {
-            SeparacaoPadrao sp = new SeparacaoPadrao(this);
-            return sp.ColorFillingSegmentation2AndSeamCarving2(null, false).CortarECentralizarTodos(TamanhoImagemLetra.X, TamanhoImagemLetra.Y);
+            ColorFillingSegmentation2 cfs = new ColorFillingSegmentation2(this.ImgArray, 8, 18, true, false, 22);
+            return cfs.GetCaracteres().CortarECentralizarTodos(this.TamanhoImagemLetra.X, this.TamanhoImagemLetra.Y);
         }
 
         public override Bitmap RemoverFundo(Bitmap source)
@@ -88,6 +87,7 @@ namespace Core.Logic.Captchas
         {
             List<Point> pontosPretos = VarrerBordas(source);
 
+            // Caso a imagem não tenha riscos pretos esse método é chamado pois as letras são pretas, mas não há o que remover.
             if (pontosPretos.Count == 0)
             {
                 return source;
@@ -115,10 +115,10 @@ namespace Core.Logic.Captchas
 
                 double anguloComEixo = AnguloEntreDuasRetas(pInicio, p2, pInicio, sentido);
 
-                if (anguloComEixo > 90.0)
+                /*if (anguloComEixo > 90.0)
                 {
                     anguloComEixo = Math.Abs(180.0 - anguloComEixo);
-                }
+                }*/
 
                 #endregion
 
@@ -132,10 +132,10 @@ namespace Core.Logic.Captchas
                     // Retorna uma lista com o ângulo entre o ponto P e todos os outros pontos das bordas em relação ao eixo X
                     // var angV = Math.Abs(Math.Atan2(v.Y - y, v.X - x) * ((double)180 / Math.PI));
 
-                    if (angV > 90.0)
+                    /*if (angV > 90.0)
                     {
                         angV = Math.Abs(180.0 - angV);
-                    }
+                    }*/
 
                     angulos.Add(new ChaveValor<Point, double> { Chave = v, Valor = angV });
                     // Para medir em relação à outra reta (como o eixo Y por exemplo), fazer:
@@ -144,14 +144,27 @@ namespace Core.Logic.Captchas
 
                 #endregion
 
-                Point pFim = CompararAngulos(angulos, anguloComEixo);
+                Point pFim;
+                ImgArray linhaImg;
+                ChaveValor<List<Point>, bool> linhaValidada;
 
-                ImgArray linhaImg = PintarLinha(img.Width, img.Height, pInicio, pFim);
+                do
+                {
+                    pFim = CompararAngulos(angulos, anguloComEixo);
+                    linhaImg = PintarLinha(img.Width, img.Height, pInicio, pFim);
+                    linhaValidada = VerificarEReposicionarLinha(linhaImg.ToList(), img); // Apagar linha na imagem original seguindo os pontos pretos em linhaImg, não apagar caso na imagem original os vizinhos de cima ou de baixo também forem pretos
+                    
+                    if (angulos.Count == 1)
+                    {
+                        linhaValidada.Valor = true;
+                    }                    
+                    if (!linhaValidada.Valor)
+                    {
+                        angulos.Remove(angulos.Where(c => c.Chave == pFim).FirstOrDefault());
+                    }
+                } while (!linhaValidada.Valor);
 
-                // Apagar linha na imagem original seguindo os pontos pretos em linhaImg, não apagar caso na imagem original os vizinhos de cima ou de baixo também forem pretos
-
-                var linhaImgLista = ReposicionarLinha(linhaImg.ToList(), img);
-
+                List<Point> linhaImgLista = linhaValidada.Chave;
                 img = ApagarRisco(img, linhaImgLista);
                 pontosPretos.Remove(pInicio);
                 pontosPretos.Remove(pFim);
@@ -378,10 +391,11 @@ namespace Core.Logic.Captchas
             return new ImgArray(result);
         }
 
-        private List<Point> ReposicionarLinha(List<Point> linha, ImgArray imgCaptcha)
+        private ChaveValor<List<Point>, bool> VerificarEReposicionarLinha(List<Point> linha, ImgArray imgCaptcha)
         {
             int[] erro = new int[9];
             List<Point>[] linhasDeslocadas = new List<Point>[9];
+            bool linhaValida = true;
 
             int x = 0;
             int y = 0;
@@ -419,7 +433,14 @@ namespace Core.Logic.Captchas
                 }
             }
 
-            return linhasDeslocadas[Array.IndexOf(erro, erro.Min())];
+            int menorErro = erro.Min();
+            
+            if((linha.Count - menorErro) * 100 / linha.Count < 60)
+            {
+                linhaValida = false;
+            }
+
+            return new ChaveValor<List<Point>, bool> { Chave = linhasDeslocadas[Array.IndexOf(erro, menorErro)], Valor = linhaValida };
         }
 
         /// <summary>

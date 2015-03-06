@@ -9,7 +9,7 @@ namespace TestesManuais
 {
     public partial class TreinamentoRede : Form
     {
-        private const string rootDirectory = @"E:\OCR\Testes\TJPE\Rede\";
+        private const string rootDirectory = @"E:\OCR\Testes\PJE\Rede";
 
         public TreinamentoRede()
         {
@@ -20,10 +20,7 @@ namespace TestesManuais
         {
             var dicio = new[]
                             {
-                                '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'b' ,'B', 'c',
-                                'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'j', 'J',
-                                'k', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'q', 'Q', 'r',
-                                'R', 's', 't', 'T', 'u', 'U', 'v', 'w', 'W', 'x', 'y', 'Y', 'z'
+                                '1', '2', '3', '4', '5', '6', '7', '8', '9'
                             };
             
             bool brk = false;

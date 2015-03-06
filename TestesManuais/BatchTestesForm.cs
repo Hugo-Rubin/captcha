@@ -856,7 +856,7 @@ namespace TestesManuais
 
                 crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
-                /*var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
+                var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
                 var letras = crf.GetCaracteres();
 
                 int i = 0;
@@ -864,7 +864,7 @@ namespace TestesManuais
                 {
                     letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + "-" + i++ + ".png");
                     letra.Save(currentDir.FullName + @"\" + i++ + ".png");
-                }*/
+                }
             }
 
         }

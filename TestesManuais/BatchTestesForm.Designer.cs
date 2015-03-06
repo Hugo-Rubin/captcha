@@ -90,6 +90,8 @@
             "TRTSP - Tribunal Regional do Trabalho de São Paulo ",
             "TJPE - Tribunal de Justiça de Pernambuco",
             "TJMG - Tribunal de Justiça de Minas Gerais",
+            "ESAJ -  ",
+            "PJE - Processo Judiciário Eletrônico",
             "CAM - Sistema de Consignações da Aeronáutica/Marinha",
             "CA - Sistema de Consignações da Aeronáutica",
             "CM - Sistema de Consignações da Marinha",
