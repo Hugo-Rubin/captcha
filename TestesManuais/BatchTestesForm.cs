@@ -869,5 +869,11 @@ namespace TestesManuais
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //Cria pastas do alfabeto
+            ServerUtil.CriarPastas(@"E:\OCR\Testes\ESAJ\Rede");
+        }
+
     }
 }

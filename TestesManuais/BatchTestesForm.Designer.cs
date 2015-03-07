@@ -38,6 +38,7 @@
             this.btnChecarErros = new System.Windows.Forms.Button();
             this.btnSeparacao = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.lblUltimaExecucao = new System.Windows.Forms.Label();
             this.comboPadroes = new System.Windows.Forms.ComboBox();
@@ -86,18 +87,18 @@
             "NFE - Nota Fiscal Eletrônica",
             "RF - Receita Federal",
             "RF3 - Receita Federal 3",
-            "SI - Siscarga",
+            "ESAJ -  Sistema de Automação da Justiça",
+            "PJE - Processo Judiciário Eletrônico",
             "TRTSP - Tribunal Regional do Trabalho de São Paulo ",
             "TJPE - Tribunal de Justiça de Pernambuco",
             "TJMG - Tribunal de Justiça de Minas Gerais",
-            "ESAJ -  ",
-            "PJE - Processo Judiciário Eletrônico",
             "CAM - Sistema de Consignações da Aeronáutica/Marinha",
             "CA - Sistema de Consignações da Aeronáutica",
             "CM - Sistema de Consignações da Marinha",
             "CRJ - Sistema de Consignações RJ - Padrão Cinza",
             "CRJa - Sistema de Consignações RJ - Padrão Azul",
             "CRJv - Sistema de Consignações RJ - Padrão Verde",
+            "SI - Siscarga",
             "SP - São Paulo",
             "RJ - Rio de Janeiro",
             "MG - Minas Gerais",
@@ -214,6 +215,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.lblUltimaExecucao);
             this.groupBox2.Controls.Add(this.comboPadroes);
@@ -233,6 +235,16 @@
             this.groupBox2.Size = new System.Drawing.Size(672, 181);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(227, 141);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 27;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -653,5 +665,6 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button intTestsBtn;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }

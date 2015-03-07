@@ -1898,7 +1898,7 @@ namespace Core.Logic
                     result = new ChaveValor<Type, Type>
                     {
                         Chave = typeof(CaptchaESAJ),
-                        Valor = null
+                        Valor = typeof(PredictCaptchaESAJ)
                     };
                     break;
                 case "PJE":
