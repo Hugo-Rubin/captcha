@@ -72,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Deploy %28C OCR Captchas Deploy%29.pubxml" />
     <Content Include="Resources\theta1.csv" />
     <Content Include="Resources\theta2.csv" />
     <None Include="Web.Debug.config">

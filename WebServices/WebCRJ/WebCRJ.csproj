@@ -91,7 +91,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Deploy %28C OCR Captchas Deploy%29.pubxml" />
     <Content Include="Resources\azul_theta1.csv" />
     <Content Include="Resources\azul_theta2.csv" />
     <Content Include="Resources\theta1.csv" />

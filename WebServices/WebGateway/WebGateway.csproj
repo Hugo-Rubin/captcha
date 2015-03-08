@@ -63,7 +63,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Gateway.asmx" />
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Deploy %28C OCR Captchas Deploy%29.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
