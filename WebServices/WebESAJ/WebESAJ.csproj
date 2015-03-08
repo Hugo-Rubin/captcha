@@ -61,6 +61,7 @@
     <Content Include="ocr.asmx" />
     <Content Include="Resources\theta1.csv" />
     <Content Include="Resources\theta2.csv" />
+    <None Include="Properties\PublishProfiles\Deploy %28C Captcha Deploy%29.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
