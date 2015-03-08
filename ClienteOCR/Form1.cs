@@ -27,7 +27,8 @@ namespace ClienteSintegra
                 Application.DoEvents();
 
                 var servico = cbEstado.Text;
-                servico = servico.Substring(0, servico.IndexOf(" - ", StringComparison.Ordinal));
+                var idx = servico.IndexOf(" - ", StringComparison.Ordinal);
+                servico = idx > -1 ? servico.Substring(0, servico.IndexOf(" - ", StringComparison.Ordinal)) : servico;
                 var dt = DateTime.Now;
                 var resposta = consulta.ReconhecerCaptcha(servico, token.Key);
                 lblTempo.Text = String.Format("Tempo decorrido: {0} seg.", (DateTime.Now - dt).ToString(@"s\.fff"));

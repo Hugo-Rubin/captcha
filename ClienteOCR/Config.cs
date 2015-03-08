@@ -5,7 +5,7 @@ namespace ClienteSintegra
     public static class Config
     {
         private static readonly WebProxy Wp = WebProxy.GetDefaultProxy();
-        public static readonly RemoteGateway.Gateway Ws = new RemoteGateway.Gateway();
+        public static readonly Gateway.Gateway Ws = new Gateway.Gateway();
 
         static Config()
         {

@@ -58,10 +58,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseCaptchaTest.cs" />
+    <Compile Include="CaptchaESAJTest.cs" />
     <Compile Include="CaptchaNFETest.cs" />
+    <Compile Include="CaptchaPJETest.cs" />
     <Compile Include="CaptchaRFTest.cs" />
     <Compile Include="CaptchaRJTest.cs" />
     <Compile Include="CaptchaSPTest.cs" />
+    <Compile Include="CaptchaTJPETest.cs" />
+    <Compile Include="CaptchaTRTSPTest.cs" />
     <Compile Include="GringoFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CaptchaMGTest.cs" />
