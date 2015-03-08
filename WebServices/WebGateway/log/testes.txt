@@ -193,3 +193,14 @@
 29/10/2014 07:43:52 - Tester em 127.0.0.1 - RF3:  ce0sya
 29/10/2014 08:11:03 - Tester em 127.0.0.1 - RF3:  trmkxn
 29/10/2014 08:29:49 - Tester em 127.0.0.1 - RF3:  rdz3sm
+08/03/2015 01:08:38 - Tester em 127.0.0.1 - NFE:  sMX1
+08/03/2015 01:58:33 - Tester em 127.0.0.1 - ESAJ:  tSfmQ
+08/03/2015 01:58:34 - Tester em 127.0.0.1 - ESAJ:  xSwDw
+08/03/2015 02:07:54 - Tester em 127.0.0.1 - PJE:  596958
+08/03/2015 02:07:54 - Tester em 127.0.0.1 - PJE:  496268
+08/03/2015 02:08:03 - Tester em 127.0.0.1 - TRTSP:  n8ku8
+08/03/2015 02:08:03 - Tester em 127.0.0.1 - TRTSP:  v832k
+08/03/2015 02:08:07 - Tester em 127.0.0.1 - ESAJ:  tSfmQ
+08/03/2015 02:08:07 - Tester em 127.0.0.1 - ESAJ:  xSwDw
+08/03/2015 02:11:55 - Tester em 127.0.0.1 - TJPE:  endlW
+08/03/2015 02:11:57 - Tester em 127.0.0.1 - TJPE:  sWlR3
