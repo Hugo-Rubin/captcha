@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="ocr.asmx" />
     <Content Include="Resources\theta1.csv" />
     <Content Include="Resources\theta2.csv" />
     <None Include="Web.Debug.config">
@@ -70,9 +72,28 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ocr.asmx.cs">
+      <DependentUpon>ocr.asmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Common\Common.csproj">
+      <Project>{e511f63f-f352-400d-9deb-7931e3e3a2e0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Logic\Logic.csproj">
+      <Project>{adf52f5a-5091-4121-9ad7-dcbb5bd23498}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebCommon\WebCommon.csproj">
+      <Project>{4b3f3b61-db4c-4db5-ad1f-f32d541d4c90}</Project>
+      <Name>WebCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

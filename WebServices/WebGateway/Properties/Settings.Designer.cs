@@ -152,5 +152,35 @@ namespace WebGateway.Properties {
                 return ((string)(this["WebGateway_WS_TJPE_OCRTJPE"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:53835/ocr.asmx")]
+        public string WebGateway_WS_ESAJ_OCRESAJ {
+            get {
+                return ((string)(this["WebGateway_WS_ESAJ_OCRESAJ"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:53849/ocr.asmx")]
+        public string WebGateway_WS_PJE_OCRPJE {
+            get {
+                return ((string)(this["WebGateway_WS_PJE_OCRPJE"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:53850/ocr.asmx")]
+        public string WebGateway_WS_TRTSP_OCRTRTSP {
+            get {
+                return ((string)(this["WebGateway_WS_TRTSP_OCRTRTSP"]));
+            }
+        }
     }
 }

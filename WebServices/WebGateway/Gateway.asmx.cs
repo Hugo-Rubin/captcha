@@ -25,6 +25,9 @@ using WebGateway.WS_RJ;
 using WebGateway.WS_SI;
 using WebGateway.WS_SP;
 using WebGateway.WS_TJPE;
+using WebGateway.WS_ESAJ;
+using WebGateway.WS_PJE;
+using WebGateway.WS_TRTSP;
 
 namespace WebGateway
 {
@@ -54,7 +57,10 @@ namespace WebGateway
                 {"CAM", ConsigAeronautica},
                 {"CA", ConsigAeronautica},
                 {"CM", ConsigMarinha},
-                {"TJPE", TribunalJusticaPE}
+                {"TJPE", TribunalJusticaPE},
+                {"ESAJ", Esaj},
+                {"PJE", Pje},
+                {"TRTSP", Trtsp},
             };
         }
 
@@ -289,6 +295,27 @@ namespace WebGateway
         private string TribunalJusticaPE(Bitmap imagem, string token)
         {
             var ws = new OCRTJPE();
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
+        }
+
+        private string Esaj(Bitmap imagem, string token)
+        {
+            var ws = new OCRESAJ();
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
+        }
+
+        private string Pje(Bitmap imagem, string token)
+        {
+            var ws = new OCRPJE();
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
+        }
+
+        private string Trtsp(Bitmap imagem, string token)
+        {
+            var ws = new OCRTRTSP();
             var rawImage = imagem.ToByteArray(ImageFormat.Png);
             return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }

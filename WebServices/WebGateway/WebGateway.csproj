@@ -89,6 +89,11 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\WS_ESAJ\ocr.wsdl" />
+    <Content Include="Web References\WS_ESAJ\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\WS_MG\ocr.wsdl" />
     <None Include="Web References\WS_MG\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -105,8 +110,15 @@
     <None Include="Web References\WS_CRJ\ocr.disco" />
     <None Include="Web References\WS_MG\ocr.disco" />
     <None Include="Web References\WS_NFE\ocr.disco" />
+    <None Include="Web References\WS_ESAJ\ocr.disco" />
+    <None Include="Web References\WS_PJE\ocr.disco" />
     <Content Include="Web References\WS_RF3\ocr.wsdl" />
     <Content Include="Web References\WS_RF3\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\WS_PJE\ocr.wsdl" />
+    <Content Include="Web References\WS_PJE\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -121,6 +133,7 @@
     <None Include="Web References\WS_SP\ocr.disco" />
     <Content Include="Web References\WS_RF3\ocr.disco" />
     <None Include="Web References\WS_TJPE\ocr.disco" />
+    <None Include="Web References\WS_TRTSP\ocr.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -147,6 +160,11 @@
     </None>
     <None Include="Web References\WS_TJPE\ocr.wsdl" />
     <Content Include="Web References\WS_TJPE\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\WS_TRTSP\ocr.wsdl" />
+    <Content Include="Web References\WS_TRTSP\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -185,12 +203,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\WS_ESAJ\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\WS_MG\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\WS_NFE\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WS_PJE\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -221,6 +249,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\WS_TJPE\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WS_TRTSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -371,6 +404,39 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WebGateway_WS_SI_OCRSI</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:53835/ocr.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_ESAJ\</RelPath>
+      <UpdateFromURL>http://localhost:53835/ocr.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebGateway_WS_ESAJ_OCRESAJ</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:53849/ocr.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_PJE\</RelPath>
+      <UpdateFromURL>http://localhost:53849/ocr.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebGateway_WS_PJE_OCRPJE</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:53850/ocr.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_TRTSP\</RelPath>
+      <UpdateFromURL>http://localhost:53850/ocr.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WebGateway_WS_TRTSP_OCRTRTSP</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:7373/ocr.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>

@@ -41,5 +41,14 @@
     <Setting Name="WebGateway_WS_TJPE_OCRTJPE" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:13502/ocr.asmx</Value>
     </Setting>
+    <Setting Name="WebGateway_WS_ESAJ_OCRESAJ" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53835/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_PJE_OCRPJE" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53849/ocr.asmx</Value>
+    </Setting>
+    <Setting Name="WebGateway_WS_TRTSP_OCRTRTSP" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:53850/ocr.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
