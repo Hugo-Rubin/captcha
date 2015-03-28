@@ -44,19 +44,7 @@ namespace Core.Logic.Captchas
 
         public override System.Drawing.Bitmap RemoverFundo(System.Drawing.Bitmap source)
         {
-            var output = new ImgArray(source.Width, source.Height);
-
-            for (int y = 0; y < source.Height; y++)
-            {
-                for (int x = 0; x < source.Width; x++)
-                {
-                    var pixelBrightness = source.GetPixel(x, y).GetBrightness();
-                    if (pixelBrightness < MaximumLetterBrightness)
-                    {
-                        output.SetPixel(x, y, Color.Black);
-                    }
-                }
-            }
+            var output = source.KeepPixelsWithMaximumBrightness(MaximumLetterBrightness);
             return output.PreencherPixels().ToBitmap();
         }
     }

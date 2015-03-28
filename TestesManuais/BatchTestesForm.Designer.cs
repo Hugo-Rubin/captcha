@@ -127,7 +127,8 @@
             "SE - Sergipe",
             "TO - Tocantins",
             "CCT - CCT_CaptchaA",
-            "ProjudiBA - Projudi Bahia"});
+            "ProjudiBA - Projudi Bahia",
+            "ProjudiGeral - Projudi Geral"});
             this.comboEstado.Location = new System.Drawing.Point(119, 20);
             this.comboEstado.Name = "comboEstado";
             this.comboEstado.Size = new System.Drawing.Size(564, 21);

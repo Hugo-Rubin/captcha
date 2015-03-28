@@ -1915,6 +1915,13 @@ namespace Core.Logic
                         Valor = typeof(PredictCaptchaNFE)
                     };
                     break;
+                case "ProjudiGeral":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = typeof(CaptchaProjudiGeral),
+                        Valor = typeof(PredictCaptchaCAM)
+                    };
+                    break;
                 default:
                     throw new Exception(
                         "Captcha não implementado ou não especificado em Bll.ServerUtil.GetTypeCaptchaByID!");

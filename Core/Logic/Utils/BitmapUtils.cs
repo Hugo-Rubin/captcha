@@ -185,6 +185,30 @@ namespace Core.Logic.Utils
 
             return destino;
         }
+
+        /// <summary>
+        /// Mantem apenas pixels que possuem brilho menor ou igual ao especificado. Pinta o restante de branco.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="maximumBrightness"></param>
+        /// <returns></returns>
+        public static ImgArray KeepPixelsWithMaximumBrightness(this Bitmap source, float maximumBrightness)
+        {
+            var output = new ImgArray(source.Width, source.Height);
+
+            for (int y = 0; y < source.Height; y++)
+            {
+                for (int x = 0; x < source.Width; x++)
+                {
+                    var pixelBrightness = source.GetPixel(x, y).GetBrightness();
+                    if (pixelBrightness <= maximumBrightness)
+                    {
+                        output.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+            return output;
+        }
         
         /// <summary>
         /// Pinta os pixels em escala de cinza de preto, todos os outros de branco
