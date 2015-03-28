@@ -455,9 +455,9 @@ namespace TestesManuais
                 var g = Graphics.FromImage(b);
 
                 var bmp = (Bitmap) BitmapUtils.LoadImageWithoutLockFile(file.FullName);
-                var wu = new WuColorQuantizer();
-                var pq = new PalleteQuantizer(bmp, wu, 16);
-                bmp = (Bitmap) pq.ApplyFilter();
+                //var wu = new WuColorQuantizer();
+                //var pq = new PalleteQuantizer(bmp, wu, 16);
+                //bmp = (Bitmap) pq.ApplyFilter();
 
 
                 g.DrawImage(bmp, 0, 0);
