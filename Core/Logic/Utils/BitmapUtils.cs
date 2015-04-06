@@ -86,6 +86,30 @@ namespace Core.Logic.Utils
         }
 
         /// <summary>
+        /// Mantém apenas os pixels com a condicao atendida pela condicao da funcao passada.
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static ImgArray KeepColors(this Bitmap origem, Func<Color,Boolean> condition)
+        {
+            var destino = new ImgArray(origem.Width, origem.Height);
+
+            for (var y = 0; y < origem.Height; y++)
+            {
+                for (var x = 0; x < origem.Width; x++)
+                {
+                    var c = origem.GetPixel(x, y);
+                    if (condition(c))
+                    {
+                        destino.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return destino;
+        }
+
+        /// <summary>
         /// Mantém apenas os pixels com a cor (RGB) passada por parâmetro na imagem, apagando todos os outros.
         /// </summary>
         /// <param name="r"></param>
