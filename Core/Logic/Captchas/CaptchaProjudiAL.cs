@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Core.Logic.Utils;
+using Core.Logic.Separacao;
 
 namespace Core.Logic.Captchas
 {
@@ -32,12 +34,27 @@ namespace Core.Logic.Captchas
 
         public override IEnumerable<Types.ImgArray> GetCaracteres()
         {
-            throw new NotImplementedException();
+            var cfs = new ColorFillingSegmentation2(this.ImgArray, 8, 1);
+            var chars = cfs.GetCaracteres();
+
+            return chars.CortarECentralizarTodos(TamanhoImagemLetra.X, TamanhoImagemLetra.Y);
         }
 
         public override System.Drawing.Bitmap RemoverFundo(System.Drawing.Bitmap source)
         {
-            throw new NotImplementedException();
+
+            Func<Color, Boolean> condition = (Color c) => {
+                if (c.R > 200 && c.G == 255 && c.B > 255)
+                {
+                    return true;
+                } 
+                return false; 
+            };
+
+            var output = source.KeepColors(condition);
+
+            return output.ToBitmap();
+            
         }
     }
 }
