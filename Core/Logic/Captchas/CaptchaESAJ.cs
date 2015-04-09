@@ -223,7 +223,7 @@ namespace Core.Logic.Captchas
             foreach (var p in pontos)
             {
                 Neighbors n = new Neighbors(img, p);
-                if (n.ToStack().Sum() == 1)
+                if (n.ToStack().Sum() == 1) // Se o ponto possuir apenas um vizinho
                 {
                     cPontos.Add(p);
                 }

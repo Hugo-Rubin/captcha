@@ -609,6 +609,18 @@ namespace TestesManuais
             {
                 return PredictCaptchaCAM.Instance;
             }
+            if (predictType == typeof(PredictCaptchaESAJ))
+            {
+                return PredictCaptchaESAJ.Instance;
+            }
+            if (predictType == typeof(PredictCaptchaPJE))
+            {
+                return PredictCaptchaPJE.Instance;
+            }
+            if (predictType == typeof(PredictCaptchaRF4))
+            {
+                return PredictCaptchaRF4.Instance;
+            }
             throw new ArgumentOutOfRangeException("predictType");
         }
 

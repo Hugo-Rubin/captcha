@@ -24,12 +24,12 @@ namespace Core.Logic
 
         public static string ResourcesDir
         {
-            get { return CustomConfigurationManager.ReadAppSetting("ResourcesDir") ?? AbsolutePath + @"\resources\"; }
+            get { return CustomConfigurationManager.ReadAppSetting("ResourcesDir") ?? AbsolutePath + @"resources\"; }
         }
 
         public static string LogDir
         {
-            get { return CustomConfigurationManager.ReadAppSetting("LogDir") ?? AbsolutePath + @"\log\"; }
+            get { return CustomConfigurationManager.ReadAppSetting("LogDir") ?? AbsolutePath + @"log\"; }
         }
 
         public static string AbsolutePath
@@ -1920,6 +1920,13 @@ namespace Core.Logic
                     {
                         Chave = typeof(CaptchaProjudiGeral),
                         Valor = typeof(PredictCaptchaCAM)
+                    };
+                    break;
+                case "RF4":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = typeof(CaptchaRF4),
+                        Valor = typeof(PredictCaptchaRF4)
                     };
                     break;
                 default:

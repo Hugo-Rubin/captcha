@@ -299,7 +299,7 @@ namespace Core.Logic.Utils
         /// </summary>
         /// <param name="imgArray"> </param>
         /// <param name="tamanhoRuido"> </param>
-        public static ImgArray RemoverRuidos(this ImgArray imgArray, int tamanhoRuido)
+        public static ImgArray RemoverRuidos(this ImgArray imgArray, int tamanhoRuido, int connectivity = 8)
         {
             var x = 0;
             var y = 0;
@@ -324,7 +324,7 @@ namespace Core.Logic.Utils
 
                 if (!sair && !pixelsProcessados.Contains(pointPixel))
                 {
-                    var clusterPixels = imgArray.GetCluster(pointPixel);
+                    var clusterPixels = imgArray.GetCluster(pointPixel, connectivity);
                     pixelsProcessados.AddRange(clusterPixels);
 
                     if (clusterPixels.Count() < tamanhoRuido)
@@ -405,7 +405,7 @@ namespace Core.Logic.Utils
             int y = 0;
             int x = 0;
 
-            while(y < tam)
+            while (y < tam)
             {
                 for (x = 0; x < img.Width; x++)
                 {
@@ -425,7 +425,7 @@ namespace Core.Logic.Utils
             }
 
             x = 0;
-            while(x < tam)
+            while (x < tam)
             {
                 for (y = 0; y < img.Height; y++)
                 {
@@ -501,9 +501,100 @@ namespace Core.Logic.Utils
                     }
                 }
             }
-            
+
             return pixelsPretos;
         }
+
+        public static int GetValidWidth(this ImgArray img)
+        {
+            int minX = img.Width;
+            int maxX = 0;
+
+            for (int y = 0; y < img.Height; y++)
+            {
+                for (int x = 0; x < img.Width; x++)
+                {
+                    if (img.GetPixel(x, y).IsBlackPixel())
+                    {
+                        if (x < minX)
+                        {
+                            minX = x;
+                        }
+                        else
+                        {
+                            if (x > maxX)
+                            {
+                                maxX = x;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return maxX - minX + 1;
+        }
+
+        public static int GetValidHeight(this ImgArray img)
+        {
+            int minY = img.Height;
+            int maxY = 0;
+
+            for (int y = 0; y < img.Height; y++)
+            {
+                for (int x = 0; x < img.Width; x++)
+                {
+                    if (img.GetPixel(x, y).IsBlackPixel())
+                    {
+                        if (y < minY)
+                        {
+                            minY = y;
+                        }
+                        else
+                        {
+                            if (y > maxY)
+                            {
+                                maxY = y;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return maxY - minY + 1;
+        }
+
+        public static ImgArray MesclarImagens(this List<ImgArray> images)
+        {
+            if (null == images || images.Count == 0)
+            {
+                return new ImgArray(1, 1);
+            }
+            
+            if (images.Count == 1)
+            {
+                return images[0];
+            }
+            
+            ImgArray result = new ImgArray(images[0].Width, images[0].Height);
+            result.Clear();
+
+            foreach (var img in images)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    for (int x = 0; x < img.Width; x++)
+                    {
+                        if (img.GetPixel(x, y).IsBlackPixel())
+                        {
+                            result.SetPixel(x, y, Color.Black);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
 
     }
 }

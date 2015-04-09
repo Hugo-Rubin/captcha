@@ -134,7 +134,7 @@ namespace Core.Logic.Utils
             var tamOriginalLetra = tamanholetra;
             var controllerCount = 0;
 
-            // TODO: adicionar tratamento para o caso do número de caracteres se igual ao número de saída esperada, mas um dos clusters ser maior do que o tamanho máximo de um caractere sozinho
+            // TODO: adicionar tratamento para o caso do número de caracteres ser igual ao número de saída esperada, mas um dos clusters ser maior do que o tamanho máximo de um caractere sozinho
             // TODO: adicionar tratamento para descartar um cluster muito pequeno, ou mesclá-lo à esquerda, caso seja encontrado
 
             if (chars.Count == numeroMinimoDeLetras)
