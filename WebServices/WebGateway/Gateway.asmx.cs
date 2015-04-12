@@ -44,9 +44,8 @@ namespace WebGateway
         {
             servicosSuportados = new Dictionary<string, Func<Bitmap, string, string>>
             {
-                {"RF", ReceitaFederal},
+                {"RF", ReceitaFederal4},
                 {"RF3", ReceitaFederal3},
-                {"RF4", ReceitaFederal4},
                 {"NFE", NotaFiscalEletronica},
                 {"SI", Siscarga},
                 {"SP", SintegraSP},
@@ -208,13 +207,6 @@ namespace WebGateway
             return servicos.FirstOrDefault() != null;
         
              */
-        }
-
-        private string ReceitaFederal(Bitmap imagem, string token)
-        {
-            var captcha = new CaptchaRF(imagem);
-            var ws = new OCRRF();
-            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
         }
 
         private string ReceitaFederal3(Bitmap imagem, string token)

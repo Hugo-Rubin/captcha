@@ -62,7 +62,7 @@
     <Content Include="Global.asax" />
     <Content Include="Resources\theta1.csv" />
     <Content Include="Resources\theta2.csv" />
-    <None Include="Properties\PublishProfiles\GoDaddy.pubxml" />
+    <None Include="Properties\PublishProfiles\Deploy %28C OCR Captchas Deploy%29.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

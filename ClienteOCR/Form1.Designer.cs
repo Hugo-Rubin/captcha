@@ -69,7 +69,7 @@
             this.cbEstado.FormattingEnabled = true;
             this.cbEstado.Items.AddRange(new object[] {
             "NFE - Nota Fiscal Eletrônica",
-            "RF4 - Receita Federal",
+            "RF - Receita Federal",
             "SI - Siscarga",
             "CRJ - Consignações / Rio de Janeiro",
             "CA - Consignações Aeronáutica",
@@ -104,9 +104,7 @@
             "RR - Roraima",
             "SC - Santa Catarina",
             "SE - Sergipe",
-            "TO - Tocantins",
-            "RF - Receita Federal",
-            "RF3 - Receita Federal"});
+            "TO - Tocantins"});
             this.cbEstado.Location = new System.Drawing.Point(12, 12);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(200, 21);
