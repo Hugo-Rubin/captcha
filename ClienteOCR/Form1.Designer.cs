@@ -70,7 +70,6 @@
             this.cbEstado.Items.AddRange(new object[] {
             "NFE - Nota Fiscal Eletrônica",
             "RF - Receita Federal",
-            "RF3 - Receita Federal",
             "SI - Siscarga",
             "CRJ - Consignações / Rio de Janeiro",
             "CA - Consignações Aeronáutica",

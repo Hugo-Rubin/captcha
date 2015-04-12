@@ -217,7 +217,7 @@ namespace TestesManuais
         private void btnClassificacao_Click(object sender, EventArgs e)
         {
             //Rede
-            var di = new DirectoryInfo(@"C:\OCR\Testes\TRTSP\Separados\");
+            /*var di = new DirectoryInfo(@"E:\OCR\Testes\RF4\Separadas\");
             var dirs = di.GetDirectories();
 
             var i = 1;
@@ -227,11 +227,12 @@ namespace TestesManuais
             {
                 foreach (var file in dir.GetFiles())
                 {
-                    var baseDir = @"C:\OCR\Testes\RF3\Rede\" + (char)letra;
+                    var baseDir = @"E:\OCR\Testes\RF4\Rede\" + (char) letra;
                     if (Directory.Exists(baseDir) == false)
                     {
                         Directory.CreateDirectory(baseDir);
                     }
+
                     var destination = string.Format(@"{0}\{1}-{2}", baseDir, dir.Name, file.Name);
                     File.Copy(file.FullName, destination);
                     i++;
@@ -241,7 +242,7 @@ namespace TestesManuais
                     }
                 }
 
-            }
+            }*/
 
 
             ////Separados
@@ -259,12 +260,10 @@ namespace TestesManuais
             //    var destination = string.Format(@"{0}\{1}", baseDir, file.Name.Split(' ')[1]);
             //    File.Copy(file.FullName, destination);
             //}
-
-
-
+            
 
             inicioProcessamento = DateTime.Now;
-            var predict = predictType == null ? typeof(PredictCaptchaSP) : predictType;
+            var predict = predictType == null ? typeof(PredictCaptchaRF4) : predictType;
             if (
                 MessageBox.Show(
                     "Este procedimento utiliza o " + predict +
@@ -474,9 +473,9 @@ namespace TestesManuais
         /// Copia as imagens da pasta Separados para a pasta Rede, de acordo com um modelo já organizado (pasta Rede em diOrigem)
         private void button3_Click(object sender, EventArgs e)
         {
-            var diOrigem = new DirectoryInfo(@"C:\OCR\Testes\Rede\Rede").GetDirectories();
-            var dirSeparados = @"C:\OCR\Testes\CAM\Separados\";
-            var dirDestino = @"C:\OCR\Testes\CAM\Rede\";
+            var diOrigem = new DirectoryInfo(@"E:\OCR\Testes\RF4\Rede - Copia\").GetDirectories();
+            var dirSeparados = @"E:\OCR\Testes\RF4\Separadas\";
+            var dirDestino = @"E:\OCR\Testes\RF4\Rede\";
 
             foreach (var d in diOrigem)
             {
@@ -491,7 +490,15 @@ namespace TestesManuais
                     var pasta = f.Name.Split('-')[0];
                     var arquivo = f.Name.Split('-')[1];
 
-                    File.Copy(dirSeparados + pasta + @"\" + arquivo, dirDestino + d.Name + @"\" + f.Name);
+                    try
+                    {
+                        File.Copy(dirSeparados + pasta + @"\" + arquivo, dirDestino + d.Name + @"\" + f.Name);
+                    }
+                    catch (FileNotFoundException ex) { }
+                    finally
+                    {
+                        File.Copy(dirSeparados + pasta + @"\" + (Convert.ToInt16(arquivo.Substring(0, arquivo.IndexOf('.'))) + 1) + ".png", dirDestino + d.Name + @"\" + f.Name);
+                    }
                 }
             }
 
@@ -607,7 +614,8 @@ namespace TestesManuais
 
 
                 ICM_Basic icm = new ICM_Basic();
-                img = icm.Apply(img, 10, 20, 1);
+                img = 
+             * (img, 10, 20, 1);
                 ForwardDerivative fd = new ForwardDerivative();
 
                 img = fd.Apply(img, true, false);
@@ -840,10 +848,10 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var images = new DirectoryInfo(@"E:\OCR\Testes\ESAJ").GetFiles("*.png");
-            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\ESAJ\SemFundo\");
-            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\ESAJ\Separadas\");
-            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\ESAJ\Rede\");
+            var images = new DirectoryInfo(@"E:\OCR\Testes\RF4").GetFiles("*.png");
+            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\RF4\SemFundo\");
+            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\RF4\Separadas\");
+            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\RF4\Rede\");
 
             foreach (var imagem in images)
             {
@@ -852,7 +860,7 @@ namespace TestesManuais
                 //source = source.CropRectangle(areaValida);
                 //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-                CaptchaESAJ crf = new CaptchaESAJ(source);
+                CaptchaRF4 crf = new CaptchaRF4(source);
 
                 crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
@@ -871,8 +879,18 @@ namespace TestesManuais
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //Cria pastas do alfabeto
-            ServerUtil.CriarPastas(@"E:\OCR\Testes\ESAJ\Rede");
+            //Criar pastas do alfabeto
+            ServerUtil.CriarPastas(@"E:\OCR\Testes\RF4\Rede");
+
+            //Renomear Imagens
+            /*DirectoryInfo di = new DirectoryInfo(@"E:\Users\Hugo\Desktop\RF3");
+            var files = di.GetFiles();
+            int cont = 201;
+
+            foreach (var f in files)
+            {
+                f.CopyTo(@"E:\Users\Hugo\Desktop\RF3\Nova pasta\" + "0" + cont++ + ".png");
+            }*/
         }
 
     }

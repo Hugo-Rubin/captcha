@@ -90,6 +90,7 @@
     <Compile Include="Captchas\CaptchaProjudiBA.cs" />
     <Compile Include="Captchas\CaptchaProjudiGeral.cs" />
     <Compile Include="Captchas\CaptchaRF3.cs" />
+    <Compile Include="Captchas\CaptchaRF4.cs" />
     <Compile Include="Captchas\CaptchaTJPE.cs" />
     <Compile Include="Captchas\CaptchaTRTSP.cs" />
     <Compile Include="Captchas\CctCaptchaA.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Predict\PredictCaptchaESAJ.cs" />
     <Compile Include="Predict\PredictCaptchaPJE.cs" />
     <Compile Include="Predict\PredictCaptchaRF3.cs" />
+    <Compile Include="Predict\PredictCaptchaRF4.cs" />
     <Compile Include="Predict\PredictCaptchaTJPE.cs" />
     <Compile Include="Predict\PredictCaptchaTRTSP.cs" />
     <Compile Include="Separacao\ColorFillingSegmentation2.cs" />

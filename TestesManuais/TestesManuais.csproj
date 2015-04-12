@@ -296,6 +296,10 @@
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Data\Data.csproj">
+      <Project>{a7b2066a-3a1b-48c7-b264-2b9322f6acb1}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Logic\Logic.csproj">
       <Project>{ADF52F5A-5091-4121-9AD7-DCBB5BD23498}</Project>
       <Name>Logic</Name>
@@ -303,6 +307,10 @@
     <ProjectReference Include="..\Core\Common\Common.csproj">
       <Project>{e511f63f-f352-400d-9deb-7931e3e3a2e0}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebServices\WebCommon\WebCommon.csproj">
+      <Project>{4b3f3b61-db4c-4db5-ad1f-f32d541d4c90}</Project>
+      <Name>WebCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

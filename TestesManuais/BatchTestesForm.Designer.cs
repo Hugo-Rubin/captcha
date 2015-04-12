@@ -86,7 +86,7 @@
             this.comboEstado.Items.AddRange(new object[] {
             "NFE - Nota Fiscal Eletrônica",
             "RF - Receita Federal",
-            "RF3 - Receita Federal 3",
+            "RF4 - Receita Federal 4",
             "ESAJ -  Sistema de Automação da Justiça",
             "PJE - Processo Judiciário Eletrônico",
             "TRTSP - Tribunal Regional do Trabalho de São Paulo ",
@@ -128,7 +128,8 @@
             "TO - Tocantins",
             "CCT - CCT_CaptchaA",
             "ProjudiBA - Projudi Bahia",
-            "ProjudiGeral - Projudi Geral"});
+            "ProjudiGeral - Projudi Geral",
+            "RF3 - Receita Federal 3"});
             this.comboEstado.Location = new System.Drawing.Point(119, 20);
             this.comboEstado.Name = "comboEstado";
             this.comboEstado.Size = new System.Drawing.Size(564, 21);

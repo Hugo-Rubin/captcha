@@ -28,6 +28,7 @@ using WebGateway.WS_TJPE;
 using WebGateway.WS_ESAJ;
 using WebGateway.WS_PJE;
 using WebGateway.WS_TRTSP;
+using WebGateway.WS_RF4;
 
 namespace WebGateway
 {
@@ -43,7 +44,7 @@ namespace WebGateway
         {
             servicosSuportados = new Dictionary<string, Func<Bitmap, string, string>>
             {
-                {"RF", ReceitaFederal},
+                {"RF", ReceitaFederal4},
                 {"RF3", ReceitaFederal3},
                 {"NFE", NotaFiscalEletronica},
                 {"SI", Siscarga},
@@ -208,19 +209,19 @@ namespace WebGateway
              */
         }
 
-        private string ReceitaFederal(Bitmap imagem, string token)
-        {
-            var captcha = new CaptchaRF(imagem);
-            var ws = new OCRRF();
-            return ws.GetTextFromNano(captcha.ImgArray.ToNanoArray().GetInternalArray(), imagem.Width, imagem.Height, token);
-        }
-
         private string ReceitaFederal3(Bitmap imagem, string token)
         {
             var captcha = new CaptchaRF3(imagem);
             var ws = new OCRRF3();
             var nanoImg = captcha.ImgArray.ToNanoArray().GetInternalArray();
             return ws.GetTextFromNano(nanoImg, imagem.Width, imagem.Height, token);
+        }
+
+        private string ReceitaFederal4(Bitmap imagem, string token)
+        {
+            var ws = new OCRRF4();
+            var rawImage = imagem.ToByteArray(ImageFormat.Png);
+            return ws.GetText(rawImage, imagem.Width, imagem.Height, token);
         }
 
         private string NotaFiscalEletronica(Bitmap imagem, string token)
