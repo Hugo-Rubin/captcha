@@ -44,7 +44,7 @@ namespace Core.Logic.Captchas
         {
 
             Func<Color, Boolean> condition = (Color c) => {
-                if (c.R > 200 && c.G == 255 && c.B > 255)
+                if (c.R > 160 && c.G > 235 && c.B > 235)
                 {
                     return true;
                 } 
