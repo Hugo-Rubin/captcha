@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.Threading;
 using System.IO;
 using System.Net;
+using System.Net.Security;
 
 namespace BaixarImagensCaptcha
 {
@@ -90,7 +91,7 @@ namespace BaixarImagensCaptcha
             {
                 return;
             }
-            
+
             if (MessageBox.Show("Verifique no código se o retangulo do corte do printscreen está ajustado corretamente para o seu captcha", "Atenção", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
             {
                 return;
@@ -104,9 +105,9 @@ namespace BaixarImagensCaptcha
                 for (var i = 0; i < qtde; i++)
                 {
                     Text = String.Format("Processando ({0} de {1}). Tempo decorrido: {2}",
-                        i + 1, 
+                        i + 1,
                         txtQtde.Text,
-                        DateTime.Now-dt);
+                        DateTime.Now - dt);
                     Application.DoEvents();
                     webBrowser1.Navigate(txtUrlSite.Text);
                     while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
@@ -136,6 +137,9 @@ namespace BaixarImagensCaptcha
             for (var i = 0; i < Qtde; i++)
             {
                 var web = new WebClient();
+               
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback( delegate { return true; } );
+
                 web.DownloadFile(url, String.Format(@"{0}{1:0000}.png", path, counter++));
                 IncrementProgress();
             }
@@ -164,7 +168,7 @@ namespace BaixarImagensCaptcha
         private void RefreshRectangle()
         {
             panelRec = new Rectangle(panel1.Location, panel1.Size);
-            lblRecPosition.Text = String.Format("X={0}, Y={1}\nW={2}, H={3}", 
+            lblRecPosition.Text = String.Format("X={0}, Y={1}\nW={2}, H={3}",
                 panelRec.Location.X,
                 panelRec.Location.Y,
                 panelRec.Size.Width,
@@ -210,7 +214,7 @@ namespace BaixarImagensCaptcha
         {
             if (button2.Text[0] == 'E')
             {
-                if (MessageBox.Show("Carregar site?", "Confirma", MessageBoxButtons.YesNo)==DialogResult.Yes)
+                if (MessageBox.Show("Carregar site?", "Confirma", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     webBrowser1.Navigate(txtUrlSite.Text);
                 }
@@ -229,11 +233,11 @@ namespace BaixarImagensCaptcha
         {
             const string url1 = @"http://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp";
             const string urlImageFmt = @"http://www.receita.fazenda.gov.br/scripts/captcha/Telerik.Web.UI.WebResource.axd?type=rca&guid={0}";
-            
-            InitProgressBar(qtde*copies);
+
+            InitProgressBar(qtde * copies);
 
             var start = NextFolderNumber(path);
-            
+
             for (var folderNumber = start; folderNumber < start + qtde; folderNumber++)
             {
                 var web = new WebClient();
@@ -285,7 +289,7 @@ namespace BaixarImagensCaptcha
             var info = new DirectoryInfo(path);
 
             var dirs = (from d in info.GetDirectories()
-                       select int.Parse(d.Name)).ToArray();
+                        select int.Parse(d.Name)).ToArray();
 
             if (dirs.Any() == false)
             {
