@@ -848,10 +848,10 @@ namespace TestesManuais
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var images = new DirectoryInfo(@"E:\OCR\Testes\RF4").GetFiles("*.png");
-            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\RF4\SemFundo\");
-            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\RF4\Separadas\");
-            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\RF4\Rede\");
+            var images = new DirectoryInfo(@"E:\OCR\Testes\ProjudiGeral").GetFiles("*.png");
+            var semFundoDir = new DirectoryInfo(@"E:\OCR\Testes\ProjudiGeral\SemFundo\");
+            var separadasDir = new DirectoryInfo(@"E:\OCR\Testes\ProjudiGeral\Separadas\");
+            var redeDir = new DirectoryInfo(@"E:\OCR\Testes\ProjudiGeral\Rede\");
 
             foreach (var imagem in images)
             {
@@ -860,11 +860,11 @@ namespace TestesManuais
                 //source = source.CropRectangle(areaValida);
                 //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-                CaptchaRF4 crf = new CaptchaRF4(source);
+                CaptchaProjudiGeral crf = new CaptchaProjudiGeral(source);
 
                 crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
-                var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
+                /*var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
                 var letras = crf.GetCaracteres();
 
                 int i = 0;
@@ -872,7 +872,7 @@ namespace TestesManuais
                 {
                     letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + "-" + i++ + ".png");
                     letra.Save(currentDir.FullName + @"\" + i++ + ".png");
-                }
+                }*/
             }
 
         }
@@ -880,8 +880,8 @@ namespace TestesManuais
         private void button7_Click(object sender, EventArgs e)
         {
             //Criar pastas do alfabeto
-            ServerUtil.CriarPastas(@"E:\OCR\Testes\RF4\Rede");
-
+            //ServerUtil.CriarPastas(@"E:\OCR\Testes\RF4\Rede");
+            
             //Renomear Imagens
             /*DirectoryInfo di = new DirectoryInfo(@"E:\Users\Hugo\Desktop\RF3");
             var files = di.GetFiles();

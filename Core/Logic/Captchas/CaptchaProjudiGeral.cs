@@ -42,10 +42,12 @@ namespace Core.Logic.Captchas
                      
             ForwardDerivative fd = new ForwardDerivative();
             fd.Apply(output, true, true);
+            fd.Apply(output, true, true);
             fd.Apply(output, true, false);
 
             return output
-                .RemoverRuidos(50)
+                .RemoverRuidos(30)
+                .CortarECentralizar(output.Width, output.Height)
                 .ToBitmap();
                 //.ApplyMedianFilter(5);
         }
