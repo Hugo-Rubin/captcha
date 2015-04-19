@@ -99,7 +99,7 @@ namespace Core.Logic.Utils
                 for (var x = 0; x < origem.Width; x++)
                 {
                     var c = origem.GetPixel(x, y);
-                    if (condition(c))
+                    if (condition.Invoke(c))
                     {
                         destino.SetPixel(x, y, Color.Black);
                     }
