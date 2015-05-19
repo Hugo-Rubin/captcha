@@ -16,7 +16,7 @@ namespace IntegrationTests
         [TestMethod]
         public void CanRemoveBackgroud()
         {
-            var captcha = CreateCaptcha("002.png");
+            var captcha = CreateCaptcha("001.png");
             captcha.Save(@"C:\AM\Resultado.png");
             captcha.GetCaracteres().SalvarTodos(@"C:\AM");
             //response.Should().Not.Be.Null();
