@@ -87,6 +87,7 @@
     <Compile Include="Captchas\CaptchaCRJ.cs" />
     <Compile Include="Captchas\CaptchaPJE.cs" />
     <Compile Include="Captchas\CaptchaProjudiAL.cs" />
+    <Compile Include="Captchas\CaptchaProjudiAM.cs" />
     <Compile Include="Captchas\CaptchaProjudiBA.cs" />
     <Compile Include="Captchas\CaptchaProjudiGeral.cs" />
     <Compile Include="Captchas\CaptchaRF3.cs" />

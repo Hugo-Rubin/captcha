@@ -56,6 +56,11 @@ namespace Core.Logic
             return ((pixel.A == 255) && (pixel.R == 0) && (pixel.G == 0) && (pixel.B == 0));
         }
 
+        public static bool IsWhitePixel(this Color pixel)
+        {
+            return (pixel.A != 255) || ((pixel.A == 255) && (pixel.R == 255) && (pixel.G == 255) && (pixel.B == 255));
+        }
+        
         public static void CopiarBitmapPara(this Bitmap src, ref Bitmap dest)
         {
             // TODO: Tratar exceções para caso de src menor que dest

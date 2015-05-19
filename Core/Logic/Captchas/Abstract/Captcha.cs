@@ -24,6 +24,7 @@ namespace Core.Logic.Captchas.Abstract
         protected Captcha(Bitmap bmpSource)
         {
             Init();
+            ImageLoaded(bmpSource);
             var bmp = RemoverFundo(bmpSource);
             LoadFromBitmap(bmp);
         }
@@ -66,7 +67,9 @@ namespace Core.Logic.Captchas.Abstract
 
         public void LoadFromFile(String bitmapFileName)
         {
-            var bmp = RemoverFundo((Bitmap)Image.FromFile(bitmapFileName));
+            var bmpSource = (Bitmap)Image.FromFile(bitmapFileName);
+            ImageLoaded(bmpSource);
+            var bmp = RemoverFundo(bmpSource);
             if (null != bmp)
             {
                 LoadFromBitmap(bmp);
@@ -76,6 +79,10 @@ namespace Core.Logic.Captchas.Abstract
         public void LoadFromBitmap(Bitmap bmpSource)
         {
             ImgArray = new ImgArray(bmpSource);
+        }
+
+        protected virtual void ImageLoaded(Bitmap bmpSource)
+        {
         }
 
         public void LoadFromNanoArray(NanoArray nanoArraySource)

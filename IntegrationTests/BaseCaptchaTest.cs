@@ -45,5 +45,11 @@ namespace IntegrationTests
             var captcha = CreateCaptchaInstance(fullName, CaptchaType);
             return predictInstance.Recognize(captcha);
         }
+
+        protected Captcha CreateCaptcha(string fileName)
+        {
+            var fullName = string.Format(@"{0}\{1}", SamplesDir, fileName);
+            return CreateCaptchaInstance(fullName, CaptchaType);
+        }
     }
 }
