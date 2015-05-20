@@ -1930,7 +1930,7 @@ namespace Core.Logic
                 case "ProjudiAM":
                     result = new ChaveValor<Type, Type>
                     {
-                        Chave = typeof(CaptchaProjudiGeral),
+                        Chave = typeof(CaptchaProjudiAM),
                         Valor = typeof(PredictCaptchaCAM)
                     };
                     break;
