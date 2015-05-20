@@ -8,7 +8,7 @@ using System.Threading;
 using Core.Common.Extensions;
 using Core.Logic;
 using Core.Logic.Captchas.Abstract;
-using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
+using PalleteQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Predict;
 using Core.Logic.Predict.Abstract;
 using Core.Logic.Types;
@@ -456,7 +456,7 @@ namespace TestesManuais
 
                 var bmp = (Bitmap) BitmapUtils.LoadImageWithoutLockFile(file.FullName);
                 //var wu = new WuColorQuantizer();
-                //var pq = new PalleteQuantizer(bmp, wu, 16);
+                //var pq = new MyPalleteQuantizer(bmp, wu, 16);
                 //bmp = (Bitmap) pq.ApplyFilter();
 
 

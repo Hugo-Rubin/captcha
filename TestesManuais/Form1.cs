@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -13,11 +12,11 @@ using Core.Common.Extensions;
 using Core.Logic;
 using Core.Logic.Captchas;
 using Core.Logic.ImageLevels;
-using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Obsolete;
 using Core.Logic.Predict;
 using Core.Logic.RemocaoFundo;
 using Core.Logic.Types;
+using PalleteQuantizer.Quantizers.XiaolinWu;
 using TestesManuais.WS;
 
 namespace TestesManuais
@@ -1278,7 +1277,7 @@ namespace TestesManuais
             var img = (Bitmap)Image.FromFile(@"C:\Users\Hugo\DropBox\OCR\Testes\RJ\00078.png");
 
             var wu = new WuColorQuantizer();
-            var pq = new PalleteQuantizer(img, wu, 16);
+            var pq = new MyPalleteQuantizer(img, wu, 16);
             var result = pq.ApplyFilter();
             result.Save(@"C:\Users\Hugo\NOVA_2.jpg");
         }

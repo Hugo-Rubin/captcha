@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
-using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
+using PalleteQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Separacao;
 using Core.Logic.Types;
 using Core.Logic.Utils;
@@ -108,14 +108,14 @@ namespace Core.Logic.Captchas
             source = source.CropRectangle(quadroLetras);
 
             var wu = new WuColorQuantizer();
-            var pq = new PalleteQuantizer(source, wu, 4);
+            var pq = new MyPalleteQuantizer(source, wu, 4);
             var bmp8 = (Bitmap)pq.ApplyFilter();
 
             for (var y = 0; y < bmp8.Height; y++)
             {
                 for (var x = 0; x < bmp8.Width; x++)
                 {
-                    if (source.GetPixel(x, y).BrilhoDoPixel() < 160)
+                    if (source.GetPixel(x, y).Brightness() < 160)
                     {
                         img.SetPixel(x, y, Color.Black);
                     }

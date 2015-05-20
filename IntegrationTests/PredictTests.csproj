@@ -81,6 +81,10 @@
       <Project>{ADF52F5A-5091-4121-9AD7-DCBB5BD23498}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PalleteQuantizer\PalleteQuantizer.csproj">
+      <Project>{8beb8dad-f6bf-4ca2-b5eb-00bc7583480d}</Project>
+      <Name>PalleteQuantizer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

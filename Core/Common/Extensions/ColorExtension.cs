@@ -4,7 +4,7 @@ namespace Core.Common.Extensions
 {
     public static class ColorExtension
     {
-        public static int BrilhoDoPixel(this Color pixel)
+        public static int Brightness(this Color pixel)
         {
             return (pixel.R * 299 / 1000) + (pixel.G * 587 / 1000) + (pixel.B * 114 / 1000);
         }

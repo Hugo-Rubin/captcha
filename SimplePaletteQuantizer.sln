@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePaletteQuantizer", "SimplePaletteQuantizer\SimplePaletteQuantizer.csproj", "{37812A22-91F3-4220-891E-5C26DA64A975}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalleteQuantizer", "PalleteQuantizer\PalleteQuantizer.csproj", "{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = APNG Manager.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37812A22-91F3-4220-891E-5C26DA64A975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37812A22-91F3-4220-891E-5C26DA64A975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37812A22-91F3-4220-891E-5C26DA64A975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37812A22-91F3-4220-891E-5C26DA64A975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = ..
+	EndGlobalSection
+EndGlobal

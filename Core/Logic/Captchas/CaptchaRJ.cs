@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using Core.Common.Extensions;
 using Core.Logic.Captchas.Abstract;
-using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
+using PalleteQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Separacao;
 using Core.Logic.Types;
 
@@ -92,7 +92,7 @@ namespace Core.Logic.Captchas
                 clustersPorCorDeLetra.Add(new ImgArray(source.Width, source.Height));
             }
             var wu = new WuColorQuantizer();
-            var pq = new PalleteQuantizer(source, wu, 16);
+            var pq = new MyPalleteQuantizer(source, wu, 16);
             source = (Bitmap)pq.ApplyFilter();
 
             var result = new ImgArray(source.Width, source.Height);
@@ -172,7 +172,7 @@ namespace Core.Logic.Captchas
         private ChaveValor<bool, int> IsLetterColor(Color color)
         {
             var result = false;
-            var brilho = color.BrilhoDoPixel();
+            var brilho = color.Brightness();
 
             var i = brilho - ToleranciaBrilhoLetras;
             var max = brilho + ToleranciaBrilhoLetras;
@@ -201,7 +201,7 @@ namespace Core.Logic.Captchas
             {
                 for (var i = -ToleranciaBrilhoLetras; i < ToleranciaBrilhoLetras; i++)
                 {
-                    var brilho = cor.BrilhoDoPixel() + i;
+                    var brilho = cor.Brightness() + i;
                     if (brilho > byte.MinValue && brilho < byte.MaxValue)
                     {
                         brilhosValidosParaLetras.Add((byte)(brilho));

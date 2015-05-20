@@ -22,7 +22,7 @@ namespace Core.Logic.Utils
                 for (var x = 0; x < bmp.Width; x++)
                 {
                     var novoPixel = Color.White;
-                    if (bmp.GetPixel(x, y).BrilhoDoPixel() < 90)
+                    if (bmp.GetPixel(x, y).Brightness() < 90)
                     {
                         novoPixel = Color.Black;
                     }

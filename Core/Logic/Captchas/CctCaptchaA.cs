@@ -38,7 +38,7 @@ namespace Core.Logic.Captchas
             {
                 for (var x = 0; x < source.Width; x++)
                 {
-                    source.SetPixel(x, y, source.GetPixel(x, y).BrilhoDoPixel() > 160 ? Color.White : Color.Black);
+                    source.SetPixel(x, y, source.GetPixel(x, y).Brightness() > 160 ? Color.White : Color.Black);
                 }
             }
 

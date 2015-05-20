@@ -124,80 +124,6 @@
     <Compile Include="Predict\PredictCaptchaAM.cs" />
     <Compile Include="Predict\PredictCaptchaMG.cs" />
     <Compile Include="Predict\PredictCaptchaRJ.cs" />
-    <Compile Include="ImageQuantizer\BaseColorCache.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\BaseColorCache.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\Common\ColorModel.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\EuclideanDistance\EuclideanDistanceColorCache.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\IColorCache.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\LocalitySensitiveHash\LshBucketInfo.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\LocalitySensitiveHash\LshColorCache.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\Octree\OctreeCacheNode.cs" />
-    <Compile Include="ImageQuantizer\ColorCaches\Octree\OctreeColorCache.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\BaseColorDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\AtkinsonDithering.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\BaseErrorDiffusionDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\BurkesDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\FanDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\FilterLiteSierra.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\FloydSteinbergDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\JarvisJudiceNinkeDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\ShiauDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\SierraDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\StuckiDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\ErrorDiffusion\TwoRowSierraDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\IColorDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\Ordered\BaseOrderedDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\Ordered\BayerDitherer4.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\Ordered\BayerDitherer8.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\Ordered\ClusteredDotDitherer.cs" />
-    <Compile Include="ImageQuantizer\Ditherers\Ordered\DotHalfToneDitherer.cs" />
-    <Compile Include="ImageQuantizer\Extensions\Extend.IEnumerable.cs" />
-    <Compile Include="ImageQuantizer\Extensions\Extend.Image.cs" />
-    <Compile Include="ImageQuantizer\Extensions\Extend.PixelFormat.cs" />
-    <Compile Include="ImageQuantizer\Helpers\ColorModelHelper.cs" />
-    <Compile Include="ImageQuantizer\Helpers\FastRandom.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Guard.cs" />
-    <Compile Include="ImageQuantizer\Helpers\ImageBuffer.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixel.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\IIndexedPixel.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\Indexed\PixelData1Indexed.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\Indexed\PixelData4Indexed.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\Indexed\PixelData8Indexed.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\INonIndexedPixel.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataArgb1555.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataArgb64.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataArgb8888.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataGray16.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb48.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb555.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb565.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb888.cs" />
-    <Compile Include="ImageQuantizer\Helpers\Pixels\NonIndexed\PixelDataRgb8888.cs" />
-    <Compile Include="ImageQuantizer\Helpers\PixelTransform.cs" />
-    <Compile Include="ImageQuantizer\Helpers\QuantizationHelper.cs" />
-    <Compile Include="ImageQuantizer\IColorCache.cs" />
-    <Compile Include="ImageQuantizer\PathProviders\IPathProvider.cs" />
-    <Compile Include="ImageQuantizer\PathProviders\ReversedPathProvider.cs" />
-    <Compile Include="ImageQuantizer\PathProviders\SerpentinePathProvider.cs" />
-    <Compile Include="ImageQuantizer\PathProviders\StandardPathProvider.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\BaseColorCacheQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\BaseColorQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\DistinctSelection\DistinctBucket.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\DistinctSelection\DistinctColorInfo.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\DistinctSelection\DistinctSelectionQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\IColorQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\MedianCut\MedianCutCube.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\MedianCut\MedianCutQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\NeuQuant\NeuralColorQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\Octree\OctreeNode.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\Octree\OctreeQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\OptimalPalette\OptimalPaletteQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\Popularity\PopularityColorSlot.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\Popularity\PopularityQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\Uniform\UniformColorSlot.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\Uniform\UniformQuantizer.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\XiaolinWu\WuColorCube.cs" />
-    <Compile Include="ImageQuantizer\Quantizers\XiaolinWu\WuColorQuantizer.cs" />
     <Compile Include="PalleteQuantizer.cs" />
     <Compile Include="Predict\PredictCaptchaSI.cs" />
     <Compile Include="Predict\PredictCaptchaSP.cs" />
@@ -262,6 +188,10 @@
     <Compile Include="Utils\SeparacaoPadrao.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PalleteQuantizer\PalleteQuantizer.csproj">
+      <Project>{8beb8dad-f6bf-4ca2-b5eb-00bc7583480d}</Project>
+      <Name>PalleteQuantizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{a7b2066a-3a1b-48c7-b264-2b9322f6acb1}</Project>
       <Name>Data</Name>

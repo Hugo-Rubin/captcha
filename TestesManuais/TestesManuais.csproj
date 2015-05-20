@@ -308,6 +308,10 @@
       <Project>{e511f63f-f352-400d-9deb-7931e3e3a2e0}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PalleteQuantizer\PalleteQuantizer.csproj">
+      <Project>{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}</Project>
+      <Name>PalleteQuantizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebServices\WebCommon\WebCommon.csproj">
       <Project>{4b3f3b61-db4c-4db5-ad1f-f32d541d4c90}</Project>
       <Name>WebCommon</Name>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Core.Logic.ImageQuantizer.Quantizers.XiaolinWu;
+using PalleteQuantizer.Quantizers.XiaolinWu;
 using Core.Logic.Types;
 
 namespace Core.Logic
@@ -118,7 +118,7 @@ namespace Core.Logic
         public TipoPadraoConsigRJ GetPadrao(Bitmap src)
         {
             var wu = new WuColorQuantizer();
-            var pq = new PalleteQuantizer(src, wu, 2);
+            var pq = new MyPalleteQuantizer(src, wu, 2);
             var source = (Bitmap)pq.ApplyFilter();
 
             var cinza = Color.FromArgb(224, 225, 224);
