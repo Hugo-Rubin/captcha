@@ -61,8 +61,7 @@ namespace Core.Logic.Captchas
 
         public override IEnumerable<ImgArray> GetCaracteres()
         {
-            return clusters.Select(cluster => cluster);
-            //.CortarECentralizar(60, 60));
+            return clusters.Select(cluster => cluster.CortarECentralizar(60, 60));
         }
 
         public override Bitmap RemoverFundo(Bitmap source)
@@ -80,10 +79,48 @@ namespace Core.Logic.Captchas
                 clusters.Add(new ImgArray(source.Width, source.Height));
             }
 
+            var buffer = new Dictionary<int, List<Point>>();
+            
+            var acumulatedCountFromPreviousCluster = 0;
+            var acumulatedCountFromCurrentCluster = 0;
+            var acumulatedCountFromNextCluster = 0;
+
             if (true)//containsBlackCluster == false)
             {
                 for (var x = 0; x < source.Width; x++)
                 {
+                    var nextClusterId = Math.Min(currentCluster + 1, NumeroMinimoDeLetras - 1);
+                    var previousClusterId = Math.Max(0, currentCluster - 1);
+
+                    if (acumulatedCountFromNextCluster < 5)
+                    {
+                        acumulatedCountFromNextCluster = 0;
+                        if (buffer.Any(b => b.Key == nextClusterId))
+                        {
+                            var item = buffer.First(b => b.Key == nextClusterId);
+                            buffer.Remove(item.Key);
+                        }
+                    }
+                    else if (acumulatedCountFromCurrentCluster < 5)
+                    {
+                        currentCluster = Math.Min(currentCluster + 1, NumeroMinimoDeLetras - 1);
+                        primeiroPixelDoCluster = x + 10;
+                        nextClusterId = Math.Min(currentCluster + 1, NumeroMinimoDeLetras - 1);
+                        previousClusterId = currentCluster - 1;
+                    }
+
+                    if (acumulatedCountFromPreviousCluster < 5)
+                    {
+                        acumulatedCountFromPreviousCluster = 0;
+                        if (buffer.Any(b => b.Key == previousClusterId))
+                        {
+                            var item = buffer.First(b => b.Key == previousClusterId);
+                            buffer.Remove(item.Key);
+                        }
+                    }
+
+                    acumulatedCountFromCurrentCluster = 0;
+
                     for (var y = 0; y < source.Height; y++)
                     {
                         var pixel = source.GetPixel(x, y);
@@ -96,59 +133,105 @@ namespace Core.Logic.Captchas
                             {
                                 continue;
                             }
-
-                            var isNextCluster = x > primeiroPixelDoCluster + tamanhoAceitaveldeCluster && ColorBelongsToCluster(pixel, Math.Min(currentCluster + 1, NumeroMinimoDeLetras - 1));
-                            //var isPreviousCluster = x < primeiroPixelDoCluster + tamanhoAceitaveldeCluster / 2 && ColorBelongsToCluster(pixel, Math.Max(0, currentCluster - 1));
+                            
+                            var isNextCluster = x > primeiroPixelDoCluster + tamanhoAceitaveldeCluster && ColorBelongsToCluster(pixel, nextClusterId);                            
+                            var isPreviousCluster = x < primeiroPixelDoCluster + tamanhoAceitaveldeCluster / 2 && ColorBelongsToCluster(pixel, previousClusterId);
 
                             if (isNextCluster)
                             {
-                                currentCluster++;
-                                clusters[currentCluster].SetPixel(x, y, Color.Black);
-                                primeiroPixelDoCluster = x + 10;
+                                acumulatedCountFromNextCluster++;
+                                if (buffer.ContainsKey(nextClusterId) == false)
+                                {
+                                    buffer.Add(nextClusterId, new List<Point>());
+                                }
+                                buffer[nextClusterId].Add(new Point(x, y));                                
                             }
-                            //else if (isPreviousCluster)
-                            //{
-                            //    ////cluster anterior
-                            //    result.SetPixel(x, y, Color.Black);
-                            //    clusters[Math.Max(0, currentCluster - 1)].SetPixel(x, y, Color.Black);
-                            //    continue;
-                            //}
+                            else if (isPreviousCluster)
+                            {
+                                ////cluster anterior
+                                acumulatedCountFromPreviousCluster++;
+                                if (buffer.ContainsKey(previousClusterId) == false)
+                                {
+                                    buffer.Add(previousClusterId, new List<Point>());
+                                }
+                                buffer[previousClusterId].Add(new Point(x, y));
+                                result.SetPixel(x, y, Color.Black);                                      
+                                continue;
+                            }
                         }
                         else
                         {
+                            acumulatedCountFromCurrentCluster++;
                             clusters[currentCluster].SetPixel(x, y, Color.Black);
                         }
                         result.SetPixel(x, y, Color.Black);                         
                     }
                 }
-
+                ProcessBuffer(buffer);
                 return RemoveNoise(result, 5).ToBitmap();
             }
 
-            //Se algum cluster for preto faco corte cego e removo tudo que nao for preto
+            //TODO: Se algum cluster for preto faco corte cego e removo tudo que nao for preto
         }
+
+        private void ProcessBuffer(Dictionary<int, List<Point>> buffer)
+        {
+            foreach (var cluster in buffer)
+            {
+                foreach (var point in cluster.Value)
+                {
+                    clusters[cluster.Key].SetPixel(point.X, point.Y, Color.Black);
+                }
+            }
+        }       
 
         private bool IsBackgroundOrNoise(Color pixel, bool containsBlackCluster)
         {
-            return pixel.RGBEquals(backGroundColor) == false || pixel.IsWhitePixel()
+            return pixel.RGBEquals(backGroundColor) || pixel.IsWhitePixel()
                    || (containsBlackCluster == false && IsBlackSibling(pixel));
         }
 
         protected override void ImageLoaded(ref Bitmap bmpSource)
         {
             base.ImageLoaded(ref bmpSource);
-            bmpSource = (Bitmap)PalleteQuantizer(bmpSource);
+
+            // Conto quantas cores distintas sao usadas em clusters
+            ExtractClusterColorSamples(bmpSource);
+
+            // Separo tudo o que for preto
+            var result = CopyAllWhere(bmpSource, pixel => IsBlackSibling(pixel) == false);            
+            var clustersPretos = CopyAllWhere(bmpSource, pixel => IsBlackSibling(pixel));
+
+            // Talvez rode erosao pra ver se tem letra preta no meio?
+
+            // rodo palleteQuantizer de acordo com a quantidade de cores distintas            
+            var coresDistintas = clusterSampleColors.Distinct().Count();
+            bmpSource = (Bitmap)PalleteQuantizer(result, coresDistintas);
+
             ExtractClusterColorSamples(bmpSource);
             ExtractClusterBrightnessSamples();
         }
 
-        protected Image PalleteQuantizer(Bitmap source)
+        private Bitmap CopyAllWhere(Bitmap source, Func<Color, bool> selectFunc){
+            var output = new Bitmap(source.Width, source.Height);
+            for (int x = 0; x < source.Width; x++)
+            {
+                for (int y = 0; y < source.Height; y++)
+                {
+                    var pixel = source.GetPixel(x, y);
+                    if (selectFunc(pixel))
+                    {
+                        output.SetPixel(x, y, pixel);
+                    }
+                }
+            }
+            return output;
+        }
+
+        protected Image PalleteQuantizer(Bitmap source, int colorCount = 5)
         {
             var activeQuantizer = new WuColorQuantizer();
-
             const int parallelTaskCount = 1;
-            const int colorCount = 8;
-
             return ImageBuffer.QuantizeImage(source, activeQuantizer, null, colorCount, parallelTaskCount);
         }
 

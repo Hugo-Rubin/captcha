@@ -177,7 +177,7 @@ namespace TestesManuais
 
         private void comboEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtPasta.Text = @"E:\OCR\Testes\";
+            txtPasta.Text = Environment.GetEnvironmentVariable("CAPTCHAS") ?? @"E:\OCR\Testes\";
             try
             {
                 var idx = comboEstado.Text.IndexOf(" - ");

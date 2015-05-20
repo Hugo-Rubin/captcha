@@ -129,6 +129,7 @@
             "CCT - CCT_CaptchaA",
             "ProjudiBA - Projudi Bahia",
             "ProjudiGeral - Projudi Geral",
+            "ProjudiAM - Projudi Amazonas",
             "RF3 - Receita Federal 3"});
             this.comboEstado.Location = new System.Drawing.Point(119, 20);
             this.comboEstado.Name = "comboEstado";
