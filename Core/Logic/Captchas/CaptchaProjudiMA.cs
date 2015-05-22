@@ -28,6 +28,11 @@ namespace Core.Logic.Captchas
 
         public override Bitmap RemoverFundo(Bitmap source)
         {
+            var activeQuantizer = new WuColorQuantizer();
+            const int parallelTaskCount = 1;
+
+            source = (Bitmap)ImageBuffer.QuantizeImage(source, activeQuantizer, null, 30, parallelTaskCount);
+
             var pixels = new List<Color>();
             for (var x = source.Width - 1; x >= 0; x--)
             {
@@ -42,8 +47,8 @@ namespace Core.Logic.Captchas
                         && p.IsBlackPixel() == false
             );
 
-            var activeQuantizer = new WuColorQuantizer();
-            const int parallelTaskCount = 1;
+            
+            
             source = (Bitmap) ImageBuffer.QuantizeImage(source, activeQuantizer, null, 2, parallelTaskCount);
 
             source.Save(@"C:\OCR\MATest1.png");
