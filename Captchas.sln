@@ -141,6 +141,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaProjudiAM", "Captcha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalleteQuantizer", "PalleteQuantizer\PalleteQuantizer.csproj", "{8BEB8DAD-F6BF-4CA2-B5EB-00BC7583480D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CaptchaProjudiMA", "CaptchaProjudiMA", "{266D12C9-12BB-4410-ADC7-8939EEA046E7}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\CaptchaProjudiMA\001.png = Samples\CaptchaProjudiMA\001.png
+		Samples\CaptchaProjudiMA\002.png = Samples\CaptchaProjudiMA\002.png
+		Samples\CaptchaProjudiMA\003.png = Samples\CaptchaProjudiMA\003.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -462,5 +469,6 @@ Global
 		{D8D738A3-85AD-417E-8049-3B060A464E36} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
 		{0644FF2A-94B6-41CD-84EA-1DF1D3B7B8E3} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
 		{E41FE476-D1AC-43F0-AE06-428C5975BCD6} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
+		{266D12C9-12BB-4410-ADC7-8939EEA046E7} = {07C4CAFE-930E-4302-8D24-2F93B64CB09A}
 	EndGlobalSection
 EndGlobal

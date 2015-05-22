@@ -1934,6 +1934,13 @@ namespace Core.Logic
                         Valor = typeof(PredictCaptchaCAM)
                     };
                     break;
+                case "ProjudiMA":
+                    result = new ChaveValor<Type, Type>
+                    {
+                        Chave = typeof(CaptchaProjudiMA),
+                        Valor = typeof(PredictCaptchaCAM)
+                    };
+                    break;
 
                 case "RF4":
                     result = new ChaveValor<Type, Type>

@@ -90,6 +90,7 @@
     <Compile Include="Captchas\CaptchaProjudiAM.cs" />
     <Compile Include="Captchas\CaptchaProjudiBA.cs" />
     <Compile Include="Captchas\CaptchaProjudiGeral.cs" />
+    <Compile Include="Captchas\CaptchaProjudiMA.cs" />
     <Compile Include="Captchas\CaptchaRF3.cs" />
     <Compile Include="Captchas\CaptchaRF4.cs" />
     <Compile Include="Captchas\CaptchaTJPE.cs" />

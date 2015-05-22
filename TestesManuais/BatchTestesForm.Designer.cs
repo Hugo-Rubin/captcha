@@ -130,6 +130,7 @@
             "ProjudiBA - Projudi Bahia",
             "ProjudiGeral - Projudi Geral",
             "ProjudiAM - Projudi Amazonas",
+            "ProjudiMA - Projudi Maranhão",
             "RF3 - Receita Federal 3"});
             this.comboEstado.Location = new System.Drawing.Point(119, 20);
             this.comboEstado.Name = "comboEstado";

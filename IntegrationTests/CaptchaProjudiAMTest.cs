@@ -1,7 +1,4 @@
-﻿using System;
-using System.Drawing.Imaging;
-using System.IO;
-using Core.Logic.Captchas;
+﻿using Core.Logic.Captchas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Core.Logic.Utils;
 using System.Drawing;
