@@ -20,7 +20,7 @@ namespace Core.Logic.Utils
 
         public static Bitmap BitmapFundoBranco(int width, int height)
         {
-            return new Bitmap(width > 0 ? width : 1, height > 0 ? height : 1).InserirFundoBranco();
+            return new Bitmap(Math.Max(1, width), Math.Max(1, height)).InserirFundoBranco();
         }
 
         public static void SalvarTodos(this IEnumerable<ImgArray> lista, string diretorio, string nome = "")

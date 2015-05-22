@@ -62,6 +62,7 @@
     <Compile Include="CaptchaNFETest.cs" />
     <Compile Include="CaptchaPJETest.cs" />
     <Compile Include="CaptchaProjudiAMTest.cs" />
+    <Compile Include="CaptchaProjudiMATest.cs" />
     <Compile Include="CaptchaRF4Test.cs" />
     <Compile Include="CaptchaRFTest.cs" />
     <Compile Include="CaptchaRJTest.cs" />

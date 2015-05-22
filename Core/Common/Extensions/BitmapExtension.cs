@@ -742,5 +742,24 @@ namespace Core.Common.Extensions
                 return !res;
             }
         }
+
+        public static Bitmap Where(this Bitmap source, Func<Color, int, int, bool> selectFunc)
+        {
+            if (selectFunc == null)
+            {
+                throw new ArgumentNullException("selectFunc");
+            }
+
+            var output = new Bitmap(source.Width, source.Height);
+            for (var x = 0; x < source.Width; x++)
+            {
+                for (var y = 0; y < source.Height; y++)
+                {
+                    var pixel = source.GetPixel(x, y);
+                    output.SetPixel(x, y, selectFunc(pixel, x, y) ? pixel : Color.White);
+                }
+            }
+            return output;
+        }
     }
 }
