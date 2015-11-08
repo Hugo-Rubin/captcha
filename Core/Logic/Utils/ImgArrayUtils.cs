@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using Core.Logic.Types;
+using System.Globalization;
 
 namespace Core.Logic.Utils
 {
@@ -503,6 +504,44 @@ namespace Core.Logic.Utils
             }
 
             return pixelsPretos;
+        }
+
+        public static int[] ToIntVector(this ImgArray img)
+        {
+            int[] pixels = new int[img.Width * img.Height];
+
+            for (int y = 0; y < img.Height; y++)
+            {
+                for (int x = 0; x < img.Width; x++)
+                {
+                    pixels[y * img.Width + x] = img.GetPixel(x, y).ToArgb();
+                }
+            }
+
+            return pixels;
+        }
+
+        public static string GetKnownColorName(int r, int g, int b)
+        {
+            Dictionary<int, string> colorCache = new Dictionary<int, string>();
+            int iArgb = Color.FromArgb(r, g, b).ToArgb();
+
+            if (colorCache.ContainsKey(iArgb))
+                return colorCache[iArgb];
+
+            string namedColor = null;
+            foreach (string name in Enum.GetNames(typeof(KnownColor)))
+            {
+                Color kc = Color.FromName(name);
+                if (!kc.IsSystemColor && kc.ToArgb() == iArgb)
+                {
+                    namedColor = kc.Name;
+                    colorCache.Add(iArgb, namedColor);
+                    break;
+                }
+            }
+
+            return namedColor;
         }
 
         public static int GetValidWidth(this ImgArray img)

@@ -860,11 +860,11 @@ namespace TestesManuais
                 //source = source.CropRectangle(areaValida);
                 //bmpValida.Save(Constants.DesktopHugo + "teste.png");
 
-                CaptchaProjudiGeral crf = new CaptchaProjudiGeral(source);
+                var crf = new CaptchaProjudiGeral(source);
 
                 crf.RemoverFundo(source).Save(semFundoDir + imagem.Name);
 
-                /*var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
+                var currentDir = Directory.CreateDirectory(separadasDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4));
                 var letras = crf.GetCaracteres();
 
                 int i = 0;
@@ -872,13 +872,66 @@ namespace TestesManuais
                 {
                     letra.Save(redeDir.FullName + imagem.Name.Substring(0, imagem.Name.Length - 4) + "-" + i++ + ".png");
                     letra.Save(currentDir.FullName + @"\" + i++ + ".png");
-                }*/
+                }
             }
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            var dir = new DirectoryInfo(@"C:\Users\Hugo\Chromatic\");
+            var images = dir.GetFiles("*.jpg");
+            
+            foreach (var imagem in images) 
+            {
+                Bitmap source = (Bitmap)Image.FromFile(imagem.FullName);
+                Bitmap result = new Bitmap(source.Width, source.Height);
+                
+                for (int y = 0; y < source.Height; y++)
+                {
+                    for (int x = 0; x < source.Width; x++)
+                    {
+                        Color c = source.GetPixel(x, y);
+
+                        /*double sum = c.R + c.G + c.B;
+                        sum = sum == 0.0 ? 1.0 : sum;
+
+                        double red = c.R / sum;
+                        double green = c.G / sum;
+                        double blue = c.B / sum;*/
+
+                        // normalize red, green, blue values
+                        double rLinear = (double)c.R/255.0;
+                        double gLinear = (double)c.G/255.0;
+                        double bLinear = (double)c.B/255.0;
+
+                        // convert to a sRGB form
+                        double r = (rLinear > 0.04045)? Math.Pow((rLinear + 0.055)/(
+                            1 + 0.055), 2.2) : (rLinear/12.92) ;
+                        double g = (gLinear > 0.04045)? Math.Pow((gLinear + 0.055)/(
+                            1 + 0.055), 2.2) : (gLinear/12.92) ;
+                        double b = (bLinear > 0.04045)? Math.Pow((bLinear + 0.055)/(
+                            1 + 0.055), 2.2) : (bLinear/12.92) ;
+
+                        // converts
+                        double redL = r*0.4124 + g*0.3576 + b*0.1805;
+                        double greenL = r*0.2126 + g*0.7152 + b*0.0722;
+                        double blueL = r*0.0193 + g*0.1192 + b*0.9505;
+
+                        redL = (redL / 0.9505) * 255;
+                        greenL = greenL * 255;
+                        blueL = (blueL / 1.089) * 255;
+
+                        //Color chromatic = Color.FromArgb((int) (red * 255), (int) (green * 255), (int) (blue * 255));
+                        Color chromatic = Color.FromArgb((int) redL, (int) greenL, (int) blueL);
+
+                        result.SetPixel(x, y, chromatic);
+                    }
+                }
+
+                result.Save(dir + imagem.Name.Substring(0, imagem.Name.Length - 4) + "_ChromaticLN.png");
+            }
+            
             //Criar pastas do alfabeto
             //ServerUtil.CriarPastas(@"E:\OCR\Testes\RF4\Rede");
             

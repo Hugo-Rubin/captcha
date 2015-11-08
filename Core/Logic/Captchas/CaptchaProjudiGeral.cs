@@ -31,7 +31,7 @@ namespace Core.Logic.Captchas
             var cfs2 = new ColorFillingSegmentation2(ImgArray, 8, 2, true, true, 120);
             var sp = new SeparacaoPadrao(this, cfs2);
 
-            return sp.ColorFillingSegmentation2AndCorteCego(18);
+            return sp.ColorFillingSegmentation2AndCorteCego(21);
         }
 
         public override Bitmap RemoverFundo(Bitmap source)
@@ -47,6 +47,7 @@ namespace Core.Logic.Captchas
 
             return output
                 .RemoverRuidos(30)
+                .PreencherPixels()
                 .CortarECentralizar(output.Width, output.Height)
                 .ToBitmap();
                 //.ApplyMedianFilter(5);

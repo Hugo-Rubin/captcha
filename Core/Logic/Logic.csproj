@@ -50,8 +50,14 @@
     <Reference Include="Accord.Math">
       <HintPath>..\..\packages\Accord.Math.2.12.0.0\lib\Accord.Math.dll</HintPath>
     </Reference>
+    <Reference Include="AForge">
+      <HintPath>..\..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
     <Reference Include="AForge.Imaging">
       <HintPath>..\..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -86,6 +92,7 @@
     <Compile Include="Captchas\CaptchaCM.cs" />
     <Compile Include="Captchas\CaptchaCRJ.cs" />
     <Compile Include="Captchas\CaptchaPJE.cs" />
+    <Compile Include="Captchas\CaptchaPJE2.cs" />
     <Compile Include="Captchas\CaptchaProjudiAL.cs" />
     <Compile Include="Captchas\CaptchaProjudiAM.cs" />
     <Compile Include="Captchas\CaptchaProjudiBA.cs" />
@@ -140,6 +147,7 @@
     <Compile Include="SeparacaoADAP_CRJ_Cinza\SeparacaoPadraoADAP.cs" />
     <Compile Include="StringLogicalComparer.cs" />
     <Compile Include="TemplateMatching.cs" />
+    <Compile Include="Tratamento\CircleHough.cs" />
     <Compile Include="Tratamento\IConditional.cs" />
     <Compile Include="Tratamento\IDilation.cs" />
     <Compile Include="Tratamento\ForwardDerivative.cs" />

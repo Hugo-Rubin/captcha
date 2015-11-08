@@ -65,6 +65,21 @@ namespace Core.Logic.Types
             imgArray = imgArraySource;
         }
 
+        public ImgArray(int[] imgArraySource, int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            length = this.width * this.height;
+
+            byte[] imgArrayByte = new byte[imgArraySource.Length];
+            for (int i = 0; i < imgArraySource.Length; i++)
+            {
+                imgArrayByte[i] = (byte) imgArraySource[i];
+            }
+
+            imgArray = imgArrayByte;
+        }
+
         public ImgArray(int width, int height)
         {
             this.width = width;
@@ -205,6 +220,24 @@ namespace Core.Logic.Types
             return Color.FromArgb(255, 255 * p, 255 * p, 255 * p);
         }
 
+        public Color GetPixelInt(int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= width || y >= height)
+            {
+                return Color.White;
+            }
+
+            int p = 255;
+            var idx = y * Width + x;
+            if (idx < imgArray.Length)
+            {
+                p = imgArray[idx];
+            }
+
+            p = p > 255 ? 255 : (p < 0 ? 0 : p);
+            return Color.FromArgb(255, p, p, p);
+        }
+
         public Color GetPixelXYInvertido(int x, int y)
         {
             //TODO: O desempenho pode aumentar se ao invés de Color, retornarmos o byte mas altera o projeto todo
@@ -233,6 +266,16 @@ namespace Core.Logic.Types
             }
         }
 
+        public void SetPixelInvertido(int x, int y, Color cor)
+        {
+            var idx = y * width + x;
+            if (idx < imgArray.Length && idx > 0)
+            {
+                var c = ByteFromColor(cor);
+                imgArray[idx] = c;
+            }
+        }
+
         public Bitmap ToBitmap()
         {
             var bmp = new Bitmap(Width, Height, PixelFormat.Format32bppArgb).InserirFundoBranco();
@@ -242,6 +285,23 @@ namespace Core.Logic.Types
                 for (var y = 0; y < bmp.Height; y++)
                 {
                     if (GetPixel(x, y).IsBlackPixel())
+                    {
+                        bmp.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+            return bmp;
+        }
+
+        public Bitmap ImgArrayIntToBitmap()
+        {
+            var bmp = new Bitmap(Width, Height, PixelFormat.Format32bppArgb).InserirFundoBranco();
+            
+            for (var y = 0; y < bmp.Height; y++)
+            {
+                for (var x = 0; x < bmp.Width; x++)   
+                {
+                    if (GetPixelInt(x, y).IsBlackPixel())
                     {
                         bmp.SetPixel(x, y, Color.Black);
                     }
@@ -286,6 +346,23 @@ namespace Core.Logic.Types
             }
             
             ToBitmap().Save(fileName, ImageFormat.Png);
+        }
+
+        public void SaveInt(String fileName = "C:\\ImgArray.png")
+        {
+            if (fileName == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var dir = Path.GetDirectoryName(fileName);
+            if (dir == null
+                || Directory.Exists(dir) == false)
+            {
+                throw new DirectoryNotFoundException();
+            }
+
+            ImgArrayIntToBitmap().Save(fileName, ImageFormat.Png);
         }
 
         public void SaveWithAleatory(String fileDir)
